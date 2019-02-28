@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, createStyles, WithStyles, Theme } from '@material-ui/core/styles';
-// import { authService } from '../services/auth.service';
+import { register } from '../serviceWorker';
 
 const styles = (theme: Theme) => 
 createStyles({
@@ -66,7 +66,6 @@ class Login extends Component <WithStyles<typeof styles>, State> {
     this.emailChange = this.emailChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.submit = this.submit.bind(this);
-    // this.getConnect = this.getConnect.bind(this);
 
   }
 
@@ -85,7 +84,10 @@ class Login extends Component <WithStyles<typeof styles>, State> {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ 
+        email: email, 
+        password: password
+      })
     }
     return fetch(`/user/signin`, requestOptions)
     .then(response => response.json()).then(
