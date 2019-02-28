@@ -87,7 +87,7 @@ class Login extends Component <WithStyles<typeof styles>, State> {
       headers: { 'Content-Type': 'application/json' }, 
       body: JSON.stringify({ email, password })
     }
-    return fetch(`/user/signin`, requestOptions)
+    return fetch(`/api/user/signin`, requestOptions)
     .then(response => response.json()).then(
       data => {
         if(data.success) {
