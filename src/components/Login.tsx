@@ -89,7 +89,7 @@ class Login extends Component <WithStyles<typeof styles>, State> {
         password: password
       })
     }
-    return fetch(`/user/signin`, requestOptions)
+    return fetch(`/api/user/signin`, requestOptions)
     .then(response => response.json()).then(
       data => {
         if(data.success) {
