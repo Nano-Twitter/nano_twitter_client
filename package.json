@@ -10,7 +10,6 @@
     "@types/node": "^11.9.5",
     "@types/react": "^16.8.5",
     "@types/react-dom": "^16.8.2",
-    "http-proxy-middleware": "^0.19.1",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "node-sass": "^4.11.0",
@@ -35,8 +34,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "http-proxy-middleware": "^0.19.1",
     "typescript": "^3.3.3333"
   },
-  "proxy": "http://localhost:4567"
-  
+  //"proxy": "http://localhost:19268"
 }
