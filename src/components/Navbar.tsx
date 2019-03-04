@@ -2,21 +2,23 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles, Theme ,createStyles} from '@material-ui/core/styles';
+import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import EditIcon from '@material-ui/icons/Edit'
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-const styles = (theme:Theme) => createStyles({
+const styles = (theme: Theme) => createStyles({
   root: {
     width: '100%',
   },
@@ -86,22 +88,27 @@ const styles = (theme:Theme) => createStyles({
   },
 });
 
-class PrimarySearchAppBar extends React.Component<any,any> {
+const menuOption = [{
+  name: 'home'
+}]
+
+class PrimarySearchAppBar extends React.Component<any, any> {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    menuAnchorEl: null
   };
 
-  handleProfileMenuOpen = (event:any) => {
+  handleProfileMenuOpen = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleMenuClose = () => {
+  closeAllMenues = () => {
     this.setState({ anchorEl: null });
     this.handleMobileMenuClose();
   };
 
-  handleMobileMenuOpen = (event:any) => {
+  handleMobileMenuOpen = (event: any) => {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
 
@@ -109,24 +116,48 @@ class PrimarySearchAppBar extends React.Component<any,any> {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  handleMenuOpen = (event: any) => {
+    this.setState({ menuAnchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ menuAnchorEl: null });
+  };
+
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl, menuAnchorEl } = this.state;
     const { classes } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
+    const isProfileMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isMenuOpen = Boolean(menuAnchorEl)
+
+    const renderProfileMenu = (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isProfileMenuOpen}
+        onClose={this.closeAllMenues}
+      >
+        <MenuItem onClick={this.closeAllMenues}>Profile</MenuItem>
+        <MenuItem onClick={this.closeAllMenues}>My account</MenuItem>
+      </Menu>
+    );
 
     const renderMenu = (
       <Menu
-        anchorEl={anchorEl}
+        anchorEl={menuAnchorEl}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        {menuOption.map(menu => (
+          <MenuItem onClick={this.closeAllMenues}>{menu.name}</MenuItem>
+        ))}
+
       </Menu>
-    );
+    )
 
     const renderMobileMenu = (
       <Menu
@@ -134,7 +165,7 @@ class PrimarySearchAppBar extends React.Component<any,any> {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMobileMenuOpen}
-        onClose={this.handleMenuClose}
+        onClose={this.closeAllMenues}
       >
         <MenuItem onClick={this.handleMobileMenuClose}>
           <IconButton color="inherit">
@@ -166,10 +197,10 @@ class PrimarySearchAppBar extends React.Component<any,any> {
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
+              <MenuIcon onClick={this.handleMenuOpen} />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Material-UI
+              Nano-Twitter
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -186,6 +217,9 @@ class PrimarySearchAppBar extends React.Component<any,any> {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
+                <EditIcon />
+              </IconButton>
+              <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge>
@@ -196,7 +230,7 @@ class PrimarySearchAppBar extends React.Component<any,any> {
                 </Badge>
               </IconButton>
               <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                aria-owns={isProfileMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
@@ -212,6 +246,7 @@ class PrimarySearchAppBar extends React.Component<any,any> {
           </Toolbar>
         </AppBar>
         {renderMenu}
+        {renderProfileMenu}
         {renderMobileMenu}
       </div>
     );
