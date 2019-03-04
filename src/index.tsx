@@ -6,7 +6,6 @@ import Home from './components/Home'
 import * as serviceWorker from './serviceWorker';
 
 
-// ReactDOM.render(<Navbar />, document.getElementById('navbar'));
-// ReactDOM.render(<Login />, document.getElementById('body')); 
-ReactDOM.render(<Home />, document.getElementById('body')); 
+ReactDOM.render(<Navbar />, document.getElementById('navbar'));
+ReactDOM.render(<Login />, document.getElementById('body')); 
 serviceWorker.register();
