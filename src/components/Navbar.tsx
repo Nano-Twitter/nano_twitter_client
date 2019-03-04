@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
@@ -85,6 +85,10 @@ const styles = (theme: Theme) => createStyles({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main,
   },
 });
 
@@ -235,7 +239,8 @@ class PrimarySearchAppBar extends React.Component<any, any> {
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                <Avatar className={this.props.classes.avatar} alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg">
+                </Avatar>
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
