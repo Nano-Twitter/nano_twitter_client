@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 function home(){
     return (
-        <div>home</div>
+        <h1>Home</h1>
     )
 }
 

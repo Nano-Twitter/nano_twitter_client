@@ -18,7 +18,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-const styles = (theme: Theme) => createStyles({
+const styles = theme => createStyles({
   root: {
     width: '100%',
   },
@@ -96,14 +96,14 @@ const menuOption = [{
   name: 'home'
 }]
 
-class PrimarySearchAppBar extends React.Component<any, any> {
+class PrimarySearchAppBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
     menuAnchorEl: null
   };
 
-  handleProfileMenuOpen = (event: any) => {
+  handleProfileMenuOpen = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -112,7 +112,7 @@ class PrimarySearchAppBar extends React.Component<any, any> {
     this.handleMobileMenuClose();
   };
 
-  handleMobileMenuOpen = (event: any) => {
+  handleMobileMenuOpen = (event) => {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
 
@@ -120,7 +120,7 @@ class PrimarySearchAppBar extends React.Component<any, any> {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
-  handleMenuOpen = (event: any) => {
+  handleMenuOpen = (event) => {
     this.setState({ menuAnchorEl: event.currentTarget });
   };
 

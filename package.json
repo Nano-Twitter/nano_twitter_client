@@ -6,16 +6,18 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "@types/jest": "^24.0.9",
-    "@types/node": "^11.9.5",
-    "@types/react": "^16.8.5",
+    "@types/node": "^11.10.4",
+    "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
+    "mobx-react-devtools": "^6.1.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,8 +33,7 @@
     "last 2 Firefox versions"
   ],
   "devDependencies": {
-    "http-proxy-middleware": "^0.19.1",
-    "typescript": "^3.3.3333"
+    "http-proxy-middleware": "^0.19.1"
   },
   "proxy": "http://127.0.0.1:8000"
 }
