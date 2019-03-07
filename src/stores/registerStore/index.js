@@ -33,6 +33,7 @@ class RegisterStore{
             password: this.password,
             email: this.email
         }
+        
         return fetch( ip + `/api/user/signup`, {
             method: 'POST',
             headers: new Headers({
@@ -48,12 +49,13 @@ class RegisterStore{
                 alert(data.message + " Please log in.");
                 window.location = '/login';
             }else{
-                alert(data.error);
+                alert(JSON.stringify(data.error));
             }
         })
         .catch((error) => {
             console.log(error);
         });
+
     }
     
 }

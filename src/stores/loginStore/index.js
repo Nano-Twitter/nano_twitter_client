@@ -45,7 +45,7 @@ class LoginStore {
                 sessionStorage.setItem('isLoggedIn', true);
                 window.location = '/home';
             }else{
-                alert(data.error);
+                alert(JSON.stringify(data.error));
             }
         })
         .catch((error) => {
