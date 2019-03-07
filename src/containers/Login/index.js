@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import { Link } from 'react-router';
 import { withStyles, createStyles, WithStyles, Theme } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +12,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+// import { unstable_Box as Box } from '@material-ui/core/Box';
 
 const styles = theme =>
 
@@ -100,6 +101,10 @@ class Login extends Component{
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                     />
+                    <Typography>
+                      <Link href='/register' className="register">Don't have an account? Register?</Link>
+                    </Typography>       
+                         
                     <Button
                     fullWidth
                     variant="contained"
