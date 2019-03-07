@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -17,6 +17,8 @@ import EditIcon from '@material-ui/icons/Edit'
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link } from '@material-ui/core';
+import { observer, inject } from 'mobx-react';
 
 const styles = theme => createStyles({
   root: {
@@ -93,7 +95,8 @@ const styles = theme => createStyles({
 });
 
 const menuOption = [{
-  name: 'home'
+  name: 'home',
+  link: '/home'
 }]
 
 class PrimarySearchAppBar extends React.Component {
@@ -101,6 +104,10 @@ class PrimarySearchAppBar extends React.Component {
     anchorEl: null,
     mobileMoreAnchorEl: null,
     menuAnchorEl: null
+  };
+
+  logout = () => {
+    this.props.rootStore.loginStore.logout();
   };
 
   handleProfileMenuOpen = (event) => {
@@ -145,6 +152,7 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem onClick={this.closeAllMenues}>Profile</MenuItem>
         <MenuItem onClick={this.closeAllMenues}>My account</MenuItem>
+        <MenuItem onClick={this.logout}>Logout</MenuItem>
       </Menu>
     );
 
@@ -157,7 +165,7 @@ class PrimarySearchAppBar extends React.Component {
         onClose={this.handleMenuClose}
       >
         {menuOption.map(menu => (
-          <MenuItem onClick={this.closeAllMenues}>{menu.name}</MenuItem>
+          <MenuItem onClick={this.closeAllMenues}><Link to={menu.link}>{menu.name}</Link></MenuItem>
         ))}
 
       </Menu>
@@ -258,4 +266,4 @@ class PrimarySearchAppBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withStyles(styles)(inject('rootStore')(observer(PrimarySearchAppBar)));

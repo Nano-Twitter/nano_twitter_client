@@ -9,6 +9,7 @@
     "@types/node": "^11.10.4",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
+    "axios": "^0.18.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "mobx-react-devtools": "^6.1.1",
@@ -35,5 +36,5 @@
   "devDependencies": {
     "http-proxy-middleware": "^0.19.1"
   },
-  "proxy": "http://127.0.0.1:8000"
+  "proxy": "http://localhost:8000"
 }

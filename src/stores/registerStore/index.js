@@ -2,16 +2,20 @@ import { observable, action, decorate} from 'mobx';
 import { ip } from '../../assets/constant';
 const qs = require('qs');
 
-class LoginStore {
+class RegisterStore{
 
+    username;
     password;
     email;
-    isLoggedIn;
-
+    
     constructor() {
+        this.username = '';
         this.password = '';
         this.email = '';
-        this.isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    }
+
+    changeUsername = (value) => {
+        this.username = value;
     }
 
     changePassword = (value) => {
@@ -22,28 +26,27 @@ class LoginStore {
         this.email = value;
     }
 
-
-    login = () => {
+    register = () => {
 
         const params = {
+            name: this.username,
             password: this.password,
             email: this.email
         }
-        return fetch( ip + `/api/user/signin`, {
+        return fetch( ip + `/api/user/signup`, {
             method: 'POST',
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
             }),
-            body: qs.stringify(params),
+            body: qs.stringify(params)
         })
         .then(res => res.json())
         .then(data => 
         {
             if(data.message){
-                alert(data.message);
-                sessionStorage.setItem('isLoggedIn', true);
-                window.location = '/home';
+                alert(data.message + " Please log in.");
+                window.location = '/login';
             }else{
                 alert(data.error);
             }
@@ -52,24 +55,20 @@ class LoginStore {
             console.log(error);
         });
     }
-
-    logout = () => {
-        sessionStorage.setItem('isLoggedIn', false);
-        this.isLoggedIn = false;
-        window.location = '/login';
-    }
-
+    
 }
 
-decorate(LoginStore, {
+decorate(RegisterStore, {
+    username: observable,
     email: observable,
     password: observable,
-    isLoggedIn: observable,
+    changeUsername: action,
     changePassword: action,
-    changeEmail: action
+    changeEmail: action,
+    register: action
 });
 
-const loginStore = new LoginStore();
+const registerStore = new RegisterStore();
 
-export default loginStore;
-export { LoginStore };
+export default registerStore;
+export { RegisterStore };

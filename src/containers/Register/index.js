@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import { Link } from 'react-router';
-import { withStyles, createStyles, WithStyles, Theme } from '@material-ui/core/styles';
+// import { Link } from 'react-router';
+import { withStyles, createStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -48,29 +48,28 @@ const styles = theme =>
     },
   });
 
-
-
-class Login extends Component{
+class Register extends Component{
 
     changeUsername = (e) => {
-        this.props.rootStore.loginStore.changeUsername(e.target.value);
+        this.props.rootStore.registerStore.changeUsername(e.target.value);
     }
 
     changePassword = (e) => {
-        this.props.rootStore.loginStore.changePassword(e.target.value);
+        this.props.rootStore.registerStore.changePassword(e.target.value);
     }
 
     changeEmail = (e) => {
-        this.props.rootStore.loginStore.changeEmail(e.target.value);
+        this.props.rootStore.registerStore.changeEmail(e.target.value);
     }
 
-    submit = (e) => {
-        this.props.rootStore.loginStore.login();
+    register = () => {
+        this.props.rootStore.registerStore.register();
     }
 
     render() {
+
         const cacheAvatar=false;
-        
+
         return (
 
             <main className={this.props.classes.main}>
@@ -85,12 +84,16 @@ class Login extends Component{
                     </Avatar>
                 }
                 <Typography component="h1" variant="h5">
-                    Login
+                    Register
                 </Typography>
                 <form className={this.props.classes.form}>
                     <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="username">Username</InputLabel>
+                    <Input onChange={this.changeUsername} id="username" name="username" type="text" autoComplete="current-username" autoFocus />
+                    </FormControl>
+                    <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="email">Email Address</InputLabel>
-                    <Input onChange={this.changeEmail} id="email" name="email" type="email" autoComplete="email" autoFocus />
+                    <Input onChange={this.changeEmail} id="email" name="email" type="email" autoComplete="email"/>
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
@@ -104,10 +107,9 @@ class Login extends Component{
                     fullWidth
                     variant="contained"
                     color="primary"
-                    className={this.props.classes.submit}
-                    onClick={this.submit}
+                    onClick={this.register}
                     >
-                    Log in
+                    Register
                     </Button>
                 </form>
                 </Paper>
@@ -117,4 +119,4 @@ class Login extends Component{
     }
 }
 
-export default withStyles(styles)(inject('rootStore')(observer(Login)));
+export default withStyles(styles)(inject('rootStore')(observer(Register)));
