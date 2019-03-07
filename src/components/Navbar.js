@@ -17,8 +17,8 @@ import EditIcon from '@material-ui/icons/Edit'
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { Link } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
+import Link from '@material-ui/core/Link';
 
 const styles = theme => createStyles({
   root: {
@@ -94,10 +94,18 @@ const styles = theme => createStyles({
   },
 });
 
-const menuOption = [{
-  name: 'home',
-  link: '/home'
-}]
+const menuOption = [
+  {
+    id: 1,
+    name: 'home',
+    link: '/home'
+  },
+  {
+    id: 2,
+    name: 'register',
+    link: '/register'
+  }
+]
 
 class PrimarySearchAppBar extends React.Component {
   state = {
@@ -164,9 +172,9 @@ class PrimarySearchAppBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        {menuOption.map(menu => (
-          <MenuItem onClick={this.closeAllMenues}><Link to={menu.link}>{menu.name}</Link></MenuItem>
-        ))}
+        {menuOption.map((menu) => 
+          <MenuItem component={Link} key={menu.id.toString()} to={menu.link}>{menu.name}</MenuItem>
+        )}
 
       </Menu>
     )
@@ -208,8 +216,8 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon onClick={this.handleMenuOpen} />
+            <IconButton onClick={this.handleMenuOpen} className={classes.menuButton} color="inherit" aria-label="Open drawer">
+              <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               Nano-Twitter

@@ -29,6 +29,7 @@ class LoginStore {
             password: this.password,
             email: this.email
         }
+
         return fetch( ip + `/api/user/signin`, {
             method: 'POST',
             headers: new Headers({
