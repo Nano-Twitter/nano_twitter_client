@@ -12,6 +12,9 @@ class LoginStore {
         this.password = '';
         this.email = '';
         this.isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        // this.authenticate().then((res) => {
+        //     this.isLoggedIn = res;
+        // });
     }
 
     changePassword = (value) => {
@@ -22,6 +25,26 @@ class LoginStore {
         this.email = value;
     }
 
+    // authenticate = () => {
+    //     const params = JSON.parse(sessionStorage.getItem('user'))
+    //     return fetch( ip + `/api/users/auth`, {
+    //         method: 'POST',
+    //         headers: new Headers({
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/x-www-form-urlencoded',
+    //         }),
+    //         body: qs.stringify(params),
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => 
+    //     {
+    //         return data.message === 'true'
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
+
 
     login = () => {
 
@@ -30,7 +53,7 @@ class LoginStore {
             email: this.email
         }
 
-        return fetch( ip + `/api/user/signin`, {
+        return fetch( ip + `/api/users/signin`, {
             method: 'POST',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -42,8 +65,9 @@ class LoginStore {
         .then(data => 
         {
             if(data.message){
-                alert(data.message);
+                // sessionStorage.setItem('user', data.message);
                 sessionStorage.setItem('isLoggedIn', true);
+                alert("Login success!");
                 window.location = '/home';
             }else{
                 alert(JSON.stringify(data.error));
@@ -55,7 +79,8 @@ class LoginStore {
     }
 
     logout = () => {
-        sessionStorage.setItem('isLoggedIn', false);
+        // sessionStorage.removeItem('user');
+        sessionStorage.removeItem('isLoggedIn');
         this.isLoggedIn = false;
         window.location = '/login';
     }
@@ -66,6 +91,7 @@ decorate(LoginStore, {
     email: observable,
     password: observable,
     isLoggedIn: observable,
+    authenticate: action,
     changePassword: action,
     changeEmail: action
 });

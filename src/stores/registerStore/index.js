@@ -34,7 +34,7 @@ class RegisterStore{
             email: this.email
         }
         
-        return fetch( ip + `/api/user/signup`, {
+        return fetch( ip +`/api/users/signup`, {
             method: 'POST',
             headers: new Headers({
                 'Accept': 'application/json',
