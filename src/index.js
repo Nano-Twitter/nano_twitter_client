@@ -23,7 +23,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Switch>
-                    <Route exact path="/" component={Login} />
+                    <AuthorizedRoute exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />í
                     <AuthorizedRoute path="/home" component={Home} />
