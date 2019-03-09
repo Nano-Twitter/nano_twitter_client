@@ -1,6 +1,5 @@
 import { observable, action, decorate} from 'mobx';
-import { ip } from '../../assets/constant';
-const qs = require('qs');
+import { api } from '../../api';
 
 class LoginStore {
 
@@ -53,15 +52,7 @@ class LoginStore {
             email: this.email
         }
 
-        return fetch( ip + `/api/users/signin`, {
-            method: 'POST',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }),
-            body: qs.stringify(params),
-        })
-        .then(res => res.json())
+        return api.signin()
         .then(data => 
         {
             if(data.message){
