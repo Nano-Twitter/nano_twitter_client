@@ -1,28 +1,19 @@
-import { ip } from './constant'
+import { ip, timeout } from './constant'
+import axios from 'axios'
 const qs = require('qs');
+
+const mainServer = axios.create({
+    baseURL: ip,
+    timeout: timeout,
+    headers: { 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest' }
+});
 
 let api = {
     signin: (params) => {
-        return fetch(ip + `/api/users/signin`, {
-            method: 'POST',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }),
-            body: qs.stringify(params),
-        })
-            .then(res => res.json())
+        return mainServer.post('/api/users/signin', qs.stringify(params))
     },
-    signup: (pamras) => {
-        return fetch(ip + `/api/users/signup`, {
-            method: 'POST',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }),
-            body: qs.stringify(pamras)
-        })
-            .then(res => res.json())
+    signup: (params) => {
+        return mainServer.post('/api/users/signup', qs.stringify(params))
     }
 }
 

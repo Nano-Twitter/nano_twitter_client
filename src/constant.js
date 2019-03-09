@@ -1,4 +1,8 @@
 // const ip = `http://localhost:8000`;
-const ip = ``;
-export {ip}
 
+let constant={
+    ip:'',
+    timeout:30000
+}
+
+export default constant
