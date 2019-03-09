@@ -1,6 +1,6 @@
 import { ip, timeout } from './constant'
 import axios from 'axios'
-const qs = require('qs');
+import qs from 'qs'
 
 const mainServer = axios.create({
     baseURL: ip,
@@ -10,10 +10,10 @@ const mainServer = axios.create({
 
 let api = {
     signin: (params) => {
-        return mainServer.post('/api/users/signin', qs.stringify(params))
+        return mainServer.post('/users/signin', qs.stringify(params))
     },
     signup: (params) => {
-        return mainServer.post('/api/users/signup', qs.stringify(params))
+        return mainServer.post('/users/signup', qs.stringify(params))
     }
 }
 
