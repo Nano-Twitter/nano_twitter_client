@@ -52,7 +52,7 @@ class LoginStore {
             email: this.email
         }
 
-        return api.signin()
+        return api.signin(params)
         .then(data => 
         {
             if(data.message){

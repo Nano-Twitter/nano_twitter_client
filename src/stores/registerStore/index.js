@@ -35,7 +35,7 @@ class RegisterStore{
             email: this.email
         }
         
-        return api.signup
+        return api.signup(params)
         .then(data => 
         {
             if(data.message){
