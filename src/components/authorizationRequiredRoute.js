@@ -9,7 +9,7 @@ class AuthorizedRoute extends Component{
         return(
             <Route {...rest} render={ props =>{
                 console.log(isLoggedIn);
-                return isLoggedIn==='true'?<Component {...this.props} />:<Redirect to="/login" /> 
+                return isLoggedIn?<Component {...this.props} />:<Redirect to="/login" /> 
             }}/>
         )
     }
