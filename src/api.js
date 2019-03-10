@@ -1,10 +1,10 @@
-import { ip, timeout } from './constant'
+import constant from './constant'
 import axios from 'axios'
 import qs from 'qs'
 
 const mainServer = axios.create({
-    baseURL: ip,
-    timeout: timeout,
+    baseURL: constant.ip,
+    timeout: constant.timeout,
     headers: { 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest' }
 });
 
