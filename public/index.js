@@ -11,7 +11,6 @@ import Register from './containers/Register';
 import AuthorizedRoute from './components/authorizationRequiredRoute';
 import JumpToHomeIfLogedInRoute from './components/JumpToHomeIfLogedInRoute';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 ReactDOM.render(
     <Provider rootStore={rootStore}>
         <Navbar />
