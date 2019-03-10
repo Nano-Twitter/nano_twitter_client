@@ -25,7 +25,7 @@ ReactDOM.render(
                 <Switch>
                     <AuthorizedRoute exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />í
+                    <Route path="/register" component={Register} />
                     <AuthorizedRoute path="/home" component={Home} />
                 </Switch>
             </div>
