@@ -18,7 +18,7 @@ const styles = theme => ({
   });
 
 
-class NameCard extends Component {
+class NameCardSmall extends Component {
     render(){
         return (
             <main className={this.props.classes.main}>
@@ -29,4 +29,4 @@ class NameCard extends Component {
     }
 }
 
-export default withStyles(styles)(inject('rootStore')(observer(NameCard)));
+export default withStyles(styles)(inject('rootStore')(observer(NameCardSmall)));
