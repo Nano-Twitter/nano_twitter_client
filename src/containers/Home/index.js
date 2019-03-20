@@ -11,10 +11,10 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
   main: {
     width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-      width: 1100,
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
+    [theme.breakpoints.up(1200 + theme.spacing.unit * 3 * 2)]: {
+      width: 1200,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -43,6 +43,7 @@ class Home extends Component{
     return (
         <main className={this.props.classes.main}>
             <Grid container spacing={24}>
+
                 <Grid item xs={12} md={6} lg={3}>
                     <PersonalProfile />
                     <Trend />
