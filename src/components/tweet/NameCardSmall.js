@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {observer, inject} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
+import {Button} from '@material-ui/core'
 
 const styles = theme => ({
     main: {
@@ -21,10 +23,18 @@ const styles = theme => ({
 class NameCardSmall extends Component {
     render(){
         return (
-            <main className={this.props.classes.main}>
-            Trend
-            </main>
-            
+            <div>
+              <Avatar src={this.props.avatarAddress}></Avatar>
+              <div>
+                <div>
+                  <span>{this.props.userName}</span>
+                  <span>{this.props.account}</span>
+                  <Button>follow</Button>
+                  <Button>unfollow</Button>
+                  </div>
+
+              </div>
+            </div>
         );
     }
 }
