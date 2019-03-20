@@ -1,5 +1,6 @@
 import { observable, action, decorate} from 'mobx';
-import { ip } from '../../assets/constant';
+import { ip } from '../../constant';
+import api from '../../api';
 const qs = require('qs');
 
 class RegisterStore{
@@ -34,15 +35,7 @@ class RegisterStore{
             email: this.email
         }
         
-        return fetch( ip +`/api/users/signup`, {
-            method: 'POST',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }),
-            body: qs.stringify(params)
-        })
-        .then(res => res.json())
+        return api.signup(params)
         .then(data => 
         {
             if(data.message){

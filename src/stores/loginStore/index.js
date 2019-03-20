@@ -1,6 +1,5 @@
 import { observable, action, decorate} from 'mobx';
-import { ip } from '../../assets/constant';
-const qs = require('qs');
+import api from '../../api';
 
 class LoginStore {
 
@@ -11,7 +10,7 @@ class LoginStore {
     constructor() {
         this.password = '';
         this.email = '';
-        this.isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        this.isLoggedIn = localStorage.getItem('isLoggedIn');
         // this.authenticate().then((res) => {
         //     this.isLoggedIn = res;
         // });
@@ -53,20 +52,12 @@ class LoginStore {
             email: this.email
         }
 
-        return fetch( ip + `/api/users/signin`, {
-            method: 'POST',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }),
-            body: qs.stringify(params),
-        })
-        .then(res => res.json())
+        return api.signin(params)
         .then(data => 
         {
             if(data.message){
                 // sessionStorage.setItem('user', data.message);
-                sessionStorage.setItem('isLoggedIn', true);
+                localStorage.setItem('isLoggedIn', true);
                 alert("Login success!");
                 window.location = '/home';
             }else{
@@ -80,7 +71,7 @@ class LoginStore {
 
     logout = () => {
         // sessionStorage.removeItem('user');
-        sessionStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('isLoggedIn');
         this.isLoggedIn = false;
         window.location = '/login';
     }

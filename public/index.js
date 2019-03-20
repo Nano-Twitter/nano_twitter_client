@@ -11,7 +11,6 @@ import Register from './containers/Register';
 import AuthorizedRoute from './components/authorizationRequiredRoute';
 import JumpToHomeIfLogedInRoute from './components/JumpToHomeIfLogedInRoute';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 ReactDOM.render(
     <Provider rootStore={rootStore}>
         <Navbar />
@@ -27,8 +26,7 @@ ReactDOM.render(
                     <AuthorizedRoute exact path="/" component={Home} />
                     <JumpToHomeIfLogedInRoute path="/login" component={Login} />
                     <Route path="/register" component={Register} />í
-                    {/* <AuthorizedRoute path="/home" component={Home} /> */}
-                    <Route path="/home" component={Home} />í
+                    <AuthorizedRoute path="/home" component={Home} />
                 </Switch>
             </div>
         </BrowserRouter>
