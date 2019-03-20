@@ -17,20 +17,7 @@ const styles = theme => ({
   
   });
 
-  const fakePosts = [
-    {
-      title: 'Featured tweet',
-      user: 'hahaha1',
-      content:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    },
-    {
-      title: 'Tweet title',
-      user: 'hahaha2',
-      content:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    },
-  ];
+
 
 class TweetBlock extends Component {
     render(){

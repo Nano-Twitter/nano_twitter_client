@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {observer, inject} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
+import Tweet from './tweet/Tweet'
+import indigo from '@material-ui/core/colors/indigo';
+
 
 const styles = theme => ({
   main: {
     width: 'auto',
-    paddingTop: theme.spacing.unit * 2
+    paddingTop: theme.spacing.unit * 2,
   },
 });
 
@@ -14,7 +17,8 @@ class TimeLine extends Component {
     render(){
         return (
             <main className={this.props.classes.main}>
-            TimeLine
+              <Tweet />
+              <Tweet />
             </main>
             
         );
