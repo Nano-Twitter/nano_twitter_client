@@ -18,7 +18,7 @@ const styles = theme => ({
       paddingTop: theme.spacing.unit * 2
     },
     card: {
-      maxWidth: 345,
+      // maxWidth: 345,
     },
     media: {
       height: 110,
@@ -38,15 +38,8 @@ const styles = theme => ({
     }
   });
 
-const fakeProfile = {
-    name: 'Harry Mairson',
-    nickname: '@HMair',
-    tweets: '3',
-    following: '12',
-    followers: '20'
-}
-
 class PersonalProfile extends Component {
+
     render(){
         return (
           <Card className={this.props.classes.card}>
@@ -60,14 +53,14 @@ class PersonalProfile extends Component {
 
                 <Grid container spacing={2}>
                   <Grid item xs={4} md={4} lg={4}>
-                    <Avatar alt={fakeProfile.name} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
+                    <Avatar alt={this.props.rootStore.profileStore.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
                   </Grid>
                   <Grid item xs={8} md={8} lg={8}>
                     <Typography variant="title">
-                      {fakeProfile.name}
+                      {this.props.rootStore.profileStore.username}
                     </Typography>
                     <Typography gutterBottom variant="caption">
-                      {fakeProfile.nickname}
+                      {this.props.rootStore.profileStore.nickname}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -78,7 +71,7 @@ class PersonalProfile extends Component {
                       Tweets
                     </Typography>
                     <Typography variant="title" className={this.props.classes.link} >
-                      {fakeProfile.tweets}
+                      {this.props.rootStore.profileStore.tweets}
                     </Typography>
                   </Grid>
                   <Grid item xs={4} md={4} lg={4}>
@@ -86,7 +79,7 @@ class PersonalProfile extends Component {
                       Followers
                     </Typography>
                     <Typography variant="title" className={this.props.classes.link} >
-                      {fakeProfile.followers}
+                      {this.props.rootStore.profileStore.follower}
                     </Typography>
                   </Grid>
                   <Grid item xs={4} md={4} lg={4}>
@@ -94,7 +87,7 @@ class PersonalProfile extends Component {
                       Following
                     </Typography>
                     <Typography variant="title" className={this.props.classes.link}>
-                      {fakeProfile.following}
+                      {this.props.rootStore.profileStore.following}
                     </Typography>
                   </Grid>
                   

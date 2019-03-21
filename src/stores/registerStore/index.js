@@ -1,7 +1,5 @@
 import { observable, action, decorate} from 'mobx';
-import { ip } from '../../constant';
 import api from '../../api';
-const qs = require('qs');
 
 class RegisterStore{
 
@@ -36,17 +34,13 @@ class RegisterStore{
         }
         
         return api.signup(params)
-        .then(data => 
+        .then(response => 
         {
-            if(data.message){
-                alert(data.message + " Please log in.");
-                window.location = '/login';
-            }else{
-                alert(JSON.stringify(data.error));
-            }
+            alert(response.data.message)
+            window.location = '/login';
         })
         .catch((error) => {
-            console.log(error);
+            alert(error.response.data.message);
         });
 
     }

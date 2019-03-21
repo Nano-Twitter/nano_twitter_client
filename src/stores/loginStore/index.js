@@ -11,9 +11,6 @@ class LoginStore {
         this.password = '';
         this.email = '';
         this.isLoggedIn = localStorage.getItem('isLoggedIn');
-        // this.authenticate().then((res) => {
-        //     this.isLoggedIn = res;
-        // });
     }
 
     changePassword = (value) => {
@@ -24,27 +21,6 @@ class LoginStore {
         this.email = value;
     }
 
-    // authenticate = () => {
-    //     const params = JSON.parse(sessionStorage.getItem('user'))
-    //     return fetch( ip + `/api/users/auth`, {
-    //         method: 'POST',
-    //         headers: new Headers({
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/x-www-form-urlencoded',
-    //         }),
-    //         body: qs.stringify(params),
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => 
-    //     {
-    //         return data.message === 'true'
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    // }
-
-
     login = () => {
 
         const params = {
@@ -53,27 +29,32 @@ class LoginStore {
         }
 
         return api.signin(params)
-        .then(data => 
+        .then((response) => 
         {
-            if(data.message){
-                // sessionStorage.setItem('user', data.message);
-                localStorage.setItem('isLoggedIn', true);
-                alert("Login success!");
-                window.location = '/home';
-            }else{
-                alert(JSON.stringify(data.error));
-            }
+            localStorage.setItem('user', JSON.stringify(response.data.data));
+            localStorage.setItem('isLoggedIn', true);
+            alert(response.data.message);
+            window.location = '/home';
         })
         .catch((error) => {
-            console.log(error);
+            alert(error.response.data.message);
         });
     }
 
     logout = () => {
         // sessionStorage.removeItem('user');
-        localStorage.removeItem('isLoggedIn');
-        this.isLoggedIn = false;
-        window.location = '/login';
+        
+        return api.signout({})
+        .then((response) => {
+            alert(response.data.message)
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('user');
+            this.isLoggedIn = false;
+            window.location = '/login';
+        })
+        .catch((error) => {
+            alert(error.response.data.message)
+        });
     }
 
 }
