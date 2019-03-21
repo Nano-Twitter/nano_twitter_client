@@ -81,6 +81,10 @@ const styles = theme => ({
     input: {
         display: 'none',
     },
+    cardContent: {
+        marginBottom: 0,
+        paddingBottom: 0
+    }
 });
 
 const theme = createMuiTheme({

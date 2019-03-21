@@ -39,10 +39,10 @@ let api = {
     addTweet: (params) => {
         return mainServer.post('/tweets', qs.stringify(params))
     },
-    timeline: (id) => {
+    userTimeline:(id)=>{
         return mainServer.get(`/tweets/users/${id}`)
     },
-    recent: () => {
+    timeline:()=>{
         return mainServer.get(`/tweets/recent/`)
     },
 };

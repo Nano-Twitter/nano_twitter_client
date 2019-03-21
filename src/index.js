@@ -26,8 +26,9 @@ ReactDOM.render(
                 <Switch>
                     <AuthorizedRoute exact path="/" component={Home} />
                     <JumpToHomeIfLogedInRoute path="/login" component={Login} />
-                    <Route path="/register" component={Register} />í
-                    <AuthorizedRoute path="/home" component={Home} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/home" component={Home} />
+                    {/* <AuthorizedRoute path="/home" component={Home} /> */}
                 </Switch>
             </div>
         </BrowserRouter>
