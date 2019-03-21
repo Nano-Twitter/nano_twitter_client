@@ -10,17 +10,23 @@ const mainServer = axios.create({
 
 let api = {
     signin: (params) => {
-        return mainServer.post('/users/signin', qs.stringify(params))
+        return mainServer.post(`/users/signin`, qs.stringify(params))
     },
     signup: (params) => {
-        return mainServer.post('/users/signup', qs.stringify(params))
+        return mainServer.post(`/users/signup`, qs.stringify(params))
     },
     signout: (params) => {
-        return mainServer.delete('/users/signout', qs.stringify(params))
+        return mainServer.delete(`/users/signout`, qs.stringify(params))
     },
     getprofile: (id, params) => {
-        return mainServer.get('/users/' + id, qs.stringify(params))
-    }
+        return mainServer.get(`/users/${id}`, qs.stringify(params))
+    },
+    follow:(followee_id)=>{
+        return mainServer.put(`/follows/:${followee_id}`)
+    },
+    unfollow:(followee_id)=>{
+        return mainServer.delete(`/follows/:${followee_id}`)
+    },
 }
 
 export default api

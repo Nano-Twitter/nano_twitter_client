@@ -47,8 +47,8 @@ import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import indigo from '@material-ui/core/colors/indigo';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -96,58 +96,22 @@ const styles = theme => ({
     },
     cssLabel: {
         '&$cssFocused': {
-            color: purple[500],
+            color: indigo[500],
         },
     },
     cssFocused: {},
-    cssUnderline: {
-        '&:after': {
-            borderBottomColor: purple[500],
-        },
-    },
     cssOutlinedInput: {
         '&$cssFocused $notchedOutline': {
-            borderColor: purple[500],
+            borderColor: indigo[500],
         },
-    },
-    notchedOutline: {},
-    bootstrapRoot: {
-        'label + &': {
-            marginTop: theme.spacing.unit * 3,
-        },
-    },
-    bootstrapInput: {
-        borderRadius: 4,
-        position: 'relative',
-        backgroundColor: theme.palette.common.white,
-        border: '1px solid #ced4da',
-        fontSize: 16,
-        width: 'auto',
-        padding: '10px 12px',
-        transition: theme.transitions.create(['border-color', 'box-shadow']),
-        // Use the system font instead of the default Roboto font.
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
-        '&:focus': {
-            borderRadius: 4,
-            borderColor: '#80bdff',
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-        },
-    },
-    bootstrapFormLabel: {
-        fontSize: 18,
-    },
+        // minWidth: 275,
+        minHeight: 100,
+        borderRadius: 10,
 
+    },
+    notchedOutline: {
+        borderRadius: 10,
+    },
     avatar: {
         margin: 10,
     },
@@ -172,38 +136,48 @@ function SimpleCard(props) {
     return (
         <Card className={classes.card}>
             <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    New Tweet
-                </Typography>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-start"
+                    spacing={16}
+                >
+                    <Grid item xs={1.5}>
+                        <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
+                                className={classes.avatar}/>
+                        {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
+                    </Grid>
+                    <Grid item xs>
+                        <TextField
+                            className={classes.margin}
+                            InputLabelProps={{
+                                classes: {
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                },
+                            }}
+                            InputProps={{
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            label="Say something..."
+                            variant="outlined"
+                            id="custom-css-outlined-input"
+                            fullWidth
+                            margin="normal"
 
-                <Grid container justify="center" alignItems="center">
-                    <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" className={classes.avatar} />
-                    {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
-                    <TextField
-                        className={classes.margin}
-                        InputLabelProps={{
-                            classes: {
-                                root: classes.cssLabel,
-                                focused: classes.cssFocused,
-                            },
-                        }}
-                        InputProps={{
-                            classes: {
-                                root: classes.cssOutlinedInput,
-                                focused: classes.cssFocused,
-                                notchedOutline: classes.notchedOutline,
-                            },
-                        }}
-                        label="Say something..."
-                        variant="outlined"
-                        id="custom-css-outlined-input"
-                    />
+                        />
+                    </Grid>
+
                 </Grid>
-
 
             </CardContent>
             {/*<CardActions>*/}
-                {/*<Button size="small">Learn More</Button>*/}
+            {/*<Button size="small">Learn More</Button>*/}
             {/*</CardActions>*/}
         </Card>
     );
