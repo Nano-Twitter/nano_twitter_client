@@ -16,6 +16,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextsmsIcon from '@material-ui/icons/Textsms';
 import RotateRight from '@material-ui/icons/RotateRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TweetBlock from '../TweetBlock'
 
 const styles = theme => ({
     main: {
@@ -64,7 +70,8 @@ const styles = theme => ({
       paddingTop: 15
     },
     cardHeader: {
-      padding: 10
+      padding: 10,
+      paddingLeft: 15,
     },
     cardContent: {
       marginTop: -15,
@@ -85,7 +92,27 @@ const styles = theme => ({
 
 class Tweet extends Component {
 
-    state = { expanded: false };
+    state = { 
+      expanded: false,
+      commentOpen: false,
+      retweetOpen:false,
+    };
+
+    handleClickOpenComment = () => {
+      this.setState({ commentOpen: true });
+    };
+
+    handleClickOpenRetweet = () => {
+      this.setState({ retweetOpen: true });
+    };
+  
+    handleCloseComment = () => {
+      this.setState({ commentOpen: false });
+    };
+
+    handleCloseRetweet = () => {
+      this.setState({ retweetOpen: false });
+    };
 
     handleExpandClick = () => {
       this.setState(state => ({ expanded: !state.expanded }));
@@ -94,6 +121,7 @@ class Tweet extends Component {
     render(){
       
       const { classes } = this.props;
+
       return (
 
         <main className={this.props.classes.main}>
@@ -107,7 +135,7 @@ class Tweet extends Component {
                 <Grid container spacing={0}  className={classes.cardHeader}>
                   <Grid item xs={10} md={10} lg={10}>
                     <Typography variant="body2">
-                      {fakePost.username} {"       "}
+                      {fakePost.username} {" "}
                       <Typography variant="caption" inline>
                         {fakePost.nickname} · {fakePost.time}
                       </Typography>
@@ -130,12 +158,12 @@ class Tweet extends Component {
                 <CardActions className={classes.actions}>
                   <Grid container spacing={5}>
                     <Grid item xs={3} md={3} lg={3}>
-                      <IconButton aria-label="Repost">
+                      <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
                         <RotateRight />
                       </IconButton>
                     </Grid>
                     <Grid item xs={3} md={3} lg={3}>
-                      <IconButton aria-label="Comment">
+                      <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
                         <TextsmsIcon />
                       </IconButton>
                     </Grid>
@@ -191,8 +219,48 @@ class Tweet extends Component {
               </CardContent>
             </Collapse>
           </Card>
+
+
+          <Dialog
+          open={this.state.commentOpen}
+          onClose={this.handleCloseComment}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Comment Dialog"}</DialogTitle>
+            <DialogContent>
+              <TweetBlock />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCloseComment} color="primary">
+                Disagree
+              </Button>
+              <Button onClick={this.handleCloseComment} color="primary" autoFocus>
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          <Dialog
+          open={this.state.retweetOpen}
+          onClose={this.handleCloseRetweet}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Retweet Dialog"}</DialogTitle>
+            <DialogContent>
+              <TweetBlock />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCloseRetweet} color="primary">
+                Disagree
+              </Button>
+              <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog>
         </main>
-            
       );
     }
 }

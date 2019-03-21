@@ -14,6 +14,12 @@ let api = {
     },
     signup: (params) => {
         return mainServer.post('/users/signup', qs.stringify(params))
+    },
+    signout: (params) => {
+        return mainServer.delete('/users/signout', qs.stringify(params))
+    },
+    getprofile: (id, params) => {
+        return mainServer.get('/users/' + id, qs.stringify(params))
     }
 }
 
