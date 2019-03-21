@@ -104,7 +104,7 @@ function SimpleCard(props) {
                     alignItems="flex-start"
                     spacing={10}
                 >
-                    <Grid item xs={1.5}>
+                    <Grid item xs={1}>
                         <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
                                 className={classes.avatar}/>
                         {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
