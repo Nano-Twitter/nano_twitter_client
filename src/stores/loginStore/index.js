@@ -42,8 +42,6 @@ class LoginStore {
     }
 
     logout = () => {
-        // sessionStorage.removeItem('user');
-        
         return api.signout({})
         .then((response) => {
             alert(response.data.message)
