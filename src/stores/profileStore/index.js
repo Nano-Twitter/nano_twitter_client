@@ -13,13 +13,13 @@ class ProfileStore{
     constructor() {
         const user = JSON.parse(localStorage.getItem('user'))
         console.log(user)
-        this.username = user.name;
-        this.nickname = '@' + user.name;
-        this.email = user.email;
-        this.follower = user.follower_ids.length;
-        this.following = user.following_ids.length;
+        // this.username = user.name;
+        // this.nickname = '@' + user.name;
+        // this.email = user.email;
+        // this.follower = user.follower_ids.length;
+        // this.following = user.following_ids.length;
         // this.tweets = user.tweets.length;
-        this.tweets = 0;
+        // this.tweets = 0;
     }
 
     changeUsername = (value) => {
