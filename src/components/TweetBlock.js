@@ -1,38 +1,3 @@
-// import React, { Component } from 'react';
-// import {observer, inject} from 'mobx-react';
-// import { withStyles } from '@material-ui/core/styles';
-//
-// const styles = theme => ({
-//     main: {
-//       width: 'auto',
-//       marginLeft: theme.spacing.unit * 3,
-//       marginRight: theme.spacing.unit * 3,
-//       [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-//         width: 1100,
-//         marginLeft: 'auto',
-//         marginRight: 'auto',
-//       },
-//       paddingTop: theme.spacing.unit * 2
-//     },
-//
-//   });
-//
-//
-//
-// class TweetBlock extends Component {
-//     render(){
-//         return (
-//             <main className={this.props.classes.main}>
-//             TweetBlock
-//             </main>
-//
-//         );
-//     }
-// }
-//
-// export default withStyles(styles)(inject('rootStore')(observer(TweetBlock)));
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
@@ -54,26 +19,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
 
-// const styles = {
-//     card: {
-//         minWidth: 275,
-//     },
-//     bullet: {
-//         display: 'inline-block',
-//         margin: '0 2px',
-//         transform: 'scale(0.8)',
-//     },
-//     title: {
-//         fontSize: 14,
-//     },
-//     pos: {
-//         marginBottom: 12,
-//     },
-// };
-
 const styles = theme => ({
     card: {
         minWidth: 275,
+        // paddingLeft: theme.spacing.unit * 3,
+        // paddingRight: theme.spacing.unit * 3,
+        paddingBottom: 0,
     },
     bullet: {
         display: 'inline-block',
@@ -90,6 +41,9 @@ const styles = theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+        paddingRight: theme.spacing.unit * 3,
+        // padding
+        paddingBottom: 0,
     },
     margin: {
         margin: theme.spacing.unit,
@@ -120,6 +74,12 @@ const styles = theme => ({
         width: 60,
         height: 60,
     },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
 });
 
 const theme = createMuiTheme({
@@ -136,12 +96,13 @@ function SimpleCard(props) {
     return (
         <Card className={classes.card}>
             <CardContent>
+
                 <Grid
                     container
                     direction="row"
                     justify="space-between"
                     alignItems="flex-start"
-                    spacing={16}
+                    spacing={10}
                 >
                     <Grid item xs={1}>
                         <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
@@ -149,36 +110,49 @@ function SimpleCard(props) {
                         {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
                     </Grid>
                     <Grid item xs>
-                        <TextField
-                            className={classes.margin}
-                            InputLabelProps={{
-                                classes: {
-                                    root: classes.cssLabel,
-                                    focused: classes.cssFocused,
-                                },
-                            }}
-                            InputProps={{
-                                classes: {
-                                    root: classes.cssOutlinedInput,
-                                    focused: classes.cssFocused,
-                                    notchedOutline: classes.notchedOutline,
-                                },
-                            }}
-                            label="Say something..."
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                            fullWidth
-                            margin="normal"
+                        <Grid
+                            container
+                            direction="column"
+                            justify="flex-start"
+                            alignItems="stretch"
+                        >
 
-                        />
+                            <Grid item>
+                                <TextField
+                                    className={classes.margin}
+                                    InputLabelProps={{
+                                        classes: {
+                                            root: classes.cssLabel,
+                                            focused: classes.cssFocused,
+                                        },
+                                    }}
+                                    InputProps={{
+                                        classes: {
+                                            root: classes.cssOutlinedInput,
+                                            focused: classes.cssFocused,
+                                            notchedOutline: classes.notchedOutline,
+                                        },
+                                    }}
+                                    label="Say something..."
+                                    variant="outlined"
+                                    id="custom-css-outlined-input"
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </Grid>
+
+                            <Grid item
+                                  justify="flex-end"
+                            >
+                                <Button variant="contained" color="primary" className={classes.button}>
+                                    Tweet
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
 
                 </Grid>
-
             </CardContent>
-            {/*<CardActions>*/}
-            {/*<Button size="small">Learn More</Button>*/}
-            {/*</CardActions>*/}
         </Card>
     );
 }
@@ -267,5 +241,3 @@ CustomizedInputs.propTypes = {
 };
 
 export default withStyles(styles)(SimpleCard);
-
-// export default withStyles(styles)();
