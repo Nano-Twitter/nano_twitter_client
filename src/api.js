@@ -21,9 +21,6 @@ let api = {
     getprofile: (id, params) => {
         return mainServer.get(`/users/${id}`, qs.stringify(params))
     },
-    signout:(params)=>{
-        return mainServer.post('/users/signout', qs.stringify(params))
-    },
     follow:(followee_id)=>{
         return mainServer.put(`/follows/${followee_id}`)
     },
@@ -48,7 +45,7 @@ let api = {
     recent:()=>{
         return mainServer.get(`/tweets/recent/`)
     },
-    
+
 
 }
 
