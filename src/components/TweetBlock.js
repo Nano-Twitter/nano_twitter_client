@@ -80,6 +80,10 @@ const styles = theme => ({
     input: {
         display: 'none',
     },
+    cardContent: {
+        marginBottom: 0,
+        paddingBottom: 0
+    }
 });
 
 const theme = createMuiTheme({
@@ -95,7 +99,7 @@ function SimpleCard(props) {
 
     return (
         <Card className={classes.card}>
-            <CardContent>
+            <CardContent className={classes.cardContent}>
 
                 <Grid
                     container
