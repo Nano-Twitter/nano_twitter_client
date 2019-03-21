@@ -1,46 +1,271 @@
-import React, { Component } from 'react';
-import {observer, inject} from 'mobx-react';
-import { withStyles } from '@material-ui/core/styles';
+// import React, { Component } from 'react';
+// import {observer, inject} from 'mobx-react';
+// import { withStyles } from '@material-ui/core/styles';
+//
+// const styles = theme => ({
+//     main: {
+//       width: 'auto',
+//       marginLeft: theme.spacing.unit * 3,
+//       marginRight: theme.spacing.unit * 3,
+//       [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+//         width: 1100,
+//         marginLeft: 'auto',
+//         marginRight: 'auto',
+//       },
+//       paddingTop: theme.spacing.unit * 2
+//     },
+//
+//   });
+//
+//
+//
+// class TweetBlock extends Component {
+//     render(){
+//         return (
+//             <main className={this.props.classes.main}>
+//             TweetBlock
+//             </main>
+//
+//         );
+//     }
+// }
+//
+// export default withStyles(styles)(inject('rootStore')(observer(TweetBlock)));
+
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+import Input from '@material-ui/core/Input';
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import green from '@material-ui/core/colors/green';
+import indigo from '@material-ui/core/colors/indigo';
+
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+
+
+// const styles = {
+//     card: {
+//         minWidth: 275,
+//     },
+//     bullet: {
+//         display: 'inline-block',
+//         margin: '0 2px',
+//         transform: 'scale(0.8)',
+//     },
+//     title: {
+//         fontSize: 14,
+//     },
+//     pos: {
+//         marginBottom: 12,
+//     },
+// };
 
 const styles = theme => ({
-    main: {
-      width: 'auto',
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-        width: 1100,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
-      paddingTop: theme.spacing.unit * 2
+    card: {
+        minWidth: 275,
     },
-  
-  });
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
 
-  const fakePosts = [
-    {
-      title: 'Featured tweet',
-      user: 'hahaha1',
-      content:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
     },
-    {
-      title: 'Tweet title',
-      user: 'hahaha2',
-      content:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    margin: {
+        margin: theme.spacing.unit,
     },
-  ];
+    cssLabel: {
+        '&$cssFocused': {
+            color: indigo[500],
+        },
+    },
+    cssFocused: {},
+    cssOutlinedInput: {
+        '&$cssFocused $notchedOutline': {
+            borderColor: indigo[500],
+        },
+        // minWidth: 275,
+        minHeight: 100,
+        borderRadius: 10,
 
-class TweetBlock extends Component {
-    render(){
-        return (
-            <main className={this.props.classes.main}>
-            TweetBlock
-            </main>
-            
-        );
-    }
+    },
+    notchedOutline: {
+        borderRadius: 10,
+    },
+    avatar: {
+        margin: 10,
+    },
+    bigAvatar: {
+        margin: 10,
+        width: 60,
+        height: 60,
+    },
+});
+
+const theme = createMuiTheme({
+    palette: {
+        primary: green,
+    },
+    typography: {useNextVariants: true},
+});
+
+
+function SimpleCard(props) {
+    const {classes} = props;
+
+    return (
+        <Card className={classes.card}>
+            <CardContent>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-start"
+                    spacing={16}
+                >
+                    <Grid item xs={1.5}>
+                        <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
+                                className={classes.avatar}/>
+                        {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
+                    </Grid>
+                    <Grid item xs>
+                        <TextField
+                            className={classes.margin}
+                            InputLabelProps={{
+                                classes: {
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                },
+                            }}
+                            InputProps={{
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            label="Say something..."
+                            variant="outlined"
+                            id="custom-css-outlined-input"
+                            fullWidth
+                            margin="normal"
+
+                        />
+                    </Grid>
+
+                </Grid>
+
+            </CardContent>
+            {/*<CardActions>*/}
+            {/*<Button size="small">Learn More</Button>*/}
+            {/*</CardActions>*/}
+        </Card>
+    );
 }
 
-export default withStyles(styles)(inject('rootStore')(observer(TweetBlock)));
+SimpleCard.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
+function CustomizedInputs(props) {
+    const {classes} = props;
+
+    return (
+        <div className={classes.root}>
+            <FormControl className={classes.margin}>
+                <InputLabel
+                    htmlFor="custom-css-standard-input"
+                    classes={{
+                        root: classes.cssLabel,
+                        focused: classes.cssFocused,
+                    }}
+                >
+                    Custom CSS
+                </InputLabel>
+                <Input
+                    id="custom-css-standard-input"
+                    classes={{
+                        underline: classes.cssUnderline,
+                    }}
+                />
+            </FormControl>
+            <TextField
+                className={classes.margin}
+                InputLabelProps={{
+                    classes: {
+                        root: classes.cssLabel,
+                        focused: classes.cssFocused,
+                    },
+                }}
+                InputProps={{
+                    classes: {
+                        root: classes.cssOutlinedInput,
+                        focused: classes.cssFocused,
+                        notchedOutline: classes.notchedOutline,
+                    },
+                }}
+                label="Custom CSS"
+                variant="outlined"
+                id="custom-css-outlined-input"
+            />
+
+            <MuiThemeProvider theme={theme}>
+                <TextField
+                    className={classes.margin}
+                    label="MuiThemeProvider"
+                    id="mui-theme-provider-standard-input"
+                />
+
+                <TextField
+                    className={classes.margin}
+                    label="MuiThemeProvider"
+                    variant="outlined"
+                    id="mui-theme-provider-outlined-input"
+                />
+            </MuiThemeProvider>
+            <FormControl className={classes.margin}>
+                <InputLabel shrink htmlFor="bootstrap-input" className={classes.bootstrapFormLabel}>
+                    Bootstrap
+                </InputLabel>
+                <InputBase
+                    id="bootstrap-input"
+                    defaultValue="react-bootstrap"
+                    classes={{
+                        root: classes.bootstrapRoot,
+                        input: classes.bootstrapInput,
+                    }}
+                />
+            </FormControl>
+            <InputBase className={classes.margin} defaultValue="Naked input"/>
+        </div>
+    );
+}
+
+CustomizedInputs.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SimpleCard);
+
+// export default withStyles(styles)();
