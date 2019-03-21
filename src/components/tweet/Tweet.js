@@ -127,7 +127,7 @@ class Tweet extends Component {
         <main className={this.props.classes.main}>
           
           <Card className={classes.card}>
-            <Grid container spacing={10}  className={classes.cardMain}>
+            <Grid container spacing={8}  className={classes.cardMain}>
               <Grid item xs={1} md={1} lg={1}>
                 <Avatar alt={fakePost.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.avatar} />
               </Grid>
@@ -156,7 +156,7 @@ class Tweet extends Component {
                   title="Paella dish"
                 />
                 <CardActions className={classes.actions}>
-                  <Grid container spacing={5}>
+                  <Grid container spacing={8}>
                     <Grid item xs={3} md={3} lg={3}>
                       <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
                         <RotateRight />

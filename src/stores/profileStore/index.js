@@ -1,4 +1,6 @@
 import { observable, action, decorate} from 'mobx';
+import loginStore from '../loginStore';
+
 // import api from '../../api';
 
 class ProfileStore{
@@ -11,15 +13,24 @@ class ProfileStore{
     follower;
     
     constructor() {
-        const user = JSON.parse(localStorage.getItem('user'))
-        console.log(user)
-        this.username = user.name;
-        this.nickname = '@' + user.name;
-        this.email = user.email;
-        this.follower = user.follower_ids.length;
-        this.following = user.following_ids.length;
-        // this.tweets = user.tweets.length;
-        this.tweets = 0;
+        if(loginStore.isLoggedIn){
+            const user = JSON.parse(localStorage.getItem('user'))
+            this.username = user.name;
+            this.nickname = '@' + user.name;
+            this.email = user.email;
+            this.follower = user.follower_ids.length;
+            this.following = user.following_ids.length;
+            // this.tweets = user.tweets.length;
+            this.tweets = 0;
+        }else{
+            this.username = '';
+            this.nickname = '';
+            this.email = '';
+            this.tweets = '';
+            this.following = '';
+            this.follower = '';
+        }
+        
     }
 
     changeUsername = (value) => {

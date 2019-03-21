@@ -51,7 +51,7 @@ class PersonalProfile extends Component {
               />
               <CardContent>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={0}>
                   <Grid item xs={4} md={4} lg={4}>
                     <Avatar alt={this.props.rootStore.profileStore.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
                   </Grid>
@@ -65,7 +65,7 @@ class PersonalProfile extends Component {
                   </Grid>
                 </Grid>
 
-                <Grid container spacing={5} className={this.props.classes.infobox}>
+                <Grid container spacing={8} className={this.props.classes.infobox}>
                   <Grid item xs={4} md={4} lg={4}>
                     <Typography gutterBottom variant="caption" >
                       Tweets

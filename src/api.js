@@ -21,10 +21,10 @@ let api = {
     getprofile: (id, params) => {
         return mainServer.get(`/users/${id}`, qs.stringify(params))
     },
-    follow:(followee_id)=>{
+    follow: (followee_id)=>{
         return mainServer.put(`/follows/:${followee_id}`)
     },
-    unfollow:(followee_id)=>{
+    unfollow: (followee_id)=>{
         return mainServer.delete(`/follows/:${followee_id}`)
     },
 }
