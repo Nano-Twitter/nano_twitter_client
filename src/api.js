@@ -5,7 +5,7 @@ import qs from 'qs'
 const mainServer = axios.create({
     baseURL: constant.ip,
     timeout: constant.timeout,
-    headers: { 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest' }
+    headers: {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
 });
 
 let api = {
@@ -21,23 +21,23 @@ let api = {
     getprofile: (id, params) => {
         return mainServer.get(`/users/${id}`, qs.stringify(params))
     },
-    follow:(followee_id)=>{
+    follow: (followee_id) => {
         return mainServer.put(`/follows/${followee_id}`)
     },
-    unfollow:(followee_id)=>{
+    unfollow: (followee_id) => {
         return mainServer.delete(`/follows/${followee_id}`)
     },
-    userInfo:(id='')=>{
+    userInfo: (id = '') => {
         return mainServer.get(`/users/${id}`)
     },
-    followers:(id='')=>{
+    followers: (id = '') => {
         return mainServer.get(`/followers/list/${id}`)
     },
-    followees:(id='')=>{
+    followees: (id = '') => {
         return mainServer.get(`/followers/list/${id}`)
     },
-    addTwitter:(params)=>{
-        return mainServer.post('/tweets',qs.stringify(params))
+    addTweet: (params) => {
+        return mainServer.post('/tweets', qs.stringify(params))
     },
     userTimeline:(id)=>{
         return mainServer.get(`/tweets/users/${id}`)

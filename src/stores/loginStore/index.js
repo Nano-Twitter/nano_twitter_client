@@ -1,4 +1,4 @@
-import { observable, action, decorate} from 'mobx';
+import {observable, action, decorate} from 'mobx';
 import api from '../../api';
 
 class LoginStore {
@@ -29,30 +29,29 @@ class LoginStore {
         }
 
         return api.signin(params)
-        .then((response) => 
-        {
-            localStorage.setItem('user', JSON.stringify(response.data.data));
-            localStorage.setItem('isLoggedIn', true);
-            alert(response.data.message);
-            window.location = '/home';
-        })
-        .catch((error) => {
-            alert(error.response.data.message);
-        });
+            .then((response) => {
+                localStorage.setItem('user', JSON.stringify(response.data.data));
+                localStorage.setItem('isLoggedIn', true);
+                alert(response.data.message);
+                window.location = '/home';
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
     }
 
     logout = () => {
         return api.signout({})
-        .then((response) => {
-            alert(response.data.message)
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('user');
-            this.isLoggedIn = false;
-            window.location = '/login';
-        })
-        .catch((error) => {
-            alert(error.response.data.message)
-        });
+            .then((response) => {
+                alert(response.data.message)
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('user');
+                this.isLoggedIn = false;
+                window.location = '/login';
+            })
+            .catch((error) => {
+                alert(error.response.data.message)
+            });
     }
 
 }
@@ -69,4 +68,4 @@ decorate(LoginStore, {
 const loginStore = new LoginStore();
 
 export default loginStore;
-export { LoginStore };
+export {LoginStore};

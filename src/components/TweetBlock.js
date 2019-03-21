@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -17,6 +17,7 @@ import indigo from '@material-ui/core/colors/indigo';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import {inject, observer} from "mobx-react";
 
 
 const styles = theme => ({
@@ -94,154 +95,90 @@ const theme = createMuiTheme({
 });
 
 
-function SimpleCard(props) {
-    const {classes} = props;
+class SimpleCard extends Component {
 
-    return (
-        <Card className={classes.card}>
-            <CardContent className={classes.cardContent}>
+    changeTweet = (e) => {
+        this.props.rootStore.tweetStore.changeTweet(e.target.value);
+    };
 
-                <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="flex-start"
-                    spacing={10}
-                >
-                    <Grid item xs={1}>
-                        <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
-                                className={classes.avatar}/>
-                        {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
-                    </Grid>
-                    <Grid item xs>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="flex-start"
-                            alignItems="stretch"
-                        >
+    submit = (e) => {
+        this.props.rootStore.tweetStore.submit();
+    };
 
-                            <Grid item>
-                                <TextField
-                                    className={classes.margin}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.cssLabel,
-                                            focused: classes.cssFocused,
-                                        },
-                                    }}
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.cssOutlinedInput,
-                                            focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        },
-                                    }}
-                                    label="Say something..."
-                                    variant="outlined"
-                                    id="custom-css-outlined-input"
-                                    fullWidth
-                                    margin="normal"
-                                />
-                            </Grid>
+    render() {
 
-                            <Grid item
-                                  justify="flex-end"
+        const {classes} = this.props;
+
+        return (
+
+            <Card className={classes.card}>
+                <CardContent>
+
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="flex-start"
+                        spacing={10}
+                    >
+                        <Grid item xs={1}>
+                            <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
+                                    className={classes.avatar}/>
+                            {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />*/}
+                        </Grid>
+                        <Grid item xs>
+                            <Grid
+                                container
+                                direction="column"
+                                justify="flex-start"
+                                alignItems="stretch"
                             >
-                                <Button variant="contained" color="primary" className={classes.button}>
-                                    Tweet
-                                </Button>
+
+                                <Grid item>
+                                    <TextField
+                                        onChange={this.changeTweet}
+                                        className={classes.margin}
+                                        InputLabelProps={{
+                                            classes: {
+                                                root: classes.cssLabel,
+                                                focused: classes.cssFocused,
+                                            },
+                                        }}
+                                        InputProps={{
+                                            classes: {
+                                                root: classes.cssOutlinedInput,
+                                                focused: classes.cssFocused,
+                                                notchedOutline: classes.notchedOutline,
+                                            },
+                                        }}
+                                        label="Say something..."
+                                        variant="outlined"
+                                        id="custom-css-outlined-input"
+                                        margin="normal"
+                                        fullWidth
+                                        multiline
+                                        rows='4'
+                                    />
+                                </Grid>
+
+                                <Grid item
+                                      justify="flex-end"
+                                >
+                                    <Button variant="contained"
+                                            color="primary"
+                                            className={classes.button}
+                                            onClick={this.submit}
+                                    >
+                                        Tweet
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-
-                </Grid>
-            </CardContent>
-        </Card>
-    );
+                </CardContent>
+            </Card>
+        );
+    }
 }
 
-SimpleCard.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-
-function CustomizedInputs(props) {
-    const {classes} = props;
-
-    return (
-        <div className={classes.root}>
-            <FormControl className={classes.margin}>
-                <InputLabel
-                    htmlFor="custom-css-standard-input"
-                    classes={{
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                    }}
-                >
-                    Custom CSS
-                </InputLabel>
-                <Input
-                    id="custom-css-standard-input"
-                    classes={{
-                        underline: classes.cssUnderline,
-                    }}
-                />
-            </FormControl>
-            <TextField
-                className={classes.margin}
-                InputLabelProps={{
-                    classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                    },
-                }}
-                InputProps={{
-                    classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                    },
-                }}
-                label="Custom CSS"
-                variant="outlined"
-                id="custom-css-outlined-input"
-            />
-
-            <MuiThemeProvider theme={theme}>
-                <TextField
-                    className={classes.margin}
-                    label="MuiThemeProvider"
-                    id="mui-theme-provider-standard-input"
-                />
-
-                <TextField
-                    className={classes.margin}
-                    label="MuiThemeProvider"
-                    variant="outlined"
-                    id="mui-theme-provider-outlined-input"
-                />
-            </MuiThemeProvider>
-            <FormControl className={classes.margin}>
-                <InputLabel shrink htmlFor="bootstrap-input" className={classes.bootstrapFormLabel}>
-                    Bootstrap
-                </InputLabel>
-                <InputBase
-                    id="bootstrap-input"
-                    defaultValue="react-bootstrap"
-                    classes={{
-                        root: classes.bootstrapRoot,
-                        input: classes.bootstrapInput,
-                    }}
-                />
-            </FormControl>
-            <InputBase className={classes.margin} defaultValue="Naked input"/>
-        </div>
-    );
-}
-
-CustomizedInputs.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleCard);
+export default withStyles(styles)(inject('rootStore')(observer(SimpleCard)));
