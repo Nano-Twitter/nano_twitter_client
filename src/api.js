@@ -42,10 +42,9 @@ let api = {
     userTimeline:(id)=>{
         return mainServer.get(`/tweets/users/${id}`)
     },
-    timeline:()=>{
+    homeTimeline:()=>{
         return mainServer.get(`/tweets/recent/`)
     },
-
 
 }
 
