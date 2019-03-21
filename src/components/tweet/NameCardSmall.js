@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { Button } from '@material-ui/core'
-import {api} from '../../api'
+import api from '../../api'
 
 const styles = theme => ({
   main: {
@@ -20,7 +20,7 @@ const styles = theme => ({
     
   },
   nameBox:{
-    "margin":"0 5px 10px 5px"
+    "margin":"5px 5px 5px 5px"
   },
   userName: {
     "font-size": "14px",
