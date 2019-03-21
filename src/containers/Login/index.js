@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import NameCardSmall from '../../components/tweet/NameCardSmall';
 
 const styles = theme =>
 
@@ -105,7 +106,7 @@ class Login extends Component {
                         <Typography>
                             <Link href='/register' className="register">Don't have an account? Register?</Link>
                         </Typography>
-
+                        <NameCardSmall></NameCardSmall>
                         <Button
                             fullWidth
                             variant="contained"
