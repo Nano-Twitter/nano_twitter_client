@@ -46,8 +46,11 @@ class NameCardSmall extends Component {
     //         this.props.followed = false;
     //     })
     // }
+    follow = false;
 
     render() {
+        // const follow = false;
+
         return (
             <div className={this.props.classes.main}>
                 {/*<Avatar className={this.props.classes.avatar} src={this.props.avatarAddress}/>*/}
@@ -57,23 +60,26 @@ class NameCardSmall extends Component {
                             <strong className={this.props.classes.userName}>@{this.props.userName || "test"}</strong>
                             {/*<span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>*/}
                         </div>
-                        {console.log(this.props.rootStore.recomStore.getRelation())}
+                        {/*/!*{console.log(this.props.rootStore.recomStore.getRelation())}*!/*/}
+                        {/*/!*{console.log(this.props.id)}*!/*/}
                         {/*{this.props.rootStore.recomStore.getRelation().get(this.props.id) ?*/}
-                            {/*(<Button onClick={(e) => {*/}
-                                {/*this.unfollow(this.props.id)*/}
-                            {/*}} size="small" variant="outlined" color="secondary">unfollow</Button>) :*/}
-                            {/*(<Button onClick={(e) => {*/}
-                                {/*this.follow(this.props.id)*/}
-                            {/*}} size="small" variant="outlined" color="primary">follow</Button>)}*/}
-                        {/*{this.props.followed ?*/}
-                        {/*(<Button onClick={(e) => {*/}
-                        {/*this.unfollow(this.props.id)*/}
-                        {/*}} size="small" variant="outlined" color="secondary">unfollow</Button>):*/}
-                        {/*(<Button onClick={(e) => {*/}
-                        {/*this.follow(this.props.id)*/}
-                        {/*}} size="small" variant="outlined" color="primary">follow</Button>)*/}
+                        {/*(<Button onClick={() => {*/}
+                        {/*this.props.rootStore.recomStore.unfollow(this.props.id)*/}
+                        {/*}} size="small" variant="outlined" color="secondary">unfollow</Button>) :*/}
+                        {/*(<Button onClick={() => {*/}
+                        {/*this.props.rootStore.recomStore.follow(this.props.id)*/}
+                        {/*}} size="small" variant="outlined" color="primary">follow</Button>)}*/}
 
-                        {/*}*/}
+
+                        {this.follow ?
+                            (<Button onClick={() => {
+                                this.follow = false;
+                                this.forceUpdate();
+                            }} size="small" variant="outlined" color="secondary">unfollow</Button>) :
+                            (<Button onClick={() => {
+                                this.follow = true;
+                                this.forceUpdate();
+                            }} size="small" variant="outlined" color="primary">follow</Button>)}
                     </div>
                 </div>
             </div>

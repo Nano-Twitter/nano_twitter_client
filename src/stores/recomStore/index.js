@@ -4,7 +4,7 @@ import api from '../../api';
 class RecomStore {
     recom = [];
     current_user = JSON.parse(localStorage.getItem('user'));
-    follow_relation = {};
+    follow_relation = new Map();
 
     loadRecom = () => {
         const params = {
@@ -15,29 +15,29 @@ class RecomStore {
         };
         return api.whoToFollow(params).then((response) => {
             this.recom = response.data.data;
-            this.recom.forEach(function (user) {
-                if (this.current_user.following_ids.include(user._id.$oid)) {
+            console.log(this.follow_relation);
+            for (let user of this.recom) {
+                if (this.current_user.following_ids.includes(user._id.$oid)) {
                     this.follow_relation.set(user._id.$oid, true);
                 } else {
                     this.follow_relation.set(user._id.$oid, false);
                 }
-            })
+
+            }
         })
     };
 
     getRecom = () => {
         return this.recom.slice();
-    }
+    };
 
     getRelation = () => {
         return this.follow_relation;
-    }
+    };
 
     follow = (id) => {
         const params = {
-            params: {
-                user_id: this.current_user._id.$oid
-            }
+            user_id: this.current_user._id.$oid,
         };
         return api.follow(id, params)
             .then(
@@ -48,7 +48,7 @@ class RecomStore {
             .catch((error) => {
                 console.log(error);
             })
-    }
+    };
 
     unfollow = (id) => {
         const params = {
