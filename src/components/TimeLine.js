@@ -16,17 +16,25 @@ class TimeLine extends Component {
       this.props.rootStore.timelineStore.loadTimeline();
     }
     componentDidUpdate() {
-
+      
     }
     render(){
-      const timeline = this.props.rootStore.timelineStore.timeline;
-      const listTweets = timeline.map((tweet, index) => 
-        <Tweet key={index} post={tweet}/>
-      );
+      const timeline = this.props.rootStore.timelineStore.getTimeline();
+
       // const listTweets = [];
         return (
+
             <main className={this.props.classes.main}>
-              {listTweets}
+              {
+                timeline.map(tweet => {
+                  return (
+                    <Tweet 
+                      key={tweet._id.$oid} 
+                      post={tweet}
+                    />
+                  )
+                })
+              }
             </main>
             
         );

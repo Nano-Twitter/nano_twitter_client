@@ -135,6 +135,7 @@ class SimpleCard extends Component {
                                                 notchedOutline: classes.notchedOutline,
                                             },
                                         }}
+                                        value={this.props.rootStore.tweetStore.tweet}
                                         label="Say something..."
                                         variant="outlined"
                                         id="custom-css-outlined-input"

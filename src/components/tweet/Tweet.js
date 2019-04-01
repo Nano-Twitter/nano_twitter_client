@@ -111,8 +111,8 @@ class Tweet extends Component {
 
     render(){
       
-      const { fakePost } = this.props.post;
-      const { classes } = this.props.classes;
+      const post = this.props.post;
+      const { classes } = this.props;
 
       return (
 
@@ -121,15 +121,15 @@ class Tweet extends Component {
           <Card className={classes.card}>
             <Grid container spacing={8}  className={classes.cardMain}>
               <Grid item xs={1} md={1} lg={1}>
-                <Avatar alt={fakePost.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.avatar} />
+                <Avatar alt={post.user_attr.name} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.avatar} />
               </Grid>
               <Grid item xs={11} md={11} lg={11}>
                 <Grid container spacing={0}  className={classes.cardHeader}>
                   <Grid item xs={10} md={10} lg={10}>
                     <Typography variant="body2">
-                      {fakePost.username} {" "}
+                      {post.user_attr.name} {" "}
                       <Typography variant="caption" inline>
-                        {fakePost.nickname} · {fakePost.time}
+                        {post.user_attr.name} · {post.created_at}
                       </Typography>
                     </Typography>
                   </Grid>
@@ -139,12 +139,12 @@ class Tweet extends Component {
                 </Grid>
                 <CardContent className={classes.cardContent}>
                   <Typography component="p">
-                    {fakePost.content}
+                    {post.content}
                   </Typography>
                 </CardContent>
                 <CardMedia
                   className={classes.media}
-                  image="https://material-ui.com/static/images/cards/paella.jpg"
+                  image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
                   title="Paella dish"
                 />
                 <CardActions className={classes.actions}>

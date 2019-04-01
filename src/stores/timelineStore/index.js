@@ -15,8 +15,7 @@ class TimelineStore {
         };
         return api.homeTimeline(params)
         .then((response) => {
-            // this.timeline = response.data.data;
-            console.log(response);
+            this.timeline.push(...response.data.data);
         })
         .catch((error) => {
             console.log(error);
@@ -26,6 +25,14 @@ class TimelineStore {
         })
         ;
     };
+
+    addTimeline = (newPost) => {
+        this.timeline.unshift(newPost);
+    }
+
+    getTimeline = () => {
+        return this.timeline.slice()
+    }
 
     addTweet = (data) => {
 
