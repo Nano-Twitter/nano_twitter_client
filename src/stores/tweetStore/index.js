@@ -10,7 +10,6 @@ class TweetStore {
         this.tweet = value;
     };
 
-
     submit = () => {
         const params = {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
