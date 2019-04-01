@@ -48,7 +48,7 @@ class NameCardSmall extends Component {
     render() {
         return (
             <div className={this.props.classes.main}>
-                <Avatar className={this.props.classes.avatar} src={this.props.avatarAddress}></Avatar>
+                {/*<Avatar className={this.props.classes.avatar} src={this.props.avatarAddress}/>*/}
                 <div>
                     <div>
                         <div className={this.props.classes.nameBox}>

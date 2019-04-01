@@ -26,26 +26,17 @@ class WhoToFollow extends Component {
 
     render() {
         const recom = this.props.rootStore.recomStore.recom;
-        const recomCard = recom.map(() => <NameCardSmall id=''/>);
         return (
             <main className={this.props.classes.main}>
-                {/*WhoToFollow*/}
-                {/*<NameCardSmall id=""/>*/}
-                {recomCard}
+                {recom.map(user => {
+                    return (
+                        <NameCardSmall
+                            id={user._id.$oid}
+                         />
+                    )
+                })}
             </main>
-
         );
-
-        // const listTweets = timeline.map((tweet, index) =>
-        //     <Tweet key={index} post={tweet}/>
-        // );
-        // // const listTweets = [];
-        // return (
-        //     <main className={this.props.classes.main}>
-        //         {listTweets}
-        //     </main>
-        //
-        // );
     }
 }
 

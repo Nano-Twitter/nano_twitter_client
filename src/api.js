@@ -46,7 +46,7 @@ let api = {
         return mainServer.get(`/tweets/users/${id}`)
     },
     whoToFollow: (params) => {
-        return mainServer.get(`/users/recommend`, qs.stringify(params))
+        return mainServer.get(`/users_recommend`, qs.stringify(params))
     },
 };
 
