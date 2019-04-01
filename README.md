@@ -1,68 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Nano Twitter V 0.6
 
-## Available Scripts
+## Deployment in AWS:
 
-In the project directory, you can run:
+[Nanotwitter](http://18.219.120.204:3000/)
 
-### `npm start`
+## Repo
+* server: https://github.com/Nano-Twitter/nano_twitter
+* client: https://github.com/Nano-Twitter/nano_twitter_client
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stacks
+* Front-end: [React](https://reactjs.org/)
+* Back-end: [Sinatra](http://sinatrarb.com/)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Documentations
+* [API](https://github.com/Nano-Twitter/nano_twitter/blob/master/doc/api.md)
 
-### `npm test`
+## Contributors
+* [Ye Hong](mailto:yehong@brandeis.edu)
+* [Limian Guo](mailto:limianguo@brandeis.edu)
+* [Chenfeng Fan](mailto:fanc@brandeis.edu)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Test
+Under the root directory, enter `rake test` to run the tests: `api_test.rb`, `model_test.rb` and `service_test.rb`.
 
-### `npm run build`
+## Version Changelogs
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Version 0.1
+* Created github repo  LG
+* Finished schema design YH
+* Completed writing all data models  CF
+* design basic function implementation YH
+* setting up readme.md CF
+* adding front-end authorization logic YH
+* setting up Typescript in front-end LG
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Version 0.2
+* Created skeleton Sinatra and React apps  YH
+* Finished writing routes concerning authentication YH
+* Tests passed on the User model and the routes written. CF
+* Completed the login, register and home pages YH
+* Heroku deployment failed YH
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Version 0.3
+* Successfully deployed on Heroku: [NanoTwitter](https://nano-twitter-2019.herokuapp.com/) YH
+* Restructured the front-end React app LG
+* Added MobX for state management YH
+* Added routing and authentication logic involving interactions between front-end and backend
+* Finished NanoTwitter API Version 1 design CF
+* Set up Code Pipeline auto testing and deployment on AWS(currently removed due to financial reason 2019.3.28)
+YH
+* remove typescript due to its difficulty,rewrite all the typescript file to javascript YH
 
-### `npm run eject`
+### Version 0.4 
+* restructure route to integrate service CF
+* reorganized current business logic into service CF
+* estimating the cost and benefits change sinatra to vert.x LG
+* Connect our AWS project to mongoDB. YH
+* Finish writing core backend services and apis:  CF
+  - User
+  - Follow
+  - Tweet(without comment/like)
+* Writing API test CF
+* Writing Model test YH
+* Writing service test CF
+* Service module encapsulation CF
+* Test interface route CF
+* Process seed data LG
+* Finish writing a simplified version of front-end homepage CF
+* Implement the complete test interface: LG
+  - POST test/reset/all
+  - POST /test/reset?users=u
+  - POST /test/user/{u}/tweets?count=n
+  - GET /test/status
+* Try Loader.io to add artificial load LG
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### version 0.5
+* adding tweeting function in front-end CF
+* adding homepage YH
+* adding redis, but not yet used LG
+* change server from Thin to Falcon LG
+* building index in mongoid LG
+* optimizing mongoid schema CF
+* optimizing test interface efficiency LG
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### version 0.6
+* deploying server on AWS LG
+* simple load test using Loader.IO CF
+* AmazonMQ server registered, gem installed YH
+* adding rake db:create_indexes to the rake task LG
+* adding full text index to tweet schema LG
+* testing mongodb replica set function LG
+* timeline function optimization YH
+* nano_twitter client YH
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## References
+* [Nano Twitter Project Outline](http://cosi105b.s3-website-us-west-2.amazonaws.com/content/topics/nt/nt_outline.md/) 
+* [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+* [Mongoid Manual](https://docs.mongodb.com/mongoid/current/)
