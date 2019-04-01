@@ -81,15 +81,6 @@ const styles = theme => ({
   
   });
 
-  const fakePost = 
-    {
-      username: 'Harry Mairson',
-      nickname: '@HMair',
-      content:
-        'This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.',
-      time: 'Sept 20th',
-    }
-
 class Tweet extends Component {
 
     state = { 
@@ -120,11 +111,12 @@ class Tweet extends Component {
 
     render(){
       
-      const { classes } = this.props;
+      const { fakePost } = this.props.post;
+      const { classes } = this.props.classes;
 
       return (
 
-        <main className={this.props.classes.main}>
+        <main className={classes.main}>
           
           <Card className={classes.card}>
             <Grid container spacing={8}  className={classes.cardMain}>

@@ -12,11 +12,21 @@ const styles = theme => ({
 
 
 class TimeLine extends Component {
+    componentDidMount() {
+      this.props.rootStore.timelineStore.loadTimeline();
+    }
+    componentDidUpdate() {
+
+    }
     render(){
+      const timeline = this.props.rootStore.timelineStore.timeline;
+      const listTweets = timeline.map((tweet, index) => 
+        <Tweet key={index} post={tweet}/>
+      );
+      // const listTweets = [];
         return (
             <main className={this.props.classes.main}>
-              <Tweet />
-              <Tweet />
+              {listTweets}
             </main>
             
         );

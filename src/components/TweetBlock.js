@@ -1,18 +1,10 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import CardActions from '@material-ui/core/CardActions';
-import Typography from '@material-ui/core/Typography';
 
-import Input from '@material-ui/core/Input';
-import InputBase from '@material-ui/core/InputBase';
-import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import green from '@material-ui/core/colors/green';
 import indigo from '@material-ui/core/colors/indigo';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -87,14 +79,6 @@ const styles = theme => ({
     }
 });
 
-const theme = createMuiTheme({
-    palette: {
-        primary: green,
-    },
-    typography: {useNextVariants: true},
-});
-
-
 class SimpleCard extends Component {
 
     changeTweet = (e) => {
@@ -119,7 +103,7 @@ class SimpleCard extends Component {
                         direction="row"
                         justify="space-between"
                         alignItems="flex-start"
-                        spacing={10}
+                        spacing={8}
                     >
                         <Grid item xs={1}>
                             <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg"
@@ -162,7 +146,6 @@ class SimpleCard extends Component {
                                 </Grid>
 
                                 <Grid item
-                                      justify="flex-end"
                                 >
                                     <Button variant="contained"
                                             color="primary"

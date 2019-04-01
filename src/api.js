@@ -18,6 +18,9 @@ let api = {
     signout: (params) => {
         return mainServer.delete(`/users/signout`, qs.stringify(params))
     },
+    homeTimeline: (params) => {
+        return mainServer.get(`/tweets/recent`, params)
+    },
     getprofile: (id, params) => {
         return mainServer.get(`/users/${id}`, qs.stringify(params))
     },
@@ -37,14 +40,12 @@ let api = {
         return mainServer.get(`/followers/list/${id}`)
     },
     addTweet: (params) => {
-        return mainServer.post('/tweets', qs.stringify(params))
+        return mainServer.post(`/tweets`, qs.stringify(params))
     },
-    userTimeline:(id)=>{
+    userTimeline:(id = '')=>{
         return mainServer.get(`/tweets/users/${id}`)
     },
-    homeTimeline:()=>{
-        return mainServer.get(`/tweets/recent/`)
-    },
+    
 
 }
 

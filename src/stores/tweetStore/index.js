@@ -1,5 +1,6 @@
 import {observable, action, decorate} from 'mobx';
 import api from '../../api';
+import timelineStore from '../timelineStore'
 
 class TweetStore {
 
@@ -18,8 +19,8 @@ class TweetStore {
 
         return api.addTweet(params)
             .then((response) => {
-                localStorage.setItem('tweet', JSON.stringify((response.data.data)));
                 alert(response.data.message);
+                timelineStore.addTweet(response.data.data)
                 // window.location = '/home';
             })
             .catch((error) => {
