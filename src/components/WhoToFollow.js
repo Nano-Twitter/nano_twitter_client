@@ -34,6 +34,7 @@ class WhoToFollow extends Component {
                         <NameCardSmall
                             id={user._id.$oid}
                             userName={user.name}
+                            followed={false}
                         />
                     )
                 })

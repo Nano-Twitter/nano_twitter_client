@@ -22,10 +22,10 @@ let api = {
         return mainServer.get(`/tweets/recent`, params)
     },
     getprofile: (id, params) => {
-        return mainServer.get(`/users/${id}`, qs.stringify(params))
+        return mainServer.get(`/users/${id}`, params)
     },
-    follow: (followee_id) => {
-        return mainServer.put(`/follows/${followee_id}`)
+    follow: (followee_id, params) => {
+        return mainServer.post(`/follows/${followee_id}`,  qs.stringify(params))
     },
     unfollow: (followee_id) => {
         return mainServer.delete(`/follows/${followee_id}`)

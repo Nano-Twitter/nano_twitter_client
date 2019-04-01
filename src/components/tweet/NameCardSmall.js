@@ -33,17 +33,19 @@ const styles = theme => ({
 });
 
 class NameCardSmall extends Component {
-    follow(id) {
-        api.follow(id).then(() => {
-            //refresh user
-        })
-    }
-
-    unfollow(id) {
-        api.unfollow(id).then(() => {
-            //refresh user
-        })
-    }
+    // follow(id) {
+    //     api.follow(id).then(() => {
+    //         //refresh user
+    //         this.props.followed = true;
+    //     })
+    // }
+    //
+    // unfollow(id) {
+    //     api.unfollow(id).then(() => {
+    //         //refresh user
+    //         this.props.followed = false;
+    //     })
+    // }
 
     render() {
         return (
@@ -55,14 +57,23 @@ class NameCardSmall extends Component {
                             <strong className={this.props.classes.userName}>@{this.props.userName || "test"}</strong>
                             {/*<span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>*/}
                         </div>
-                        {this.props.followed ?
-                            (<Button onClick={(e) => {
-                                this.follow(this.props.id)
-                            }} size="small" variant="outlined" color="primary">follow</Button>) :
-                            (<Button onClick={(e) => {
-                                this.unfollow(this.props.id)
-                            }} size="small" variant="outlined" color="secondary">unfollow</Button>)
-                        }
+                        {console.log(this.props.rootStore.recomStore.getRelation())}
+                        {/*{this.props.rootStore.recomStore.getRelation().get(this.props.id) ?*/}
+                            {/*(<Button onClick={(e) => {*/}
+                                {/*this.unfollow(this.props.id)*/}
+                            {/*}} size="small" variant="outlined" color="secondary">unfollow</Button>) :*/}
+                            {/*(<Button onClick={(e) => {*/}
+                                {/*this.follow(this.props.id)*/}
+                            {/*}} size="small" variant="outlined" color="primary">follow</Button>)}*/}
+                        {/*{this.props.followed ?*/}
+                        {/*(<Button onClick={(e) => {*/}
+                        {/*this.unfollow(this.props.id)*/}
+                        {/*}} size="small" variant="outlined" color="secondary">unfollow</Button>):*/}
+                        {/*(<Button onClick={(e) => {*/}
+                        {/*this.follow(this.props.id)*/}
+                        {/*}} size="small" variant="outlined" color="primary">follow</Button>)*/}
+
+                        {/*}*/}
                     </div>
                 </div>
             </div>
