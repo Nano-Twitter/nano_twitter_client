@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-// import { Link } from 'react-router';
 import {withStyles, createStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
