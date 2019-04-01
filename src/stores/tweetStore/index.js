@@ -20,8 +20,8 @@ class TweetStore {
         return api.addTweet(params)
             .then((response) => {
                 alert(response.data.message);
-                timelineStore.addTweet(response.data.data)
-                // window.location = '/home';
+                this.tweet = '';
+                timelineStore.addTimeline(response.data.data);
             })
             .catch((error) => {
                 alert(error.response.data.message);

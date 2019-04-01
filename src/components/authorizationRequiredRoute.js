@@ -8,7 +8,6 @@ class AuthorizedRoute extends Component{
         let { isLoggedIn } = this.props.rootStore.loginStore;
         return(
             <Route {...rest} render={ props =>{
-                console.log(isLoggedIn);
                 return isLoggedIn?<Component {...this.props} />:<Redirect to="/login" /> 
             }}/>
         )
