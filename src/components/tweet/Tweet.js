@@ -127,7 +127,7 @@ class Tweet extends Component {
                 <Grid container spacing={0}  className={classes.cardHeader}>
                   <Grid item xs={10} md={10} lg={10}>
                     <Typography variant="body2">
-                      {post.user_attr.name} {" "}
+                      {'@'}{post.user_attr.name} {" "}
                       <Typography variant="caption" inline>
                         {post.user_attr.name} · {post.created_at}
                       </Typography>

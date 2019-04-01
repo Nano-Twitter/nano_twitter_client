@@ -16,9 +16,9 @@ class TimeLine extends Component {
         this.props.rootStore.timelineStore.loadTimeline();
     }
 
-    componentDidUpdate() {
-
-    }
+    // componentDidUpdate() {
+      
+    // }
 
     render() {
         const timeline = this.props.rootStore.timelineStore.getTimeline();
