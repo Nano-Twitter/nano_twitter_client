@@ -15,7 +15,7 @@ class RecomStore {
             this.recom = response.data.data;
             console.log(response);
         })
-    }
+    };
 
     getRecom = () => {
         return this.recom.slice();
