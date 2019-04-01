@@ -13,11 +13,16 @@ class RecomStore {
         };
         return api.whoToFollow(params).then((response) => {
             this.recom = response.data.data;
-            console.log(response);
+            // this.recom.push(...response.data.data);
+
+            // this.recom.push(response.data.data);
+
+            console.log(response.data.data);
         })
     };
 
     getRecom = () => {
+        console.log(this.recom.slice());
         return this.recom.slice();
     }
 
@@ -25,7 +30,7 @@ class RecomStore {
 
 decorate(RecomStore, {
     recom: observable,
-    getRecom: action,
+    loadRecom: action,
 });
 
 const recomStore = new RecomStore();

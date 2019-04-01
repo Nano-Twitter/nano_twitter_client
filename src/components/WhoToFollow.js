@@ -21,14 +21,10 @@ const styles = theme => ({
 
 class WhoToFollow extends Component {
     componentDidMount() {
-        // super(props);
-        const a = this.props.rootStore.recomStore.loadRecom;
-        a();
+        this.props.rootStore.recomStore.loadRecom();
     }
 
     render() {
-        const a = this.props.rootStore.recomStore.loadRecom;
-        a();
         const recom = this.props.rootStore.recomStore.getRecom();
 
         console.log(recom);
@@ -38,7 +34,7 @@ class WhoToFollow extends Component {
                     return (
                         <NameCardSmall
                             id={user._id.$oid}
-                         />
+                        />
                     )
                 })
                 }
