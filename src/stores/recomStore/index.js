@@ -8,21 +8,15 @@ class RecomStore {
         const params = {
             params: {
                 user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
-                num: 3,
+                num: 5,
             }
         };
         return api.whoToFollow(params).then((response) => {
             this.recom = response.data.data;
-            // this.recom.push(...response.data.data);
-
-            // this.recom.push(response.data.data);
-
-            console.log(response.data.data);
         })
     };
 
     getRecom = () => {
-        console.log(this.recom.slice());
         return this.recom.slice();
     }
 

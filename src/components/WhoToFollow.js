@@ -26,7 +26,6 @@ class WhoToFollow extends Component {
 
     render() {
         const recom = this.props.rootStore.recomStore.getRecom();
-
         console.log(recom);
         return (
             <main className={this.props.classes.main}>
@@ -34,6 +33,7 @@ class WhoToFollow extends Component {
                     return (
                         <NameCardSmall
                             id={user._id.$oid}
+                            userName={user.name}
                         />
                     )
                 })

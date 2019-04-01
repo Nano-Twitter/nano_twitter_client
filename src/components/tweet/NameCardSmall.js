@@ -53,7 +53,7 @@ class NameCardSmall extends Component {
                     <div>
                         <div className={this.props.classes.nameBox}>
                             <strong className={this.props.classes.userName}>@{this.props.userName || "test"}</strong>
-                            <span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>
+                            {/*<span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>*/}
                         </div>
                         {this.props.followed ?
                             (<Button onClick={(e) => {
