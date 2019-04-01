@@ -4,7 +4,7 @@ import api from '../../api';
 class RecomStore {
     recom = [];
 
-    getRecom = () => {
+    loadRecom = () => {
         const params = {
             params: {
                 user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
@@ -16,6 +16,11 @@ class RecomStore {
             console.log(response);
         })
     }
+
+    getRecom = () => {
+        return this.recom.slice();
+    }
+
 }
 
 decorate(RecomStore, {

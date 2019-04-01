@@ -21,11 +21,11 @@ const styles = theme => ({
 
 class WhoToFollow extends Component {
     componentDidMount() {
-        this.props.rootStore.recomStore.getRecom();
+        this.props.rootStore.recomStore.loadRecom();
     }
 
     render() {
-        const recom = this.props.rootStore.recomStore.recom;
+        const recom = this.props.rootStore.recomStore.getRecom();
         return (
             <main className={this.props.classes.main}>
                 {recom.map(user => {
@@ -34,7 +34,8 @@ class WhoToFollow extends Component {
                             id={user._id.$oid}
                          />
                     )
-                })}
+                })
+                }
             </main>
         );
     }
