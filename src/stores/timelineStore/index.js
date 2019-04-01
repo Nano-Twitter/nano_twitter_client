@@ -34,9 +34,6 @@ class TimelineStore {
         return this.timeline.slice()
     }
 
-    addTweet = (data) => {
-
-    }
 }
 
 decorate(TimelineStore, {
