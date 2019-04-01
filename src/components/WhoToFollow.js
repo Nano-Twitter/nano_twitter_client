@@ -26,13 +26,15 @@ class WhoToFollow extends Component {
 
     render() {
         const recom = this.props.rootStore.recomStore.getRecom();
+
+        console.log(recom);
         return (
             <main className={this.props.classes.main}>
                 {recom.map(user => {
                     return (
                         <NameCardSmall
                             id={user._id.$oid}
-                         />
+                        />
                     )
                 })
                 }
