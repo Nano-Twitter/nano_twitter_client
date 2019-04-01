@@ -42,11 +42,12 @@ let api = {
     addTweet: (params) => {
         return mainServer.post(`/tweets`, qs.stringify(params))
     },
-    userTimeline:(id = '')=>{
+    userTimeline: (id = '') => {
         return mainServer.get(`/tweets/users/${id}`)
     },
-    
-
-}
+    whoToFollow: (params) => {
+        return mainServer.get(`/users/recommend`, qs.stringify(params))
+    },
+};
 
 export default api
