@@ -106,7 +106,6 @@ class Login extends Component {
                         <Typography>
                             <Link href='/register' className="register">Don't have an account? Register?</Link>
                         </Typography>
-                        <NameCardSmall></NameCardSmall>
                         <Button
                             fullWidth
                             variant="contained"

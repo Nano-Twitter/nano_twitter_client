@@ -103,10 +103,6 @@ class Register extends Component {
                             <Input onChange={this.changePassword} id="password" name="password" type="password"
                                    autoComplete="current-password"/>
                         </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
                         <Button
                             fullWidth
                             variant="contained"
