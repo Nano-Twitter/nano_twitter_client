@@ -19,8 +19,10 @@ class RecomStore {
             for (let user of this.recom) {
                 if (this.current_user.following_ids.includes(user._id.$oid)) {
                     this.follow_relation.set(user._id.$oid, true);
+                    // this.follow_relation[user._id.$oid] = true;
                 } else {
                     this.follow_relation.set(user._id.$oid, false);
+                    // this.follow_relation[user._id.$oid] = false;
                 }
 
             }
@@ -62,11 +64,15 @@ class RecomStore {
                     this.follow_relation.set(id, false);
                 }
             )
+            .catch((error) => {
+                console.log(error);
+            })
     }
 }
 
 decorate(RecomStore, {
     recom: observable,
+    follow_relation: observable,
     loadRecom: action,
 });
 

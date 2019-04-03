@@ -27,8 +27,8 @@ let api = {
     follow: (followee_id, params) => {
         return mainServer.post(`/follows/${followee_id}`,  qs.stringify(params))
     },
-    unfollow: (followee_id) => {
-        return mainServer.delete(`/follows/${followee_id}`)
+    unfollow: (followee_id, params) => {
+        return mainServer.delete(`/follows/${followee_id}`, params)
     },
     userInfo: (id = '') => {
         return mainServer.get(`/users/${id}`)
