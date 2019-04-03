@@ -1,35 +1,38 @@
 import {observable, action, decorate} from 'mobx';
-import loginStore from '../loginStore';
+import api from '../../api';
 
 // import api from '../../api';
 
 class ProfileStore {
 
-    username;
-    nickname;
-    email;
-    tweets;
-    following;
-    follower;
+    username = '';
+    nickname = '';
+    email = '';
+    tweets = '';
+    following = '';
+    follower = '';
+    isLoading = false;
 
-    constructor() {
-
-        if (loginStore.isLoggedIn) {
-            const user = JSON.parse(localStorage.getItem('user'))
+    loadProfile = (user_id = '') => {
+        this.isLoading = true;
+        return api.getProfile(user_id)
+        .then((response) => {
+            const user = response.data.data;
             this.username = user.name;
-            this.nickname = '@' + user.name;
+            this.nickname = user.name;
             this.email = user.email;
+            this.tweets = 0;
+            // this.tweets = user.tweets.length;
             this.follower = user.follower_ids.length;
             this.following = user.following_ids.length;
-            this.tweets = user.tweets_count;
-        } else {
-            this.username = '';
-            this.nickname = '';
-            this.email = '';
-            this.tweets = '';
-            this.following = '';
-            this.follower = '';
-        }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .then(() => {
+            this.isLoading = false;
+        })
+        ;
     }
 
     changeUsername = (value) => {

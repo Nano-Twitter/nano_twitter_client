@@ -40,9 +40,9 @@ const styles = theme => ({
 
 class PersonalProfile extends Component {
 
-  // componentDidMount() {
-  //   this.props.rootStore.profileStore.loadProfile();
-  // }
+  componentDidMount() {
+    this.props.rootStore.profileStore.loadProfile();
+  }
 
     render(){
         return (
@@ -64,7 +64,7 @@ class PersonalProfile extends Component {
                       {this.props.rootStore.profileStore.username}
                     </Typography>
                     <Typography gutterBottom variant="caption">
-                      {this.props.rootStore.profileStore.nickname}
+                      {'@'} {this.props.rootStore.profileStore.nickname}
                     </Typography>
                   </Grid>
                 </Grid>

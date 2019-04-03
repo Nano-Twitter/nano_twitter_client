@@ -5,6 +5,10 @@ import timelineStore from '../timelineStore'
 class TweetStore {
 
     tweet;
+    user_id;
+    parent_id;
+    comments_count;
+    likes_count;
 
     changeTweet = (value) => {
         this.tweet = value;

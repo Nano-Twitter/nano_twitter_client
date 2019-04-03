@@ -21,8 +21,11 @@ let api = {
     homeTimeline: (params) => {
         return mainServer.get(`/tweets/recent`, params)
     },
-    getprofile: (id, params) => {
-        return mainServer.get(`/users/${id}`, params)
+    getProfile: (id = '') => {
+        if(id == '') {
+            id = JSON.parse(localStorage.getItem('user'))._id.$oid;
+        }
+        return mainServer.get(`/users/${id}`)
     },
     follow: (followee_id, params) => {
         return mainServer.post(`/follows/${followee_id}`,  qs.stringify(params))
