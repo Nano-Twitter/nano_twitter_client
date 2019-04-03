@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {withStyles} from '@material-ui/core/styles';
 import NameCardSmall from './tweet/NameCardSmall';
-import Tweet from "./TimeLine";
 
 const styles = theme => ({
     main: {
