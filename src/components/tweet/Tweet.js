@@ -214,12 +214,13 @@ class Tweet extends Component {
 
 
           <Dialog
+          fullWidth={this.state.fullWidth}
+          maxWidth={this.state.maxWidth}
           open={this.state.commentOpen}
           onClose={this.handleCloseComment}
-          aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Comment Dialog"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Comments"}</DialogTitle>
             <DialogContent>
               <TweetBlock />
             </DialogContent>

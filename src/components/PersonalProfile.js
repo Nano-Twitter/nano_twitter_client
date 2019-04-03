@@ -40,6 +40,10 @@ const styles = theme => ({
 
 class PersonalProfile extends Component {
 
+  // componentDidMount() {
+  //   this.props.rootStore.profileStore.loadProfile();
+  // }
+
     render(){
         return (
           <Card className={this.props.classes.card}>

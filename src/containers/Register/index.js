@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-// import { Link } from 'react-router';
 import {withStyles, createStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -103,10 +100,6 @@ class Register extends Component {
                             <Input onChange={this.changePassword} id="password" name="password" type="password"
                                    autoComplete="current-password"/>
                         </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
                         <Button
                             fullWidth
                             variant="contained"
