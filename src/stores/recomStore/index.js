@@ -5,7 +5,6 @@ class RecomStore {
     recom = [];
     current_user = JSON.parse(localStorage.getItem('user'));
 
-    // follow_relation = new Map();
     constructor(rootStore) {
         this.rootStore = rootStore;
     }

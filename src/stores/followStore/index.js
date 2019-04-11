@@ -58,7 +58,5 @@ decorate(FollowStore, {
     unfollow: action,
 });
 
-// const followStore = new FollowStore();
-
 export default FollowStore;
 export {FollowStore};

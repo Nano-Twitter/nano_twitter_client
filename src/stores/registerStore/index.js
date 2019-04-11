@@ -1,12 +1,12 @@
-import { observable, action, decorate} from 'mobx';
+import {observable, action, decorate} from 'mobx';
 import api from '../../api';
 
-class RegisterStore{
+class RegisterStore {
 
     username;
     password;
     email;
-    
+
     constructor() {
         this.username = '';
         this.password = '';
@@ -32,19 +32,18 @@ class RegisterStore{
             password: this.password,
             email: this.email
         }
-        
+
         return api.signup(params)
-        .then(response => 
-        {
-            alert(response.data.message)
-            window.location = '/login';
-        })
-        .catch((error) => {
-            alert(error.response.data.message);
-        });
+            .then(response => {
+                alert(response.data.message)
+                window.location = '/login';
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
 
     }
-    
+
 }
 
 decorate(RegisterStore, {
@@ -60,4 +59,4 @@ decorate(RegisterStore, {
 const registerStore = new RegisterStore();
 
 export default registerStore;
-export { RegisterStore };
+export {RegisterStore};
