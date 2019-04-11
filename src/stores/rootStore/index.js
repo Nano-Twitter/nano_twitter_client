@@ -3,7 +3,8 @@ import registerStore from '../registerStore';
 import profileStore from '../profileStore';
 import tweetStore from "../tweetStore";
 import timelineStore from "../timelineStore";
-import recomStore from "../recomStore";
+import RecomStore from "../recomStore";
+import FollowStore from "../followStore";
 
 class RootStore {
     constructor() {
@@ -12,7 +13,8 @@ class RootStore {
         this.profileStore = profileStore;
         this.tweetStore = tweetStore;
         this.timelineStore = timelineStore;
-        this.recomStore = recomStore;
+        this.recomStore = new RecomStore(this);
+        this.followStore = new FollowStore(this);
     }
 }
 
