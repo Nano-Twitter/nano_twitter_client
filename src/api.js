@@ -22,7 +22,7 @@ let api = {
         return mainServer.get(`/tweets/recent`, params)
     },
     getProfile: (id = '') => {
-        if(id == '') {
+        if(id === '') {
             id = JSON.parse(localStorage.getItem('user'))._id.$oid;
         }
         return mainServer.get(`/users/${id}`)
