@@ -3,7 +3,6 @@ import {observer, inject} from 'mobx-react';
 import {withStyles} from '@material-ui/core/styles';
 import {Avatar} from '@material-ui/core';
 import {Button} from '@material-ui/core'
-import api from '../../api'
 
 const styles = theme => ({
     main: {
@@ -33,19 +32,7 @@ const styles = theme => ({
 });
 
 class NameCardSmall extends Component {
-    // follow(id) {
-    //     api.follow(id).then(() => {
-    //         //refresh user
-    //         this.props.followed = true;
-    //     })
-    // }
-    //
-    // unfollow(id) {
-    //     api.unfollow(id).then(() => {
-    //         //refresh user
-    //         this.props.followed = false;
-    //     })
-    // }
+
     follow = false;
 
     render() {
@@ -53,22 +40,19 @@ class NameCardSmall extends Component {
 
         return (
             <div className={this.props.classes.main}>
-                {/*<Avatar className={this.props.classes.avatar} src={this.props.avatarAddress}/>*/}
+                <Avatar className={this.props.classes.avatar} src={this.props.avatarAddress}/>
                 <div>
                     <div>
                         <div className={this.props.classes.nameBox}>
                             <strong className={this.props.classes.userName}>@{this.props.userName || "test"}</strong>
                             {/*<span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>*/}
                         </div>
-                        {console.log(this.props.rootStore.recomStore.getRelation())}
                         {this.props.rootStore.recomStore.getRelation().get(this.props.id) ?
                             (<Button onClick={() => {
                                 this.props.rootStore.recomStore.unfollow(this.props.id);
-                                this.forceUpdate();
                             }} size="small" variant="outlined" color="secondary">unfollow</Button>) :
                             (<Button onClick={() => {
                                 this.props.rootStore.recomStore.follow(this.props.id);
-                                this.forceUpdate();
                             }} size="small" variant="outlined" color="primary">follow</Button>)}
 
 

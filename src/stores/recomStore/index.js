@@ -15,7 +15,6 @@ class RecomStore {
         };
         return api.whoToFollow(params).then((response) => {
             this.recom = response.data.data;
-            console.log(this.follow_relation);
             for (let user of this.recom) {
                 if (this.current_user.following_ids.includes(user._id.$oid)) {
                     this.follow_relation.set(user._id.$oid, true);

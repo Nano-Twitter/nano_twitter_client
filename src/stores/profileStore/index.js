@@ -21,8 +21,8 @@ class ProfileStore {
             this.username = user.name;
             this.nickname = user.name;
             this.email = user.email;
-            this.tweets = 0;
-            // this.tweets = user.tweets.length;
+            this.tweets = user.tweets_count;
+            // this.tweets = user.tweets_ids.length;
             this.follower = user.follower_ids.length;
             this.following = user.following_ids.length;
         })
@@ -33,6 +33,10 @@ class ProfileStore {
             this.isLoading = false;
         })
         ;
+    }
+
+    addTweet = () => {
+        this.tweets += 1;
     }
 
     changeUsername = (value) => {
@@ -48,13 +52,14 @@ class ProfileStore {
         this.follower = value;
     }
 
-    changeFollowing = (value) => {
-        this.following = value;
+    addFollowing = () => {
+        this.following += 1;
     }
 
-    changeTweet = (value) => {
-        this.tweets = value;
+    deleteFollowing = () => {
+        this.following -= 1;
     }
+
 
     getPersonalProfile = () => {
 
@@ -72,8 +77,9 @@ decorate(ProfileStore, {
     follower: observable,
     changeUsername: action,
     changeFollower: action,
-    changeFollowing: action,
-    changeTweet: action,
+    addFollowing: action,
+    deleteFollowing: action, 
+    addTweet: action,
     changeEmail: action,
     getProfile: action
 });

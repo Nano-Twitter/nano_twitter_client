@@ -13,11 +13,11 @@ const styles = theme => ({
 
 class TimeLine extends Component {
     componentDidMount() {
-        this.props.rootStore.timelineStore.loadTimeline();
+        this.props.rootStore.timelineStore.loadTimeline()
     }
 
     componentDidUpdate() {
-        this.props.rootStore.profileStore.loadProfile();
+        
     }
 
     render() {
