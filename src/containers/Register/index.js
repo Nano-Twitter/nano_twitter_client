@@ -48,19 +48,19 @@ const styles = theme =>
 class Register extends Component {
 
     changeUsername = (e) => {
-        this.props.rootStore.registerStore.changeUsername(e.target.value);
+        this.props.rootStore.loginStore.changeUsername(e.target.value);
     }
 
     changePassword = (e) => {
-        this.props.rootStore.registerStore.changePassword(e.target.value);
+        this.props.rootStore.loginStore.changePassword(e.target.value);
     }
 
     changeEmail = (e) => {
-        this.props.rootStore.registerStore.changeEmail(e.target.value);
+        this.props.rootStore.loginStore.changeEmail(e.target.value);
     }
 
     register = () => {
-        this.props.rootStore.registerStore.register();
+        this.props.rootStore.loginStore.register();
     }
 
     render() {

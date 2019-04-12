@@ -156,12 +156,12 @@ class Tweet extends Component {
                     </Grid>
                     <Grid item xs={3} md={3} lg={3}>
                       <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                        <TextsmsIcon />
-                      </IconButton>
+                        <TextsmsIcon /><Typography variant="caption">{post.comments_count}</Typography>
+                      </IconButton> 
                     </Grid>
                     <Grid item xs={3} md={3} lg={3}>
                       <IconButton aria-label="Add to favorites">
-                        <FavoriteIcon />
+                        <FavoriteIcon /><Typography variant="caption">{post.likes_count}</Typography>
                       </IconButton>
                     </Grid>
                     <Grid item xs={3} md={3} lg={3}>
