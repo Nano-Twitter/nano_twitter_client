@@ -20,9 +20,9 @@ class RecomStore {
             this.recom = response.data.data;
             for (let user of this.recom) {
                 if (this.current_user.following_ids.includes(user._id.$oid)) {
-                    this.rootStore.followStore.setRelation(user._id.$oid, true)
+                    this.rootStore.followStore.setFollowRelation(user._id.$oid, true)
                 } else {
-                    this.rootStore.followStore.setRelation(user._id.$oid, false)
+                    this.rootStore.followStore.setFollowRelation(user._id.$oid, false)
                 }
             }
         })

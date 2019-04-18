@@ -32,7 +32,7 @@ class LoginStore {
             .then((response) => {
                 localStorage.setItem('user', JSON.stringify(response.data.data));
                 localStorage.setItem('isLoggedIn', true);
-                alert(response.data.message);
+                // alert(response.data.message);
                 window.location = '/home';
             })
             .catch((error) => {
@@ -43,7 +43,7 @@ class LoginStore {
     logout = () => {
         return api.signout({})
             .then((response) => {
-                alert(response.data.message)
+                // alert(response.data.message)
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('user');
                 this.isLoggedIn = false;

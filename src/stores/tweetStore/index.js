@@ -22,7 +22,7 @@ class TweetStore {
 
         return api.addTweet(params)
             .then((response) => {
-                alert(response.data.message);
+                // alert(response.data.message);
                 this.tweet = '';
                 timelineStore.addTimeline(response.data.data);
             })

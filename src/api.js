@@ -33,6 +33,12 @@ let api = {
     unfollow: (followee_id, params) => {
         return mainServer.delete(`/follows/${followee_id}`, params)
     },
+    like: (tweet_id, params) => {
+        return mainServer.post(`/tweets/${tweet_id}/likes`, qs.stringify(params))
+    },
+    unlike: (tweet_id, params) => {
+        return mainServer.delete(`/tweets/${tweet_id}/likes`, qs.stringify(params))
+    },
     userInfo: (id = '') => {
         return mainServer.get(`/users/${id}`)
     },
