@@ -1,7 +1,9 @@
 import {observable, action, decorate} from 'mobx';
 import api from '../../api';
+import profileStore from '../profileStore';
 
 class FollowStore {
+
     current_user = JSON.parse(localStorage.getItem('user'));
     follow_relation = new Map();
     like_relation = new Map();
@@ -35,6 +37,7 @@ class FollowStore {
             .then(
                 () => {
                     this.follow_relation.set(id, true);
+                    profileStore.loadProfile();
                 }
             )
             .catch((error) => {
@@ -52,6 +55,7 @@ class FollowStore {
             .then(
                 () => {
                     this.follow_relation.set(id, false);
+                    profileStore.loadProfile();
                 }
             )
             .catch((error) => {

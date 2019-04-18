@@ -4,13 +4,19 @@ import api from '../../api';
 class LoginStore {
 
     password;
+    username;
     email;
     isLoggedIn;
 
     constructor() {
         this.password = '';
         this.email = '';
+        this.username = '';
         this.isLoggedIn = localStorage.getItem('isLoggedIn');
+    }
+
+    changeUsername = (value) => {
+        this.username = value;
     }
 
     changePassword = (value) => {
@@ -52,17 +58,41 @@ class LoginStore {
             .catch((error) => {
                 alert(error.response.data.message)
             });
-    }
+    };
+
+    register = () => {
+
+        const params = {
+            name: this.username,
+            password: this.password,
+            email: this.email
+        }
+
+        return api.signup(params)
+            .then(response => {
+                alert(response.data.message)
+                window.location = '/login';
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
+
+    };
 
 }
 
 decorate(LoginStore, {
+    username: observable,
     email: observable,
     password: observable,
     isLoggedIn: observable,
+    changeUsername: action,
     authenticate: action,
     changePassword: action,
-    changeEmail: action
+    changeEmail: action,
+    register: action,
+    login: action,
+    logout: action
 });
 
 const loginStore = new LoginStore();

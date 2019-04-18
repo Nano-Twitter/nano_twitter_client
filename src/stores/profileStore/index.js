@@ -22,7 +22,6 @@ class ProfileStore {
             this.nickname = user.name;
             this.email = user.email;
             this.tweets = user.tweets_count;
-            // this.tweets = user.tweets_ids.length;
             this.follower = user.follower_ids.length;
             this.following = user.following_ids.length;
         })
