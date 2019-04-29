@@ -7,6 +7,7 @@ import TimeLine from '../../components/TimeLine'
 import WhoToFollow from '../../components/WhoToFollow'
 import {observer, inject} from 'mobx-react';
 import Grid from '@material-ui/core/Grid';
+import NameCardLarge from '../../components/tweet/NameCardLarge';
 
 const styles = theme => ({
     main: {
@@ -55,7 +56,8 @@ class Home extends Component {
                     </Grid>
 
                     <Grid item xs={12} md={6} lg={3}>
-                        <WhoToFollow/>
+                        {/* <WhoToFollow/> */}
+                        <NameCardLarge/>
                     </Grid>
 
                 </Grid>
