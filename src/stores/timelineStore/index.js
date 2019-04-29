@@ -36,6 +36,7 @@ class TimelineStore {
     }
 
     getTimeline = () => {
+        // alert(this.timeline.slice())
         return this.timeline.slice()
     }
 
