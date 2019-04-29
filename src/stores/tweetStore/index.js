@@ -23,7 +23,8 @@ class TweetStore {
         return api.addTweet(params)
             .then((response) => {
                 // alert(response.data.message);
-                this.tweet = '';
+                this.tweet = undefined;
+
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();
             })

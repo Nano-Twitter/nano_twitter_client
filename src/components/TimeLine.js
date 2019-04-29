@@ -22,7 +22,7 @@ class TimeLine extends Component {
 
     render() {
         const timeline = this.props.rootStore.timelineStore.getTimeline();
-
+        // alert(timeline)
         // const listTweets = [];
         return (
 
