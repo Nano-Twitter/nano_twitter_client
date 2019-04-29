@@ -42,6 +42,9 @@ let api = {
     followees: (id = '') => {
         return mainServer.get(`/followers/list/${id}`)
     },
+    getComments:(tweet_id) => {
+        return mainServer.get(`/tweets/${tweet_id}/comments`)
+    },
     addTweet: (params) => {
         return mainServer.post(`/tweets`, qs.stringify(params))
     },

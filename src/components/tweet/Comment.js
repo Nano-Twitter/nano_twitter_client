@@ -22,7 +22,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
-import Comment from './Comment'
 
 const styles = theme => ({
     main: {
@@ -91,14 +90,13 @@ class Tweet extends Component {
     };
 
     handleClickOpenComment = () => {
-      console.log(this.props.post._id.$oid)
       this.setState({ commentOpen: true });
-      this.props.rootStore.tweetStore.loadComments(this.props.post._id.$oid);
+
     };
 
     handleClickOpenRetweet = () => {
       this.setState({ retweetOpen: true });
-      this.props.rootStore.tweetStore.changeParentId(this.props.post._id.$oid);
+      this.props.rootStore.tweetStore.changeParentId(this.props.post._id.oid);
     };
   
     handleCloseComment = () => {
@@ -115,8 +113,7 @@ class Tweet extends Component {
 
     render(){
       
-      const post = this.props.post;
-      const comments = this.props.rootStore.tweetStore.comments;
+      const post = this.props.comment;
       const { classes } = this.props;
 
       return (
@@ -186,23 +183,7 @@ class Tweet extends Component {
               </Grid>
               
             </Grid>
-            
-            
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                {
-                  comments.map((comment) => {
-                    return(
-                      <Comment
-                        key={comment._id.$oid}
-                        comment={comment}
-                      />
-                    )
-                  })
-                }
-                
-              </CardContent>
-            </Collapse>
+  
           </Card>
 
 
