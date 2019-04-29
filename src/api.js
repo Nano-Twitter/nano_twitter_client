@@ -48,6 +48,9 @@ let api = {
     followees: (id = '') => {
         return mainServer.get(`/followers/list/${id}`)
     },
+    getComments:(tweet_id) => {
+        return mainServer.get(`/tweets/${tweet_id}/comments`)
+    },
     addTweet: (params) => {
         return mainServer.post(`/tweets`, qs.stringify(params))
     },
@@ -55,8 +58,11 @@ let api = {
         return mainServer.get(`/tweets/users/${id}`)
     },
     whoToFollow: (params) => {
-        return mainServer.get(`/users_recommend`, params)
+        return mainServer.get(`/users_recommend`, {params})
     },
+    search:(params)=>{
+        return mainServer.get('/search',{params})
+    }
 };
 
 export default api

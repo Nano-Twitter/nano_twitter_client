@@ -11,11 +11,14 @@ class TimelineStore {
         this.isLoading = true;
         const params = {
             params: {
-                user_id: JSON.parse(localStorage.getItem('user'))._id.$oid
+                user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
+                start: 0,
+                count: 10
             }
         };
         return api.homeTimeline(params)
         .then((response) => {
+            console.log(response.data.data)
             this.timeline.push(...response.data.data);
         })
         .catch((error) => {
