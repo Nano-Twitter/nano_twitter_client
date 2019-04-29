@@ -22,7 +22,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
-import Comment from './Comment'
+// import Comment from './Comment'
 
 const styles = theme => ({
     main: {
