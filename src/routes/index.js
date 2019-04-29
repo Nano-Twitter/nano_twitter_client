@@ -33,6 +33,14 @@ let routes = [
         menu: true,
         exact: true
     },
+    {
+        path: '/search',
+        name: 'search',
+        authentication: false,
+        login: false, // jump to home if logged in
+        icon: '',
+        menu: false,
+    }
 ]
 let defaultRoute = {
     menu: false,

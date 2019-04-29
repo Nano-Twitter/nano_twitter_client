@@ -11,24 +11,21 @@ import Register from './containers/Register';
 import AuthorizedRoute from './components/authorizationRequiredRoute';
 import JumpToHomeIfLogedInRoute from './components/JumpToHomeIfLogedInRoute';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import search from './containers/search';
 
-ReactDOM.render(
-    <Provider rootStore={rootStore}>
-        <Navbar />
-    </Provider>
-    , document.getElementById('navbar')
-);
 
 ReactDOM.render(
     <Provider rootStore={rootStore}>
         <BrowserRouter>
             <div>
+            <Navbar />
                 <Switch>
                     <AuthorizedRoute exact path="/" component={Home} />
                     <JumpToHomeIfLogedInRoute path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     {/* <Route path="/user/:id" component={Homepage} /> */}
                     <AuthorizedRoute path="/home" component={Home} />
+                    <Route path="/searchResult" component={search}></Route>
                 </Switch>
             </div>
         </BrowserRouter>

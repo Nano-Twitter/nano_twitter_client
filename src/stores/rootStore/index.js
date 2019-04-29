@@ -4,6 +4,7 @@ import tweetStore from "../tweetStore";
 import timelineStore from "../timelineStore";
 import RecomStore from "../recomStore";
 import FollowStore from "../followStore";
+import SearchStore from '../searchStore';
 
 class RootStore {
     constructor() {
@@ -13,6 +14,7 @@ class RootStore {
         this.timelineStore = timelineStore;
         this.recomStore = new RecomStore(this);
         this.followStore = new FollowStore(this);
+        this.searchStore=new SearchStore(this)
     }
 }
 

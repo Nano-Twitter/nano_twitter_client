@@ -55,8 +55,11 @@ let api = {
         return mainServer.get(`/tweets/users/${id}`)
     },
     whoToFollow: (params) => {
-        return mainServer.get(`/users_recommend`, params)
+        return mainServer.get(`/users_recommend`, {params})
     },
+    search:(params)=>{
+        return mainServer.get('/search',{params})
+    }
 };
 
 export default api
