@@ -109,7 +109,7 @@ class Tweet extends Component {
     render(){
       
       const post = this.props.post;
-      const comments = this.props.rootStore.tweetStore.comments;
+      // const comments = this.props.rootStore.tweetStore.comments;
       const { classes } = this.props;
 
       return (
