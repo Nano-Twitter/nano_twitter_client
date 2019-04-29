@@ -233,16 +233,16 @@ class Tweet extends Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Retweet Dialog"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>
             <DialogContent>
               <TweetBlock />
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleCloseRetweet} color="primary">
-                Disagree
+                Cancel
               </Button>
               <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
-                Agree
+                Retweet
               </Button>
             </DialogActions>
           </Dialog>
