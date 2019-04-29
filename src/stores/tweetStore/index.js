@@ -8,8 +8,6 @@ class TweetStore {
     tweet;
     user_id;
     parent_id;
-    tweet_id;
-    comments = [];
     
     changeTweet = (value) => {
         this.tweet = value;
@@ -27,15 +25,15 @@ class TweetStore {
         };
 
         return api.addTweet(params)
-        .then((response) => {
-            alert(response.data.message);
-            this.tweet = '';
-            timelineStore.addTimeline(response.data.data);
-            profileStore.loadProfile();
-        })
-        .catch((error) => {
-            alert(error.response.data.message);
-        });
+            .then((response) => {
+                // alert(response.data.message);
+                this.tweet = '';
+                timelineStore.addTimeline(response.data.data);
+                profileStore.loadProfile();
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
     };
 
     loadComments = (value) => {

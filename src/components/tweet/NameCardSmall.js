@@ -45,7 +45,7 @@ class NameCardSmall extends Component {
                             <strong className={this.props.classes.userName}>@{this.props.userName || "test"}</strong>
                             {/*<span className={this.props.classes.userName}>@{this.props.account || "amazing"}</span>*/}
                         </div>
-                        {this.props.rootStore.followStore.getRelation().get(this.props.id) ?
+                        {this.props.rootStore.followStore.getFollowRelation().get(this.props.id) ?
                             (<Button onClick={() => {
                                 this.props.rootStore.followStore.unfollow(this.props.id);
                                 this.forceUpdate();
