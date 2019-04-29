@@ -27,8 +27,6 @@ import Comment from './Comment'
 const styles = theme => ({
     main: {
       width: 'auto',
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
       paddingTop: theme.spacing.unit * 2
     },
     card: {
