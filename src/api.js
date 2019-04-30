@@ -42,11 +42,11 @@ let api = {
     userInfo: (id = '') => {
         return mainServer.get(`/users/${id}`)
     },
-    followers: (id = '') => {
-        return mainServer.get(`/followers/list/${id}`)
+    followers: (id = '',params={}) => {
+        return mainServer.get(`/followers/list/${id}`,{params})
     },
-    followees: (id = '') => {
-        return mainServer.get(`/followers/list/${id}`)
+    followees: (id = '',params={}) => {
+        return mainServer.get(`/followers/list/${id}`,{params})
     },
     getComments:(tweet_id) => {
         return mainServer.get(`/tweets/${tweet_id}/comments`)
@@ -54,8 +54,8 @@ let api = {
     addTweet: (params) => {
         return mainServer.post(`/tweets`, qs.stringify(params))
     },
-    userTimeline: (id = '') => {
-        return mainServer.get(`/tweets/users/${id}`)
+    userTimeline: (id = '',params={}) => {
+        return mainServer.get(`/tweets/users/${id}`,{params})
     },
     whoToFollow: (params) => {
         return mainServer.get(`/users_recommend`, {params})
