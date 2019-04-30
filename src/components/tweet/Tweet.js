@@ -127,9 +127,9 @@ class Tweet extends Component {
 
     isRetweet = (post, props) => {
         if (post.parent_id) {
-            // return "retweet" + <retweetIcon className={props.icon}/>;
+            return  <retweetIcon className={props.icon}/>;
             // TODO
-            return " Retweet"
+            // return " Retweet"
         }
     };
 
@@ -303,5 +303,9 @@ class Tweet extends Component {
         );
     }
 }
+
+// isRetweet.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(inject('rootStore')(observer(Tweet)));
