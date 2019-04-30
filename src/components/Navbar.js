@@ -115,10 +115,6 @@ class PrimarySearchAppBar extends React.Component {
         menuAnchorEl: null,
     };
 
-    logout = () => {
-        this.props.rootStore.loginStore.logout();
-    };
-
     handleProfileMenuOpen = (event) => {
         this.setState({ anchorEl: event.currentTarget });
     };
@@ -143,6 +139,11 @@ class PrimarySearchAppBar extends React.Component {
     handleMenuClose = () => {
         this.setState({ menuAnchorEl: null });
     };
+
+    logout = () => {
+        this.props.rootStore.loginStore.logout();
+    };
+
     search = (event) => {
         if (event.key === 'Enter') {
             if(!this.props.history.location.pathname.startsWith('/searchResult')){
