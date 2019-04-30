@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
 import TextField from '@material-ui/core/TextField';
-import indigo from '@material-ui/core/colors/indigo';
+import blue from '@material-ui/core/colors/blue';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -43,13 +43,13 @@ const styles = theme => ({
     },
     cssLabel: {
         '&$cssFocused': {
-            color: indigo[500],
+            color: blue[500],
         },
     },
     cssFocused: {},
     cssOutlinedInput: {
         '&$cssFocused $notchedOutline': {
-            borderColor: indigo[500],
+            borderColor: blue[500],
         },
         // minWidth: 275,
         minHeight: 100,

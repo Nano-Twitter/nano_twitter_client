@@ -11,7 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import indigo from '@material-ui/core/colors/indigo';
+import blue from '@material-ui/core/colors/blue';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextsmsIcon from '@material-ui/icons/Textsms';
 import RotateRight from '@material-ui/icons/RotateRight';
@@ -22,7 +22,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
-// import Comment from './Comment'
+import Comment from './Comment'
+import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
     main: {
@@ -37,7 +38,7 @@ const styles = theme => ({
       paddingTop: '56.25%', // 16:9
       borderRadius: 10,
       border: '1px solid',
-      borderColor: indigo[100],
+      borderColor: blue[100],
       marginLeft: 10,
       marginTop: -5
     },
@@ -55,7 +56,7 @@ const styles = theme => ({
       transform: 'rotate(180deg)',
     },
     avatar: {
-      backgroundColor: indigo[500],
+      backgroundColor: blue[500],
       width: 50,
       height: 50,
     },
@@ -193,7 +194,6 @@ class Tweet extends Component {
                     )
                   })
                 }
-                
               </CardContent> */}
             </Collapse>
           </Card>
@@ -206,7 +206,7 @@ class Tweet extends Component {
           onClose={this.handleCloseComment}
           aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Comments"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Comment"}</DialogTitle>
             <DialogContent>
               <TweetBlock />
             </DialogContent>
@@ -220,25 +220,77 @@ class Tweet extends Component {
             </DialogActions>
           </Dialog>
 
-          <Dialog
-          open={this.state.retweetOpen}
-          onClose={this.handleCloseRetweet}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>
-            <DialogContent>
-              <TweetBlock />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseRetweet} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
-                Retweet
-              </Button>
-            </DialogActions>
-          </Dialog>
+          {/*<Dialog*/}
+          {/*open={this.state.retweetOpen}*/}
+          {/*onClose={this.handleCloseRetweet}*/}
+          {/*aria-labelledby="alert-dialog-title"*/}
+          {/*aria-describedby="alert-dialog-description"*/}
+          {/*>*/}
+          {/*  <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>*/}
+          {/*  <DialogContent>*/}
+          {/*    <TweetBlock />*/}
+          {/*  </DialogContent>*/}
+          {/*  <DialogActions>*/}
+          {/*    <Button onClick={this.handleCloseRetweet} color="primary">*/}
+          {/*      Cancel*/}
+          {/*    </Button>*/}
+          {/*    <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>*/}
+          {/*      Retweet*/}
+          {/*    </Button>*/}
+          {/*  </DialogActions>*/}
+          {/*</Dialog>*/}
+
+            <Dialog
+                open={this.state.retweetOpen}
+                onClose={this.handleCloseRetweet}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>
+                <DialogContent>
+                    {/*<TextField*/}
+                    {/*    autoFocus*/}
+                    {/*    margin="dense"*/}
+                    {/*    id="name"*/}
+                    {/*    label="Email Address"*/}
+                    {/*    type="text"*/}
+                    {/*    fullWidth*/}
+                    {/*/>*/}
+                    <TextField
+                        onChange={this.changeTweet}
+                        className={classes.margin}
+                        InputLabelProps={{
+                            classes: {
+                                root: classes.cssLabel,
+                                focused: classes.cssFocused,
+                            },
+                        }}
+                        InputProps={{
+                            classes: {
+                                root: classes.cssOutlinedInput,
+                                focused: classes.cssFocused,
+                                notchedOutline: classes.notchedOutline,
+                            },
+                        }}
+                        value={this.props.rootStore.tweetStore.tweet}
+                        autoFocus
+                        label="Say something..."
+                        variant="outlined"
+                        id="custom-css-outlined-input"
+                        margin="normal"
+                        fullWidth
+                        multiline
+                        rows='4'
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.handleCloseRetweet} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
+                        Retweet
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </main>
       );
     }

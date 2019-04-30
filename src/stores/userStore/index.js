@@ -41,12 +41,12 @@ class UserStore {
         })
     }
     getFollowers=(userId,params={})=>{
-        return api.getFollowers(userId).then(response=>{
+        return api.followers(userId).then(response=>{
             this.followers=response.data.data
          })
     }
     getFollowings=(userId,params={})=>{
-        return api.getFollowings(userId).then(response=>{
+        return api.followees(userId).then(response=>{
             this.followings=response.data.data
          })
     }

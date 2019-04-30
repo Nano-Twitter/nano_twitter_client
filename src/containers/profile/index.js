@@ -26,7 +26,7 @@ const styles = theme => ({
     },
     media: {
         height: 110,
-        backgroundColor: indigo[500],
+        color: theme.palette.text.secondary,
     },
     bigAvatar: {
         marginTop: -53,
@@ -167,7 +167,7 @@ class Profile extends Component {
                                 }
                             </TabContainer>}
                         {cardValue === 1 && <TabContainer>
-                            
+
                         </TabContainer>}
                         {cardValue === 2 && <TabContainer>
 
