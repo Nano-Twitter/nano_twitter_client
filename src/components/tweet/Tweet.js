@@ -77,12 +77,14 @@ const styles = theme => ({
     },
     icon: {
         margin: theme.spacing.unit,
-        fontSize: 12,
         color: theme.palette.primary.light,
+        fontSize: 16,
+    },
+    grid: {
+        padding: 0,
     },
 
 });
-
 
 
 class Tweet extends Component {
@@ -125,11 +127,18 @@ class Tweet extends Component {
         this.setState(state => ({expanded: !state.expanded}));
     };
 
-    isRetweet = (post, props) => {
+    isRetweet = (post) => {
         if (post.parent_id) {
-            return <Loop className={this.props.icon}/>;
-            // TODO
-            // return " Retweet"
+            return (
+                <Grid container>
+                    <Grid item className={this.props.grid}>
+                        <Loop className={this.props.icon} style={{ fontSize: 16 }}/>
+                    </Grid>
+                    <Grid item className={this.props.grid}>
+                        <small>Retweet</small>
+                    </Grid>
+                </Grid>
+            );
         }
     };
 
@@ -145,7 +154,7 @@ class Tweet extends Component {
 
             <main className={classes.main}>
                 <Card className={classes.card}>
-                        { this.isRetweet(post, classes)}
+                    {this.isRetweet(post)}
                     <Grid container spacing={8} className={classes.cardMain}>
 
                         <Grid item xs={1} md={1} lg={1}>
@@ -159,7 +168,6 @@ class Tweet extends Component {
                                 <Grid item xs={10} md={10} lg={10}>
                                     <Typography variant="body2">
                                         {'@'}{post.user_attr.name} {" "}
-                                        <retweetIcon className={this.props.icon}/>
                                         <Typography variant="caption" inline>
                                             {post.user_attr.name} · {post.created_at}
                                         </Typography>
@@ -303,5 +311,9 @@ class Tweet extends Component {
         );
     }
 }
+
+// isRetweet.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(inject('rootStore')(observer(Tweet)));

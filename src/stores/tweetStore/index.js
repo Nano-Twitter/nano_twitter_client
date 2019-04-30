@@ -28,8 +28,9 @@ class TweetStore {
         return api.addTweet(params)
             .then((response) => {
                 // alert(response.data.message);
-                this.tweet = "";
-                this.parent_id = "";
+                this.tweet = '';
+                this.parent_id = undefined;
+                // this.s
 
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();
@@ -48,7 +49,6 @@ class TweetStore {
         .catch((error) => {
             alert(error.message.response.data.message)
         })
-        
     }
 
     getComments = () => {
