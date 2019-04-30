@@ -185,7 +185,7 @@ class Profile extends Component {
                                         return (
                                             <Grid item xs={12} md={6} lg={4}>
                                                 <div className={classes.NameCardBox}>
-                                                <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                                <NameCardLarge key={user._id.$oid} username={user.name}  id={user._id.$oid}></NameCardLarge></div>
                                             </Grid>
                                         )
                                     })
@@ -201,7 +201,7 @@ class Profile extends Component {
                                     return (
                                         <Grid item xs={12} md={6} lg={4}>
                                             <div className={classes.NameCardBox}>
-                                            <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                            <NameCardLarge key={user._id.$oid} username={user.name} id={user._id.$oid}></NameCardLarge></div>
                                         </Grid>
                                     )
                                 })
