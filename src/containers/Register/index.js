@@ -34,7 +34,7 @@ const styles = theme =>
         },
         avatar: {
             margin: theme.spacing.unit,
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.secondary.light,
         },
         form: {
             width: '100%', // Fix IE 11 issue.
@@ -77,8 +77,8 @@ class Register extends Component {
                             <LockOutlinedIcon/>
                         </Avatar>
                         :
-                        <Avatar className={this.props.classes.avatar} alt="Remy Sharp"
-                                src="https://material-ui.com/static/images/avatar/1.jpg">
+                        <Avatar className={this.props.classes.avatar} >
+                            Hi
                         </Avatar>
                     }
                     <Typography component="h1" variant="h5">

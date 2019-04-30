@@ -11,15 +11,18 @@ import AuthorizedRoute from './components/authorizationRequiredRoute';
 import JumpToHomeIfLogedInRoute from './components/JumpToHomeIfLogedInRoute';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import search from './containers/search';
-
+import profile from './containers/profile'
 import {render} from 'react-dom';
+
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-// import Root from './Root';
 import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
+
 
 const theme = createMuiTheme({
     palette: {
         primary: blue,
+        secondary: grey,
     },
     status: {
         danger: 'red',
@@ -39,6 +42,7 @@ ReactDOM.render(
                         {/* <Route path="/user/:id" component={Homepage} /> */}
                         <AuthorizedRoute path="/home" component={Home}/>
                         <Route path="/searchResult" component={search}/>
+                        <Route path="/profile/:id" component={profile}></Route>
                     </Switch>
                 </div>
             </BrowserRouter>

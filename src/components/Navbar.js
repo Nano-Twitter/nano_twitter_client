@@ -91,7 +91,7 @@ const styles = theme => createStyles({
     },
     avatar: {
         margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.secondary.light,
     },
 });
 
@@ -270,8 +270,8 @@ class PrimarySearchAppBar extends React.Component {
                                 onClick={this.handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <Avatar className={this.props.classes.avatar} alt="Remy Sharp"
-                                    src="https://material-ui.com/static/images/avatar/1.jpg">
+                                <Avatar className={this.props.classes.avatar} >
+                                    {this.props.rootStore.profileStore.username.toUpperCase()[0]}
                                 </Avatar>
                             </IconButton>
                         </div>

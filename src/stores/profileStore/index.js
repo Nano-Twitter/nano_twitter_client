@@ -33,7 +33,7 @@ class ProfileStore {
         })
         ;
     }
-
+    
     addTweet = () => {
         this.tweets += 1;
     }
@@ -80,7 +80,7 @@ decorate(ProfileStore, {
     deleteFollowing: action, 
     addTweet: action,
     changeEmail: action,
-    getProfile: action
+    getProfile: action,
 });
 
 const profileStore = new ProfileStore();
