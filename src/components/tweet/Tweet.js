@@ -28,8 +28,6 @@ import TextField from "@material-ui/core/TextField";
 const styles = theme => ({
     main: {
       width: 'auto',
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
       paddingTop: theme.spacing.unit * 2
     },
     card: {
@@ -112,7 +110,7 @@ class Tweet extends Component {
     render(){
       
       const post = this.props.post;
-      const comments = this.props.rootStore.tweetStore.comments;
+      // const comments = this.props.rootStore.tweetStore.comments;
       const { classes } = this.props;
 
       return (

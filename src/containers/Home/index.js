@@ -4,7 +4,7 @@ import PersonalProfile from '../../components/PersonalProfile'
 import Trend from '../../components/TrendsForYou'
 import TweetBlock from '../../components/TweetBlock'
 import TimeLine from '../../components/TimeLine'
-import WhoToFollow from '../../components/WhoToFollow'
+// import WhoToFollow from '../../components/WhoToFollow'
 import {observer, inject} from 'mobx-react';
 import Grid from '@material-ui/core/Grid';
 import NameCardLarge from '../../components/tweet/NameCardLarge';

@@ -13,8 +13,6 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
     main: {
       width: 'auto',
-      marginLeft: theme.spacing.unit * 0,
-      marginRight: theme.spacing.unit * 0,
       paddingTop: theme.spacing.unit * 2
     },
     card: {
