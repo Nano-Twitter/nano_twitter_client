@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import indigo from '@material-ui/core/colors/indigo';
+import primary from '@material-ui/core/colors/blue';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router'
 import AppBar from '@material-ui/core/AppBar';
@@ -27,6 +27,7 @@ const styles = theme => ({
     media: {
         height: 110,
         color: theme.palette.text.secondary,
+        backgroundColor:primary[500]
     },
     bigAvatar: {
         marginTop: -53,
@@ -38,7 +39,7 @@ const styles = theme => ({
         marginTop: 10
     },
     link: {
-        color: indigo[400]
+        color: primary[400]
     },
     root: {
 
