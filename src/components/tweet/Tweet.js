@@ -24,6 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
+import retweetIcon from '@material-ui/icons/Loop'
 
 const styles = theme => ({
     main: {
@@ -73,9 +74,16 @@ const styles = theme => ({
         marginTop: -15,
         paddingTop: 10,
         paddingLeft: 12
-    }
+    },
+    icon: {
+        margin: theme.spacing.unit,
+        fontSize: 12,
+        color: theme.palette.primary.light,
+    },
 
 });
+
+
 
 class Tweet extends Component {
 
@@ -117,20 +125,33 @@ class Tweet extends Component {
         this.setState(state => ({expanded: !state.expanded}));
     };
 
+    isRetweet = (post, props) => {
+        if (post.parent_id) {
+            // return "retweet" + <retweetIcon className={props.icon}/>;
+            // TODO
+            return " Retweet"
+        }
+    };
+
     render() {
 
         const post = this.props.post;
+        // console.log(post);
         // const comments = this.props.rootStore.tweetStore.comments;
         const {classes} = this.props;
+
 
         return (
 
             <main className={classes.main}>
-
                 <Card className={classes.card}>
+                        { this.isRetweet(post, classes)}
                     <Grid container spacing={8} className={classes.cardMain}>
+
                         <Grid item xs={1} md={1} lg={1}>
+
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
+
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
