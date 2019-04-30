@@ -24,7 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
-import retweetIcon from '@material-ui/icons/Loop'
+import Loop from '@material-ui/icons/Loop'
 
 const styles = theme => ({
     main: {
@@ -127,9 +127,9 @@ class Tweet extends Component {
 
     isRetweet = (post, props) => {
         if (post.parent_id) {
-            // return "retweet" + <retweetIcon className={props.icon}/>;
+            return <Loop className={this.props.icon}/>;
             // TODO
-            return " Retweet"
+            // return " Retweet"
         }
     };
 
@@ -151,7 +151,6 @@ class Tweet extends Component {
                         <Grid item xs={1} md={1} lg={1}>
 
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
-
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
@@ -160,13 +159,13 @@ class Tweet extends Component {
                                 <Grid item xs={10} md={10} lg={10}>
                                     <Typography variant="body2">
                                         {'@'}{post.user_attr.name} {" "}
+                                        <retweetIcon className={this.props.icon}/>
                                         <Typography variant="caption" inline>
                                             {post.user_attr.name} · {post.created_at}
                                         </Typography>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} md={2} lg={2}>
-
                                 </Grid>
                             </Grid>
                             <CardContent className={classes.cardContent}>
@@ -183,7 +182,8 @@ class Tweet extends Component {
                                 <Grid container spacing={8}>
                                     <Grid item xs={3} md={3} lg={3}>
                                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                                            <RotateRight/>
+                                            {/* <RotateRight/> */}
+                                            <Loop/>
                                         </IconButton>
                                     </Grid>
                                     <Grid item xs={3} md={3} lg={3}>
