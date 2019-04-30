@@ -24,6 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
+import retweetIcon from '@material-ui/icons/Loop'
 
 const styles = theme => ({
     main: {
@@ -56,7 +57,7 @@ const styles = theme => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: blue[500],
+        backgroundColor: theme.palette.primary.light,
         width: 50,
         height: 50,
         fontSize: 25
@@ -73,9 +74,16 @@ const styles = theme => ({
         marginTop: -15,
         paddingTop: 10,
         paddingLeft: 12
-    }
+    },
+    icon: {
+        margin: theme.spacing.unit,
+        fontSize: 12,
+        color: theme.palette.primary.light,
+    },
 
 });
+
+
 
 class Tweet extends Component {
 
@@ -83,6 +91,10 @@ class Tweet extends Component {
         expanded: false,
         commentOpen: false,
         retweetOpen: false,
+    };
+
+    changeTweet = (e) => {
+        this.props.rootStore.tweetStore.changeTweet(e.target.value);
     };
 
     handleClickOpenComment = () => {
@@ -104,24 +116,42 @@ class Tweet extends Component {
         this.setState({retweetOpen: false});
     };
 
+    handleSendRetweet = () => {
+        this.setState({retweetOpen: false});
+        this.props.rootStore.tweetStore.submit();
+    };
+
     handleExpandClick = () => {
         this.setState(state => ({expanded: !state.expanded}));
+    };
+
+    isRetweet = (post, props) => {
+        if (post.parent_id) {
+            // return "retweet" + <retweetIcon className={props.icon}/>;
+            // TODO
+            return " Retweet"
+        }
     };
 
     render() {
 
         const post = this.props.post;
+        // console.log(post);
         // const comments = this.props.rootStore.tweetStore.comments;
         const {classes} = this.props;
+
 
         return (
 
             <main className={classes.main}>
-
                 <Card className={classes.card}>
+                        { this.isRetweet(post, classes)}
                     <Grid container spacing={8} className={classes.cardMain}>
+
                         <Grid item xs={1} md={1} lg={1}>
+
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
+
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
@@ -224,41 +254,15 @@ class Tweet extends Component {
                     </DialogActions>
                 </Dialog>
 
-                {/*<Dialog*/}
-                {/*open={this.state.retweetOpen}*/}
-                {/*onClose={this.handleCloseRetweet}*/}
-                {/*aria-labelledby="alert-dialog-title"*/}
-                {/*aria-describedby="alert-dialog-description"*/}
-                {/*>*/}
-                {/*  <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>*/}
-                {/*  <DialogContent>*/}
-                {/*    <TweetBlock />*/}
-                {/*  </DialogContent>*/}
-                {/*  <DialogActions>*/}
-                {/*    <Button onClick={this.handleCloseRetweet} color="primary">*/}
-                {/*      Cancel*/}
-                {/*    </Button>*/}
-                {/*    <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>*/}
-                {/*      Retweet*/}
-                {/*    </Button>*/}
-                {/*  </DialogActions>*/}
-                {/*</Dialog>*/}
-
                 <Dialog
                     open={this.state.retweetOpen}
                     onClose={this.handleCloseRetweet}
                     aria-labelledby="form-dialog-title"
+                    fullWidth
+                    maxWidth={'xs'}
                 >
                     <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>
                     <DialogContent>
-                        {/*<TextField*/}
-                        {/*    autoFocus*/}
-                        {/*    margin="dense"*/}
-                        {/*    id="name"*/}
-                        {/*    label="Email Address"*/}
-                        {/*    type="text"*/}
-                        {/*    fullWidth*/}
-                        {/*/>*/}
                         <TextField
                             onChange={this.changeTweet}
                             className={classes.margin}
@@ -287,10 +291,10 @@ class Tweet extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleCloseRetweet} color="primary">
+                        <Button onClick={this.handleCloseRetweet} color="secondary">
                             Cancel
                         </Button>
-                        <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
+                        <Button onClick={this.handleSendRetweet} color="primary" autoFocus>
                             Retweet
                         </Button>
                     </DialogActions>

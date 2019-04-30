@@ -14,6 +14,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Tweet from '../../components/tweet/Tweet'
+import NameCardLarge from '../../components/tweet/NameCardLarge';
 
 const styles = theme => ({
     main: {
@@ -21,13 +22,13 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2
     },
     card: {
-        height: 300,
+        height: 230,
         width: '100%',
     },
     media: {
-        height: 110,
+        height: 50,
         color: theme.palette.text.secondary,
-        backgroundColor:primary[500]
+        // backgroundColor:primary[500]
     },
     bigAvatar: {
         marginTop: -53,
@@ -66,6 +67,12 @@ const styles = theme => ({
     },
     appBarRoot: {
         'box-shadow': '0px 2px 0px -1px rgba(0,0,0,0.2), 0px 4px 0px 0px rgba(0,0,0,0.14), 0px 1px 0px 0px rgba(0,0,0,0.12)'
+    },
+    NameCardContainer:{
+        width:450
+    },
+    NameCardBox:{
+        marginBottom:10
     }
 });
 
@@ -99,6 +106,8 @@ class Profile extends Component {
         const { classes } = this.props;
         const { cardValue } = this.state;
         let timeline = this.props.rootStore.userStore.tweetList
+        let followers = this.props.rootStore.userStore.followers
+        let followings = this.props.rootStore.userStore.followings
         return (
             <div className={classes.root}>
                 <Card className={this.props.classes.card}>
@@ -168,10 +177,28 @@ class Profile extends Component {
                                 }
                             </TabContainer>}
                         {cardValue === 1 && <TabContainer>
-
+                            <div className={classes.NameCardContainer}>
+                            {
+                                followers.map(user => {
+                                    return (
+                                        <div className={classes.NameCardBox}>
+                                        <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                    )
+                                })
+                            }
+                            </div>
                         </TabContainer>}
                         {cardValue === 2 && <TabContainer>
-
+                            <div className={classes.NameCardContainer}>
+                            {
+                                followings.map(user => {
+                                    return (
+                                        <div className={classes.NameCardBox}>
+                                        <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                    )
+                                })
+                            }
+                            </div>
                         </TabContainer>}</div>
                 </div>
             </div>

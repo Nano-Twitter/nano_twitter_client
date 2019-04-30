@@ -71,7 +71,7 @@ class NameCardLarge extends Component {
 
                 <Grid container spacing={10}>
                   <Grid item xs={8} md={8} lg={8}>
-                    <Avatar alt={this.props.rootStore.profileStore.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
+                    <Avatar alt={this.props.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
                   </Grid>
                   <Grid item xs={4} md={4} lg={4}>
                     <Button
@@ -86,10 +86,10 @@ class NameCardLarge extends Component {
                   </Grid>
                   <Grid item xs={12} md={12} lg={12} className={this.props.classes.names}>
                     <Typography variant="title" className={this.props.classes.username} >
-                      {this.props.rootStore.profileStore.username}
+                      {this.props.username}
                     </Typography>
                     <Typography gutterBottom variant="caption" className={this.props.classes.atname}>
-                      {'@'}{this.props.rootStore.profileStore.nickname}
+                      {'@'}{this.props.nickName || 'nickNameHahah'}
                     </Typography>
                   </Grid>
                   

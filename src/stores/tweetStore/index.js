@@ -21,6 +21,7 @@ class TweetStore {
 
         const params = {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
+            parent_id: this.parent_id,
             content: this.tweet,
         };
 
@@ -28,6 +29,7 @@ class TweetStore {
             .then((response) => {
                 // alert(response.data.message);
                 this.tweet = undefined;
+                this.parent_id = undefined;
 
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();
