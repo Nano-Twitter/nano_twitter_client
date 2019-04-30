@@ -56,7 +56,7 @@ const styles = theme => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: blue[500],
+        backgroundColor: theme.palette.primary.light,
         width: 50,
         height: 50,
         fontSize: 25
@@ -85,6 +85,10 @@ class Tweet extends Component {
         retweetOpen: false,
     };
 
+    changeTweet = (e) => {
+        this.props.rootStore.tweetStore.changeTweet(e.target.value);
+    };
+
     handleClickOpenComment = () => {
         console.log(this.props.post._id.$oid)
         this.setState({commentOpen: true});
@@ -102,6 +106,11 @@ class Tweet extends Component {
 
     handleCloseRetweet = () => {
         this.setState({retweetOpen: false});
+    };
+
+    handleSendRetweet = () => {
+        this.setState({retweetOpen: false});
+        this.props.rootStore.tweetStore.submit();
     };
 
     handleExpandClick = () => {
@@ -224,41 +233,15 @@ class Tweet extends Component {
                     </DialogActions>
                 </Dialog>
 
-                {/*<Dialog*/}
-                {/*open={this.state.retweetOpen}*/}
-                {/*onClose={this.handleCloseRetweet}*/}
-                {/*aria-labelledby="alert-dialog-title"*/}
-                {/*aria-describedby="alert-dialog-description"*/}
-                {/*>*/}
-                {/*  <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>*/}
-                {/*  <DialogContent>*/}
-                {/*    <TweetBlock />*/}
-                {/*  </DialogContent>*/}
-                {/*  <DialogActions>*/}
-                {/*    <Button onClick={this.handleCloseRetweet} color="primary">*/}
-                {/*      Cancel*/}
-                {/*    </Button>*/}
-                {/*    <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>*/}
-                {/*      Retweet*/}
-                {/*    </Button>*/}
-                {/*  </DialogActions>*/}
-                {/*</Dialog>*/}
-
                 <Dialog
                     open={this.state.retweetOpen}
                     onClose={this.handleCloseRetweet}
                     aria-labelledby="form-dialog-title"
+                    fullWidth
+                    maxWidth={'xs'}
                 >
                     <DialogTitle id="alert-dialog-title">{"Retweet"}</DialogTitle>
                     <DialogContent>
-                        {/*<TextField*/}
-                        {/*    autoFocus*/}
-                        {/*    margin="dense"*/}
-                        {/*    id="name"*/}
-                        {/*    label="Email Address"*/}
-                        {/*    type="text"*/}
-                        {/*    fullWidth*/}
-                        {/*/>*/}
                         <TextField
                             onChange={this.changeTweet}
                             className={classes.margin}
@@ -287,10 +270,10 @@ class Tweet extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleCloseRetweet} color="primary">
+                        <Button onClick={this.handleCloseRetweet} color="secondary">
                             Cancel
                         </Button>
-                        <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
+                        <Button onClick={this.handleSendRetweet} color="primary" autoFocus>
                             Retweet
                         </Button>
                     </DialogActions>

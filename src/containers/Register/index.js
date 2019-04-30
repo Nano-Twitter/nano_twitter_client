@@ -104,6 +104,7 @@ class Register extends Component {
                             fullWidth
                             variant="contained"
                             color="primary"
+
                             onClick={this.register}
                         >
                             Register

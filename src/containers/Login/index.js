@@ -111,6 +111,7 @@ class Login extends Component {
                             color="primary"
                             className={this.props.classes.submit}
                             onClick={this.submit}
+                            autoFocus
                         >
                             Log in
                         </Button>
