@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import indigo from '@material-ui/core/colors/indigo';
+import blue from '@material-ui/core/colors/blue';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextsmsIcon from '@material-ui/icons/Textsms';
 import RotateRight from '@material-ui/icons/RotateRight';
@@ -43,7 +43,7 @@ const styles = theme => ({
       paddingTop: '56.25%', // 16:9
       borderRadius: 10,
       border: '1px solid',
-      borderColor: indigo[100],
+      borderColor: blue[100],
       marginLeft: 10,
       marginTop: -5
     },
@@ -61,7 +61,7 @@ const styles = theme => ({
       transform: 'rotate(180deg)',
     },
     avatar: {
-      backgroundColor: indigo[500],
+      backgroundColor: blue[500],
       width: 50,
       height: 50,
     },

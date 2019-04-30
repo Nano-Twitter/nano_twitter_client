@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import indigo from '@material-ui/core/colors/indigo';
+import blue from '@material-ui/core/colors/blue';
 import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
@@ -20,7 +20,7 @@ const styles = theme => ({
     },
     media: {
       height: 110,
-      backgroundColor: indigo[500],
+      backgroundColor: blue[500],
     },
     bigAvatar: {
       marginTop: -53,
@@ -32,7 +32,7 @@ const styles = theme => ({
       marginTop: 10
     },
     link: {
-      color: indigo[400]
+      color: blue[400]
     }
   });
 
