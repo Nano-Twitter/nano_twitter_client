@@ -177,29 +177,41 @@ class Profile extends Component {
                                 }
                             </TabContainer>}
                         {cardValue === 1 && <TabContainer>
-                            <div className={classes.NameCardContainer}>
-                            {
-                                followers.map(user => {
-                                    return (
-                                        <div className={classes.NameCardBox}>
-                                        <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
-                                    )
-                                })
-                            }
-                            </div>
+                            <Grid container spacing={8}>
+                              
+                                {/* <div className={classes.NameCardContainer}> */}
+                                {
+                                    followers.map(user => {
+                                        return (
+                                            <Grid item xs={12} md={6} lg={4}>
+                                                <div className={classes.NameCardBox}>
+                                                <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                            </Grid>
+                                        )
+                                    })
+                                }
+                                {/* </div> */}
+                            </Grid>
                         </TabContainer>}
                         {cardValue === 2 && <TabContainer>
-                            <div className={classes.NameCardContainer}>
+                            <Grid container spacing={8}>
+                            {/* <div className={classes.NameCardContainer}> */}
                             {
                                 followings.map(user => {
                                     return (
-                                        <div className={classes.NameCardBox}>
-                                        <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                        <Grid item xs={12} md={6} lg={4}>
+                                            <div className={classes.NameCardBox}>
+                                            <NameCardLarge key={user._id.$oid} username={user.name} ></NameCardLarge></div>
+                                        </Grid>
                                     )
                                 })
                             }
-                            </div>
-                        </TabContainer>}</div>
+                            {/* </div> */}
+                            </Grid>
+                            
+                        </TabContainer>}
+                        
+                        </div>
                 </div>
             </div>
         );
