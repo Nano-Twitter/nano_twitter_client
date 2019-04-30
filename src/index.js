@@ -12,14 +12,15 @@ import JumpToHomeIfLogedInRoute from './components/JumpToHomeIfLogedInRoute';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import search from './containers/search';
 
-import {render} from 'react-dom';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-// import Root from './Root';
 import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
+
 
 const theme = createMuiTheme({
     palette: {
         primary: blue,
+        secondary: grey,
     },
     status: {
         danger: 'red',
