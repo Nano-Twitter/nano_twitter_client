@@ -57,7 +57,7 @@ class Home extends Component {
 
                     <Grid item xs={12} md={6} lg={3}>
                         {/* <WhoToFollow/> */}
-                        <NameCardLarge/>
+                        <NameCardLarge {...this.props.rootStore.profileStore} />
                     </Grid>
 
                 </Grid>
