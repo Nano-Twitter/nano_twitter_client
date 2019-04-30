@@ -46,7 +46,7 @@ let api = {
         return mainServer.get(`/followers/list/${id}`,{params})
     },
     followees: (id = '',params={}) => {
-        return mainServer.get(`/followers/list/${id}`,{params})
+        return mainServer.get(`/followees/list/${id}`,{params})
     },
     getComments:(tweet_id) => {
         return mainServer.get(`/tweets/${tweet_id}/comments`)

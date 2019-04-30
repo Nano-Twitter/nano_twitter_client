@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles';
-import {observer, inject} from 'mobx-react';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { observer, inject } from 'mobx-react';
 import Tweet from '../../components/tweet/Tweet'
 
 const styles = theme => ({
@@ -28,7 +28,11 @@ const styles = theme => ({
     media: {
         height: 140,
     },
-
+    container: {
+        marginLeft: '50%',
+        'max-width':590,
+        'transform': 'translateX(-50%)',
+    },
 });
 
 class Search extends Component {
@@ -38,14 +42,17 @@ class Search extends Component {
     render() {
 
         return (
-            this.props.rootStore.searchStore.results.map(tweet => {
-                return (
-                    <Tweet
-                        key={tweet._id.$oid}
-                        post={tweet}
-                    />
-                )
-            })
+            <div className={this.props.classes.container}>
+                {this.props.rootStore.searchStore.results.map(tweet => {
+                    return (
+                        <Tweet
+                            key={tweet._id.$oid}
+                            post={tweet}
+                            className={this.props.classes.tweet}
+                        />
+                    )
+                })}
+            </div>
         );
     }
 
