@@ -28,8 +28,8 @@ class TweetStore {
         return api.addTweet(params)
             .then((response) => {
                 // alert(response.data.message);
-                this.tweet = undefined;
-                this.parent_id = undefined;
+                this.tweet = "";
+                this.parent_id = "";
 
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();
