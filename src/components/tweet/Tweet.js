@@ -24,7 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
-import retweetIcon from '@material-ui/icons/Loop'
+import Loop from '@material-ui/icons/Loop'
 
 const styles = theme => ({
     main: {
@@ -77,12 +77,14 @@ const styles = theme => ({
     },
     icon: {
         margin: theme.spacing.unit,
-        fontSize: 12,
         color: theme.palette.primary.light,
+        fontSize: 16,
+    },
+    grid: {
+        padding: 0,
     },
 
 });
-
 
 
 class Tweet extends Component {
@@ -125,11 +127,18 @@ class Tweet extends Component {
         this.setState(state => ({expanded: !state.expanded}));
     };
 
-    isRetweet = (post, props) => {
+    isRetweet = (post) => {
         if (post.parent_id) {
-            return  <retweetIcon className={props.icon}/>;
-            // TODO
-            // return " Retweet"
+            return (
+                <Grid container>
+                    <Grid item className={this.props.grid}>
+                        <Loop className={this.props.icon} style={{ fontSize: 16 }}/>
+                    </Grid>
+                    <Grid item className={this.props.grid}>
+                        <small>Retweet</small>
+                    </Grid>
+                </Grid>
+            );
         }
     };
 
@@ -145,13 +154,12 @@ class Tweet extends Component {
 
             <main className={classes.main}>
                 <Card className={classes.card}>
-                        { this.isRetweet(post, classes)}
+                    {this.isRetweet(post)}
                     <Grid container spacing={8} className={classes.cardMain}>
 
                         <Grid item xs={1} md={1} lg={1}>
 
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
-
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
@@ -166,7 +174,6 @@ class Tweet extends Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} md={2} lg={2}>
-
                                 </Grid>
                             </Grid>
                             <CardContent className={classes.cardContent}>
@@ -183,7 +190,8 @@ class Tweet extends Component {
                                 <Grid container spacing={8}>
                                     <Grid item xs={3} md={3} lg={3}>
                                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                                            <RotateRight/>
+                                            {/* <RotateRight/> */}
+                                            <Loop/>
                                         </IconButton>
                                     </Grid>
                                     <Grid item xs={3} md={3} lg={3}>
