@@ -8,7 +8,9 @@ class TweetStore {
     tweet;
     user_id;
     parent_id;
-    
+    comments;
+    likes;
+
     changeTweet = (value) => {
         this.tweet = value;
     };
@@ -43,16 +45,27 @@ class TweetStore {
     loadComments = (value) => {
         console.log(value);
         return api.getComments(value)
-        .then((response) => {
-            this.comments.add(response.data.data);
-        })
-        .catch((error) => {
-            alert(error.message.response.data.message)
-        })
-    }
+            .then((response) => {
+                this.comments.add(response.data.data);
+            })
+            .catch((error) => {
+                alert(error.message.response.data.message)
+            })
+    };
 
     getComments = () => {
         this.comments.slice()
+    };
+
+    like = (value) => {
+        const params = {
+            user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
+        };
+
+        return api.like(value, params)
+            .then((response) => {
+                this.likes++;
+            })
     }
 
     repost = () => {
@@ -62,15 +75,15 @@ class TweetStore {
             parent_id: this.parent_id,
         };
         return api.addTweet(params)
-        .then((response) => {
-            alert(response.data.message);
-            this.tweet = '';
-            timelineStore.addTimeline(response.data.data);
-            profileStore.loadProfile();
-        })
-        .catch((error) => {
-            alert(error.response.data.message);
-        });
+            .then((response) => {
+                alert(response.data.message);
+                this.tweet = '';
+                timelineStore.addTimeline(response.data.data);
+                profileStore.loadProfile();
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
     };
 }
 

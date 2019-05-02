@@ -36,12 +36,10 @@ const styles = theme => ({
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
         borderRadius: 10,
-        border: '1px solid',
-        borderColor: blue[100],
-        marginLeft: 10,
-        marginTop: -5
+        border: null,
+        paddingTop: '56.25%', // 16:9
+        marginLeft: 15,
     },
     actions: {
         display: 'flex',
@@ -63,17 +61,17 @@ const styles = theme => ({
         fontSize: 25
     },
     cardMain: {
-        padding: 10,
-        paddingTop: 15
+        padding: 15,
     },
     cardHeader: {
-        padding: 10,
-        paddingLeft: 15,
+        padding: 15,
+        paddingTop: 0,
+        paddingBottom: 0,
     },
     cardContent: {
-        marginTop: -15,
-        paddingTop: 10,
-        paddingLeft: 12
+        padding: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
     },
     icon: {
         margin: theme.spacing.unit,
@@ -105,6 +103,12 @@ class Tweet extends Component {
         this.props.rootStore.tweetStore.loadComments(this.props.post._id.$oid);
     };
 
+    handleClickLike = () => {
+        console.log(this.props.post._id.$oid)
+        this.setState({commentOpen: true});
+        this.props.rootStore.tweetStore.like(this.props.post._id.$oid);
+    };
+
     handleClickOpenRetweet = () => {
         this.setState({retweetOpen: true});
         this.props.rootStore.tweetStore.changeParentId(this.props.post._id.$oid);
@@ -132,7 +136,7 @@ class Tweet extends Component {
             return (
                 <Grid container>
                     <Grid item className={this.props.grid}>
-                        <Loop className={this.props.icon} style={{ fontSize: 16 }}/>
+                        <Loop className={this.props.icon} style={{fontSize: 16}}/>
                     </Grid>
                     <Grid item className={this.props.grid}>
                         <small>Retweet</small>
@@ -151,19 +155,19 @@ class Tweet extends Component {
 
 
         return (
-
             <main className={classes.main}>
                 <Card className={classes.card}>
-                    {this.isRetweet(post)}
-                    <Grid container spacing={8} className={classes.cardMain}>
-
-                        <Grid item xs={1} md={1} lg={1}>
-
+                    <Grid container
+                          direction="row"
+                          alignItems="flex-start"
+                          className={classes.cardMain}
+                    >
+                        <Grid item>
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
-                        <Grid item xs={11} md={11} lg={11}>
+                        <Grid item>
                             <Grid container spacing={0} className={classes.cardHeader}>
                                 <Grid item xs={10} md={10} lg={10}>
                                     <Typography variant="body2">
@@ -201,7 +205,7 @@ class Tweet extends Component {
                                         </IconButton>
                                     </Grid>
                                     <Grid item xs={3} md={3} lg={3}>
-                                        <IconButton aria-label="Add to favorites">
+                                        <IconButton aria-label="Like" onClick={this.handleClickLike}>
                                             <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
                                         </IconButton>
                                     </Grid>
@@ -220,23 +224,26 @@ class Tweet extends Component {
                                 </Grid>
                             </CardActions>
                         </Grid>
-
+                        {/*<Grid item >*/}
+                        {/*    {this.isRetweet(post)}*/}
+                        {/*</Grid>*/}
                     </Grid>
 
 
+
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                        {/* <CardContent>
-                {
-                  comments.map((comment) => {
-                    return(
-                      <Comment
-                        key={comment._id.$oid}
-                        comment={comment}
-                      />
-                    )
-                  })
-                }
-              </CardContent> */}
+                        {/*{<CardContent>*/}
+                        {/*    {*/}
+                        {/*        comments.map((comment) => {*/}
+                        {/*            return (*/}
+                        {/*                <Comment*/}
+                        {/*                    key={comment._id.$oid}*/}
+                        {/*                    comment={comment}*/}
+                        {/*                />*/}
+                        {/*            )*/}
+                        {/*        })*/}
+                        {/*    }*/}
+                        {/*</CardContent>}*/}
                     </Collapse>
                 </Card>
 

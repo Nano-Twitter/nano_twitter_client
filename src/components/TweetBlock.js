@@ -103,9 +103,8 @@ class SimpleCard extends Component {
                         direction="row"
                         justify="space-between"
                         alignItems="flex-start"
-                        spacing={8}
                     >
-                        <Grid item xs={1}>
+                        <Grid item>
                             <Avatar className={classes.avatar}>
                                 {this.props.rootStore.profileStore.username.toUpperCase()[0]}
                             </Avatar>
