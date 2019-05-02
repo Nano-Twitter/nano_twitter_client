@@ -135,12 +135,14 @@ class Tweet extends Component {
     isRetweet = (post) => {
         if (post.parent_id) {
             return (
-                <Grid container>
+                <Grid container alignItems="flex-start">
                     <Grid item className={this.props.grid}>
-                        <Loop className={this.props.icon} style={{fontSize: 16}}/>
+                        <Loop className={this.props.icon} style={{fontSize: 13.3}}/>
                     </Grid>
                     <Grid item className={this.props.grid}>
-                        <small>Retweet</small>
+                        <Typography component="p">
+                            Retweet
+                        </Typography>
                     </Grid>
                 </Grid>
             );
@@ -168,16 +170,21 @@ class Tweet extends Component {
                             </Avatar>
                         </Grid>
                         <Grid item xs={10}>
-                            <Grid container spacing={0} className={classes.cardHeader}>
-                                <Grid item xs={10} md={10} lg={10}>
+                            <Grid container
+                                  spacing={0}
+                                  justify="space-between"
+                                  alignItems="baseline"
+                                  className={classes.cardHeader}>
+                                <Grid item >
                                     <Typography variant="body2">
-                                        {'@'}{post.user_attr.name} {" "}
+                                        {post.user_attr.name} {" "}
                                         <Typography variant="caption" inline>
-                                            {post.user_attr.name} · {new Date(post.created_at).toLocaleDateString()}
+                                             · {new Date(post.created_at).toLocaleDateString()}
                                         </Typography>
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={2} md={2} lg={2}>
+                                <Grid item>
+                                    {this.isRetweet(post)}
                                 </Grid>
                             </Grid>
                             <CardContent className={classes.cardContent}>
@@ -224,9 +231,7 @@ class Tweet extends Component {
                                 </Grid>
                             </CardActions>
                         </Grid>
-                        {/*<Grid item >*/}
-                        {/*    {this.isRetweet(post)}*/}
-                        {/*</Grid>*/}
+
                     </Grid>
 
 
