@@ -4,6 +4,8 @@ import {withStyles} from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import CardHeader from '@material-ui/core/CardHeader';
+
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -26,6 +28,7 @@ import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
 import Loop from '@material-ui/icons/Loop'
 
+
 const styles = theme => ({
     main: {
         width: 'auto',
@@ -34,16 +37,63 @@ const styles = theme => ({
     card: {
         maxWidth: 590,
     },
+
+    // media: {
+    //     height: 0,
+    //     borderRadius: 10,
+    //     border: null,
+    //     paddingTop: '56.25%', // 16:9
+    //     marginLeft: 15,
+    // },
+    // actions: {
+    //     display: 'flex',
+    //     padding: 0,
+    // },
+    // expand: {
+    //     transform: 'rotate(0deg)',
+    //     marginLeft: 'auto',
+    //     transition: theme.transitions.create('transform', {
+    //         duration: theme.transitions.duration.shortest,
+    //     }),
+    // },
+    // expandOpen: {
+    //     transform: 'rotate(180deg)',
+    // },
+    // avatar: {
+    //     backgroundColor: theme.palette.primary.light,
+    //     width: 50,
+    //     height: 50,
+    //     fontSize: 25
+    // },
+    cardMain: {
+        padding: 15,
+        paddingBottom: 5,
+    },
+    cardHeader: {
+        padding: 15,
+        paddingTop: 0,
+        paddingBottom: 0,
+    },
+    cardContent: {
+        padding: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    icon: {
+        // margin: theme.spacing.unit,
+        color: theme.palette.primary.light,
+    },
+    grid: {
+        padding: 0,
+    },
+
+
     media: {
         height: 0,
-        borderRadius: 10,
-        border: null,
         paddingTop: '56.25%', // 16:9
-        marginLeft: 15,
     },
     actions: {
         display: 'flex',
-        padding: 0,
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -57,32 +107,7 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.light,
-        width: 50,
-        height: 50,
-        fontSize: 25
     },
-    cardMain: {
-        padding: 15,
-    },
-    cardHeader: {
-        padding: 15,
-        paddingTop: 0,
-        paddingBottom: 0,
-    },
-    cardContent: {
-        padding: 10,
-        paddingLeft: 15,
-        paddingRight: 15,
-    },
-    icon: {
-        margin: theme.spacing.unit,
-        color: theme.palette.primary.light,
-        fontSize: 16,
-    },
-    grid: {
-        padding: 0,
-    },
-
 });
 
 
@@ -139,11 +164,11 @@ class Tweet extends Component {
                     <Grid item className={this.props.grid}>
                         <Loop className={this.props.icon} style={{fontSize: 13.3}}/>
                     </Grid>
-                    <Grid item className={this.props.grid}>
-                        <Typography component="p">
-                            Retweet
-                        </Typography>
-                    </Grid>
+                    {/*<Grid item className={this.props.grid}>*/}
+                    {/*    <Typography component="p">*/}
+                    {/*        Retweet*/}
+                    {/*    </Typography>*/}
+                    {/*</Grid>*/}
                 </Grid>
             );
         }
@@ -160,80 +185,135 @@ class Tweet extends Component {
         return (
             <main className={classes.main}>
                 <Card className={classes.card}>
-                    <Grid container
-                          direction="row"
-                          className={classes.cardMain}
-                    >
-                        <Grid item>
-                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
+                    <CardHeader
+                        avatar={
+                            <Avatar aria-label="avatar" className={classes.avatar}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Grid container
-                                  spacing={0}
-                                  justify="space-between"
-                                  alignItems="baseline"
-                                  className={classes.cardHeader}>
-                                <Grid item >
-                                    <Typography variant="body2">
-                                        {post.user_attr.name} {" "}
-                                        <Typography variant="caption" inline>
-                                             · {new Date(post.created_at).toLocaleDateString()}
-                                        </Typography>
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    {this.isRetweet(post)}
-                                </Grid>
+                        }
+                        action={this.isRetweet(post)}
+                        title={post.user_attr.name}
+                        subheader={new Date(post.created_at).toLocaleDateString()}
+                    />
+
+
+                    <CardMedia
+                        className={classes.media}
+                        image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
+                        title="Paella dish"
+                    />
+                    <CardContent>
+                        <Typography component="p">
+                            {post.content}
+                        </Typography>
+                    </CardContent>
+
+                    <CardActions className={classes.actions}>
+                        <Grid container spacing={8}>
+                            <Grid item xs={3} md={3} lg={3}>
+                                <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
+                                    {/* <RotateRight/> */}
+                                    <Loop/>
+                                </IconButton>
                             </Grid>
-                            <CardContent className={classes.cardContent}>
-                                <Typography component="p">
-                                    {post.content}
-                                </Typography>
-                            </CardContent>
-                            <CardMedia
-                                className={classes.media}
-                                image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
-                                title="Paella dish"
-                            />
-                            <CardActions className={classes.actions}>
-                                <Grid container spacing={8}>
-                                    <Grid item xs={3} md={3} lg={3}>
-                                        <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                                            {/* <RotateRight/> */}
-                                            <Loop/>
-                                        </IconButton>
-                                    </Grid>
-                                    <Grid item xs={3} md={3} lg={3}>
-                                        <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                                            <TextsmsIcon/><Typography
-                                            variant="caption">{post.comments_count}</Typography>
-                                        </IconButton>
-                                    </Grid>
-                                    <Grid item xs={3} md={3} lg={3}>
-                                        <IconButton aria-label="Like" onClick={this.handleClickLike}>
-                                            <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
-                                        </IconButton>
-                                    </Grid>
-                                    <Grid item xs={3} md={3} lg={3}>
-                                        <IconButton
-                                            className={classnames(classes.expand, {
-                                                [classes.expandOpen]: this.state.expanded,
-                                            })}
-                                            onClick={this.handleExpandClick}
-                                            aria-expanded={this.state.expanded}
-                                            aria-label="Show more"
-                                        >
-                                            <ExpandMoreIcon/>
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>
-                            </CardActions>
+                            <Grid item xs={3} md={3} lg={3}>
+                                <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
+                                    <TextsmsIcon/><Typography
+                                    variant="caption">{post.comments_count}</Typography>
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3}>
+                                <IconButton aria-label="Like" onClick={this.handleClickLike}>
+                                    <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3}>
+                                <IconButton
+                                    className={classnames(classes.expand, {
+                                        [classes.expandOpen]: this.state.expanded,
+                                    })}
+                                    onClick={this.handleExpandClick}
+                                    aria-expanded={this.state.expanded}
+                                    aria-label="Show more"
+                                >
+                                    <ExpandMoreIcon/>
+                                </IconButton>
+                            </Grid>
                         </Grid>
+                    </CardActions>
+                    {/*<Grid container*/}
+                    {/*      direction="row"*/}
+                    {/*      className={classes.cardMain}*/}
+                    {/*>*/}
+                    {/*    <Grid item xs={1} md={1} lg={1}>*/}
+                    {/*        <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>*/}
+                    {/*            {post.user_attr.name.toUpperCase()[0]}*/}
+                    {/*        </Avatar>*/}
+                    {/*    </Grid>*/}
+                    {/*    <Grid item xs={11} md={11} lg={11}>*/}
+                    {/*        <Grid container*/}
+                    {/*              spacing={0}*/}
+                    {/*              justify="space-between"*/}
+                    {/*              alignItems="baseline"*/}
+                    {/*              className={classes.cardHeader}>*/}
+                    {/*            <Grid item >*/}
+                    {/*                <Typography variant="body2">*/}
+                    {/*                    {post.user_attr.name} {" "}*/}
+                    {/*                    <Typography variant="caption" inline>*/}
+                    {/*                         · {new Date(post.created_at).toLocaleDateString()}*/}
+                    {/*                    </Typography>*/}
+                    {/*                </Typography>*/}
+                    {/*            </Grid>*/}
+                    {/*            <Grid item>*/}
+                    {/*                {this.isRetweet(post)}*/}
+                    {/*            </Grid>*/}
+                    {/*        </Grid>*/}
+                    {/*        <CardContent className={classes.cardContent}>*/}
+                    {/*            <Typography component="p">*/}
+                    {/*                {post.content}*/}
+                    {/*            </Typography>*/}
+                    {/*        </CardContent>*/}
+                    {/*        <CardMedia*/}
+                    {/*            className={classes.media}*/}
+                    {/*            image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"*/}
+                    {/*            title="Paella dish"*/}
+                    {/*        />*/}
+                    {/*        <CardActions className={classes.actions}>*/}
+                    {/*            <Grid container spacing={8}>*/}
+                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
+                    {/*                    <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>*/}
+                    {/*                        /!* <RotateRight/> *!/*/}
+                    {/*                        <Loop/>*/}
+                    {/*                    </IconButton>*/}
+                    {/*                </Grid>*/}
+                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
+                    {/*                    <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>*/}
+                    {/*                        <TextsmsIcon/><Typography*/}
+                    {/*                        variant="caption">{post.comments_count}</Typography>*/}
+                    {/*                    </IconButton>*/}
+                    {/*                </Grid>*/}
+                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
+                    {/*                    <IconButton aria-label="Like" onClick={this.handleClickLike}>*/}
+                    {/*                        <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>*/}
+                    {/*                    </IconButton>*/}
+                    {/*                </Grid>*/}
+                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
+                    {/*                    <IconButton*/}
+                    {/*                        className={classnames(classes.expand, {*/}
+                    {/*                            [classes.expandOpen]: this.state.expanded,*/}
+                    {/*                        })}*/}
+                    {/*                        onClick={this.handleExpandClick}*/}
+                    {/*                        aria-expanded={this.state.expanded}*/}
+                    {/*                        aria-label="Show more"*/}
+                    {/*                    >*/}
+                    {/*                        <ExpandMoreIcon/>*/}
+                    {/*                    </IconButton>*/}
+                    {/*                </Grid>*/}
+                    {/*            </Grid>*/}
+                    {/*        </CardActions>*/}
+                    {/*    </Grid>*/}
 
-                    </Grid>
-
+                    {/*</Grid>*/}
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
