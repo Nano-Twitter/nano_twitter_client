@@ -43,6 +43,7 @@ const styles = theme => ({
     },
     actions: {
         display: 'flex',
+        padding: 0,
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -159,7 +160,6 @@ class Tweet extends Component {
                 <Card className={classes.card}>
                     <Grid container
                           direction="row"
-                          alignItems="flex-start"
                           className={classes.cardMain}
                     >
                         <Grid item>
@@ -167,13 +167,13 @@ class Tweet extends Component {
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={10}>
                             <Grid container spacing={0} className={classes.cardHeader}>
                                 <Grid item xs={10} md={10} lg={10}>
                                     <Typography variant="body2">
                                         {'@'}{post.user_attr.name} {" "}
                                         <Typography variant="caption" inline>
-                                            {post.user_attr.name} · {post.created_at}
+                                            {post.user_attr.name} · {new Date(post.created_at).toLocaleDateString()}
                                         </Typography>
                                     </Typography>
                                 </Grid>
