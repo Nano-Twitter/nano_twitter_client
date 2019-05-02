@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {observer, inject} from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -38,76 +38,84 @@ const styles = theme => ({
     border: '3px solid #ffffff',
   },
   profile: {
-    paddingTop:5,
-    paddingBottom:5,
+    paddingTop: 5,
+    paddingBottom: 5,
     height: 100
   },
   link: {
     color: blue[400]
   },
-  names:{
+  names: {
     paddingLeft: 5,
     paddingTop: 5
   },
-  username:{
+  username: {
     fontSize: 18
   },
-  atname:{
+  atname: {
     fontSize: 14
   }
 });
 
 class NameCardLarge extends Component {
-    render(){
-        return (
-          <Card className={this.props.classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={this.props.classes.media}
-                image=""
-                title="Contemplative Reptile"
-              />
-              <CardContent>
+  render() {
+    return (
+      <Card className={this.props.classes.card}>
+        <CardActionArea>
+          <CardMedia
+            className={this.props.classes.media}
+            image=""
+            title="Contemplative Reptile"
+          />
+          <CardContent>
 
-                <Grid container spacing={10}>
-                  <Grid item xs={8} md={8} lg={8}>
-                    <Avatar alt={this.props.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
-                  </Grid>
-                  <Grid item xs={4} md={4} lg={4}>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      color="primary"
-                      aria-label="Add"
-                      className={this.props.margin}
-                    >
-                      Follow
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} md={12} lg={12} className={this.props.classes.names}>
-                    <Typography variant="title" className={this.props.classes.username} >
-                      {this.props.username}
-                    </Typography>
-                    <Typography gutterBottom variant="caption" className={this.props.classes.atname}>
-                      {'@'}{this.props.nickName || 'nickNameHahah'}
-                    </Typography>
-                  </Grid>
-                  
-                </Grid>
+            <Grid container spacing={10}>
+              <Grid item xs={8} md={8} lg={8}>
+                <Avatar alt={this.props.username} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.bigAvatar} />
+              </Grid>
+              <Grid item xs={4} md={4} lg={4}>
+                {this.props.id ? (this.props.rootStore.followStore.getFollowRelation().get(this.props.id) ?
+                  (<Button variant="outlined"
+                    size="small"
+                    color="secondary"
+                    aria-label="Add"
+                    className={this.props.margin} onClick={() => {
+                      this.props.rootStore.followStore.unfollow(this.props.id);
+                      this.forceUpdate();
+                    }} size="small" variant="outlined" color="secondary">unfollow</Button>) :
+                  (<Button variant="outlined"
+                    size="small"
+                    color="primary"
+                    aria-label="Add"
+                    className={this.props.margin} onClick={() => {
+                      this.props.rootStore.followStore.follow(this.props.id);
+                      this.forceUpdate();
+                    }} size="small" variant="outlined" color="primary">follow</Button>)) : ''}
+              </Grid>
+              <Grid item xs={12} md={12} lg={12} className={this.props.classes.names}>
+                <Typography variant="title" className={this.props.classes.username} >
+                  {this.props.username}
+                </Typography>
+                <Typography gutterBottom variant="caption" className={this.props.classes.atname}>
+                  {'@'}{this.props.nickName || 'nickNameHahah'}
+                </Typography>
+              </Grid>
 
-                <Grid container spacing={12} className={this.props.classes.profile}>
-                  <Typography color="textPrimary">
-                    A short introduction of this person, if there is one.
+            </Grid>
+
+            <Grid container spacing={12} className={this.props.classes.profile}>
+              <Typography color="textPrimary">
+                A short introduction of this person, if there is one.
                     <Link>#ProductManager #Microsoft #TechAndArt</Link>
-                  </Typography>
-                </Grid>
-                
-              </CardContent>
-            </CardActionArea>
-          </Card>
-            
-        );
-    }
+              </Typography>
+            </Grid>
+
+          </CardContent>
+        </CardActionArea>
+      </Card>
+
+    );
+  }
 }
 
 export default withStyles(styles)(inject('rootStore')(observer(NameCardLarge)));
