@@ -27,6 +27,7 @@ import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
 import Loop from '@material-ui/icons/Loop'
+import rootStore from "../../stores/rootStore";
 
 
 const styles = theme => ({
@@ -174,6 +175,29 @@ class Tweet extends Component {
         }
     };
 
+    followStatus = (post) => {
+        console.log(post.user_id.$oid);
+        console.log(JSON.parse(localStorage.getItem('user'))._id.$oid);
+
+        if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
+            if (this.props.rootStore.followStore.getFollowRelation().get(post.user_id.$oid)) {
+                return (
+                    <Button onClick={() => {
+                        this.props.rootStore.followStore.unfollow(post.user_id.$oid);
+                        this.forceUpdate();
+                    }} size="small" variant="outlined" color="secondary">unfollow</Button>
+                )
+            } else {
+                return (
+                    <Button onClick={() => {
+                        this.props.rootStore.followStore.follow(post.user_id.$oid);
+                        this.forceUpdate();
+                    }} size="small" variant="outlined" color="primary">follow</Button>
+                )
+            }
+        }
+    };
+
     render() {
 
         const post = this.props.post;
@@ -191,7 +215,10 @@ class Tweet extends Component {
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         }
-                        action={this.isRetweet(post)}
+                        action={
+                            this.followStatus(post)
+                        }
+
                         title={post.user_attr.name}
                         subheader={new Date(post.created_at).toLocaleDateString()}
                     />
