@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { observer, inject } from 'mobx-react';
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import {observer, inject} from 'mobx-react';
 import Tweet from '../../components/tweet/Tweet'
 
 const styles = theme => ({
@@ -30,15 +30,17 @@ const styles = theme => ({
     },
     container: {
         marginLeft: '50%',
-        'max-width':590,
+        'max-width': 590,
         'transform': 'translateX(-50%)',
     },
 });
 
 class Search extends Component {
     componentDidMount() {
-        this.props.rootStore.searchStore.search()
+        this.props.rootStore.searchStore.search();
+        this.props.rootStore.followStore.loadFollowRelation();
     }
+
     render() {
 
         return (

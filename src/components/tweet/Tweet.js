@@ -176,27 +176,29 @@ class Tweet extends Component {
     };
 
     followStatus = (post) => {
-        console.log(post.user_id.$oid);
-        console.log(JSON.parse(localStorage.getItem('user'))._id.$oid);
 
         if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
-            if (this.props.rootStore.followStore.getFollowRelation().get(post.user_id.$oid)) {
+
+            console.log(this.props.rootStore.followStore.follow_relation[post.user_id.$oid]);
+
+            if (this.props.rootStore.followStore.follow_relation[post.user_id.$oid]) {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.unfollow(post.user_id.$oid);
-                        this.forceUpdate();
+                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="secondary">unfollow</Button>
                 )
             } else {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.follow(post.user_id.$oid);
-                        this.forceUpdate();
+                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="primary">follow</Button>
                 )
             }
         }
     };
+
 
     render() {
 
@@ -223,12 +225,12 @@ class Tweet extends Component {
                         subheader={new Date(post.created_at).toLocaleDateString()}
                     />
 
-
                     <CardMedia
                         className={classes.media}
                         image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
                         title="Paella dish"
                     />
+
                     <CardContent>
                         <Typography component="p">
                             {post.content}

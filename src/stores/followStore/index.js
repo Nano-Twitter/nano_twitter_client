@@ -5,11 +5,21 @@ import profileStore from '../profileStore';
 class FollowStore {
 
     current_user = JSON.parse(localStorage.getItem('user'));
-    follow_relation = new Map();
-    like_relation = new Map();
+    follow_relation = {};
+    like_relation = {};
+
 
     constructor(rootStore) {
         this.rootStore = rootStore;
+    }
+
+    loadFollowRelation() {
+        profileStore.loadProfile().then(
+            () => {
+                this.follow_relation = {...profileStore.following_list};
+                console.log(this.follow_relation)
+            }
+        );
     }
 
     getFollowRelation() {
@@ -18,7 +28,9 @@ class FollowStore {
 
 
     setFollowRelation(user_id, status) {
-        this.follow_relation.set(user_id, status)
+        // this.follow_relation.set(user_id, status)
+        this.follow_relation[user_id] = status
+
     }
 
     getLikeRelation() {
@@ -26,7 +38,8 @@ class FollowStore {
     }
 
     setLikeRelation(user_id, status) {
-        this.like_relation.set(user_id, status)
+        // this.like_relation.set(user_id, status)
+        this.like_relation[user_id] = status
     }
 
     follow = (id) => {
@@ -36,8 +49,14 @@ class FollowStore {
         return api.follow(id, params)
             .then(
                 () => {
-                    this.follow_relation.set(id, true);
-                    profileStore.loadProfile();
+                    // this.follow_relation[id] = true;
+                    profileStore.loadProfile()
+                        .then(
+                            () => {
+                                this.follow_relation = {...profileStore.following_list};
+                                console.log(this.follow_relation)
+                            }
+                        );
                 }
             )
             .catch((error) => {
@@ -54,16 +73,21 @@ class FollowStore {
         return api.unfollow(id, params)
             .then(
                 () => {
-                    this.follow_relation.set(id, false);
-                    profileStore.loadProfile();
+                    this.follow_relation[id] = false;
+
+                    profileStore.loadProfile()
+                        .then(
+                            () => {
+                                console.log({...profileStore.following_list});
+                                this.follow_relation = {...profileStore.following_list};
+                            }
+                        );
                 }
             )
             .catch((error) => {
                 console.log(error);
             })
     }
-
-
 }
 
 decorate(FollowStore, {
