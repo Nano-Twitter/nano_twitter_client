@@ -64,6 +64,7 @@ class TweetStore {
     };
 
     submit = () => {
+        let parent_id = this.parent_id;
 
         const params = {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
@@ -74,10 +75,12 @@ class TweetStore {
 
         return api.addTweet(params)
             .then((response) => {
+                if (parent_id) {
+
+                }
                 this.tweet = '';
                 this.parent_id = undefined;
-                this.imageUrl=''
-                // this.s
+                this.imageUrl='';
 
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();

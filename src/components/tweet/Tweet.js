@@ -231,7 +231,7 @@ class Tweet extends Component {
                     <CardActions className={classes.actions} disableActionSpacing>
                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
                             {/* <RotateRight/> */}
-                            <Loop/>
+                            <Loop/>{post.retweet_count}
                         </IconButton>
                         <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
                             <TextsmsIcon/><Typography
