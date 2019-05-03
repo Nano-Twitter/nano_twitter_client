@@ -3,7 +3,6 @@ import { get, set } from 'mobx';
 import api from '../../api';
 import timelineStore from '../timelineStore'
 import profileStore from '../profileStore'
-// import {CommentStore} from '../commentStore'
 
 class TweetStore {
 
@@ -37,28 +36,23 @@ class TweetStore {
         return api.addComment(params)
             .then((response) => {
                 this.content = "";
-                // set(comments, tweet_id, this.tweet_id)
+                return this.getComments(this.tweet_id)
+                
             })
             .catch((error) => {
                 alert(error.message.response.data.message);
             })
     }
 
-    loadComments = () => {
-        return api.getComments(this.tweet_id)
+    getComments = (tweetId) => {
+        if(!tweetId) return 
+        return api.getComments(tweetId)
             .then((response) => {
-                this.comments = []
-                set(this.comments,this.tweet_id, [].push(...response.data.data))
-                // this.comments.push();
+                this.comments[tweetId]=response.data.data
             })
             .catch((error) => {
                 alert(error.message.response.data.message);
             })
-    };
-
-    getComments = () => {
-       
-        
     };
     
     changeTweet = (value) => {
@@ -80,7 +74,6 @@ class TweetStore {
 
         return api.addTweet(params)
             .then((response) => {
-                // alert(response.data.message);
                 this.tweet = '';
                 this.parent_id = undefined;
                 this.imageUrl=''
@@ -129,7 +122,6 @@ class TweetStore {
 decorate(TweetStore, {
     tweet: observable,
     imageUrl: observable,
-    commentStore: observable,
     tweet_id: observable,
     content:observable,
     comments:observable,
