@@ -58,7 +58,7 @@ class TweetStore {
 
     getComments = () => {
         // return this.comments.slice()
-        const cmts = get(this.comments, this.tweet_id) || null
+        const cmts = get(this.comments, this.tweet_id)
         if (cmts){
             return cmts
         }else{
