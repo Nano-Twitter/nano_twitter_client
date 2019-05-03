@@ -113,7 +113,10 @@ class Tweet extends Component {
     };
 
     addCommment = (e) => {
-        this.props.rootStore.tweetStore.addComment();
+        this.props.rootStore.tweetStore.addComment()
+        .then(()=> {
+            this.handleCloseComment();
+        });
     };
 
     handleClickOpenComment = () => {
@@ -237,7 +240,7 @@ class Tweet extends Component {
                             <Grid item xs={3} md={3} lg={3}>
                                 <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
                                     <TextsmsIcon/><Typography
-                                    variant="caption">{post.comments_count}</Typography>
+                                    variant="caption">{(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}</Typography>
                                 </IconButton>
                             </Grid>
                             {/*<Grid item xs={3} md={3} lg={3}>*/}
@@ -259,7 +262,6 @@ class Tweet extends Component {
                             </Grid>
                         </Grid>
                     </CardActions>
-
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
