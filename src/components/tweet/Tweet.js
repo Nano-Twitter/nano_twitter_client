@@ -295,7 +295,7 @@ class Tweet extends Component {
                             }}
                             value={this.props.rootStore.tweetStore.tweet}
                             autoFocus
-                            label="Comment something..."
+                            label="Say something..."
                             variant="outlined"
                             id="custom-css-outlined-input"
                             margin="normal"
