@@ -144,11 +144,11 @@ class Tweet extends Component {
                     {post.content}
                   </Typography>
                 </CardContent>
-                <CardMedia
-                  className={classes.media}
-                  image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
-                  title="Paella dish"
-                />
+                {post.image_url?<CardMedia
+                                className={classes.media}
+                                image={post.image_url}
+                                title="Paella dish"
+                            />:''}
                 <CardActions className={classes.actions}>
                   <Grid container spacing={8}>
                     <Grid item xs={3} md={3} lg={3}>

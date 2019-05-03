@@ -1,8 +1,8 @@
-# Nano Twitter V 0.6
+# Nano Twitter V 1.0
 
 ## Deployment in AWS:
 
-[Nanotwitter](http://18.219.120.204:3000/)
+[Nanotwitter](http://d2tp46yx9fbjl7.cloudfront.net/)
 
 ## Repo
 * server: https://github.com/Nano-Twitter/nano_twitter
@@ -14,11 +14,32 @@
 
 ## Documentations
 * [API](https://github.com/Nano-Twitter/nano_twitter/blob/master/doc/api.md)
-
+* [Loader.test file](https://nano-twitter-2019.herokuapp.com/testFile.json)
 ## Contributors
 * [Ye Hong](mailto:yehong@brandeis.edu)
 * [Limian Guo](mailto:limianguo@brandeis.edu)
 * [Chenfeng Fan](mailto:fanc@brandeis.edu)
+
+## React Instruction
+* Install Node.js first, then run ```$ npm install``` in the front-end directory
+* Build the client  ```$ npm run build```
+* Debugging server ```$ npm start```
+* Configuration of react app is in package.json
+* More details see: https://facebook.github.io/create-react-app/
+
+## Server Start
+* Sinatra  ```$ bundle exec rackup -p8000 --host 127.0.0.1```
+* MongoDB ```$ mongod```
+* Redis ```$ redis-server```
+* RabbitMQ
+  1. ```$ brew install rabbitmq``` 
+  2. ```$ export PATH=$PATH:/usr/local/opt/rabbitmq/sbin``` 
+  3. ```$ rabbitmq-server```
+
+## Using Docker
+* Build image ```docker build -t <YOUR_USERNAME>/nano-twitter .```
+* Run image ```docker run -p 8888:8000 --name nano-twitter YOUR_USERNAME/nano-twitter```
+
 
 ## Test
 Under the root directory, enter `rake test` to run the tests: `api_test.rb`, `model_test.rb` and `service_test.rb`.
@@ -45,11 +66,11 @@ Under the root directory, enter `rake test` to run the tests: `api_test.rb`, `mo
 * Successfully deployed on Heroku: [NanoTwitter](https://nano-twitter-2019.herokuapp.com/) YH
 * Restructured the front-end React app LG
 * Added MobX for state management YH
-* Added routing and authentication logic involving interactions between front-end and backend
+* Added routing and authentication logic involving interactions between front-end and backend YH
 * Finished NanoTwitter API Version 1 design CF
 * Set up Code Pipeline auto testing and deployment on AWS(currently removed due to financial reason 2019.3.28)
 YH
-* remove typescript due to its difficulty,rewrite all the typescript file to javascript YH
+* remove typescript due to its difficulty, rewrite all the typescript file to javascript YH
 
 ### Version 0.4 
 * restructure route to integrate service CF
@@ -93,7 +114,27 @@ YH
 * timeline function optimization YH
 * nano_twitter client YH
 
+### version 0.7
+* change from AmazonMQ to standalone RabbitMQ service
+* Elastic Cache redis cluster replaced single Redis server
+* more counter cache is adding to MongoDB Schema
+* query optimization and anaylysis in Mongo
+
+### version 0.8
+* switching production web server to Passenger Standalone with native Nginx 
+* adding searching, retweeting function to the app
+* Docker and UFO automatic deploying 
+* tweet can now support image uploading
+* UI theme is now more like real twitter
+
+### version 1.0
+* Finishing the main function of twitter, such as timeline, tweet, commenting, retweet, follow, user's profile and search.
+* Setting up RabbitMq for queueing all tweets to be faned out. The procedure of tweeting now become asynchronous
+* Users and timelines are now cached in Redis for better performance
+* The project is now moving to AWS using ECS.
+
 ## References
 * [Nano Twitter Project Outline](http://cosi105b.s3-website-us-west-2.amazonaws.com/content/topics/nt/nt_outline.md/) 
-* [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
 * [Mongoid Manual](https://docs.mongodb.com/mongoid/current/)
+* [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+* [Material-UI](https://material-ui.com/getting-started/installation/)

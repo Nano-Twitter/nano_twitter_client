@@ -31,6 +31,7 @@ class TimelineStore {
     };
 
     addTimeline = (newPost) => {
+        console.log(newPost)
         this.timeline.unshift(newPost);
         profileStore.addTweet();
     }

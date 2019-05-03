@@ -87,6 +87,9 @@ const styles = theme => ({
     grid: {
         padding: 0,
     },
+    userName:{
+        cursor:'pointer'
+    },
 
 
     media: {
@@ -119,6 +122,14 @@ class Tweet extends Component {
         commentOpen: false,
         retweetOpen: false,
     };
+    handleClickUserName=(id)=>{
+        let target=`/profile/${id}`
+        if(!this.props.history.location.pathname.startsWith(target)){
+            this.props.history.push(target)
+        }else{
+            // do nothing
+        }
+    }
 
     changeTweet = (e) => {
         this.props.rootStore.tweetStore.changeTweet(e.target.value);
@@ -199,7 +210,6 @@ class Tweet extends Component {
         }
     };
 
-
     render() {
 
         const post = this.props.post;
@@ -213,7 +223,7 @@ class Tweet extends Component {
                 <Card className={classes.card}>
                     <CardHeader
                         avatar={
-                            <Avatar aria-label="avatar" className={classes.avatar}>
+                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar} className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         }
@@ -221,15 +231,20 @@ class Tweet extends Component {
                             this.followStatus(post)
                         }
 
-                        title={post.user_attr.name}
+                        title={
+
+                            <Typography className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}} variant="body2">
+                                {post.user_attr.name} {" "}
+                            </Typography>
+                        }
                         subheader={new Date(post.created_at).toLocaleDateString()}
                     />
 
-                    <CardMedia
+                    {post.image_url?<CardMedia
                         className={classes.media}
-                        image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
+                        image={post.image_url}
                         title="Paella dish"
-                    />
+                    />:''}
 
                     <CardContent>
                         <Typography component="p">
@@ -270,79 +285,7 @@ class Tweet extends Component {
                             </Grid>
                         </Grid>
                     </CardActions>
-                    {/*<Grid container*/}
-                    {/*      direction="row"*/}
-                    {/*      className={classes.cardMain}*/}
-                    {/*>*/}
-                    {/*    <Grid item xs={1} md={1} lg={1}>*/}
-                    {/*        <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>*/}
-                    {/*            {post.user_attr.name.toUpperCase()[0]}*/}
-                    {/*        </Avatar>*/}
-                    {/*    </Grid>*/}
-                    {/*    <Grid item xs={11} md={11} lg={11}>*/}
-                    {/*        <Grid container*/}
-                    {/*              spacing={0}*/}
-                    {/*              justify="space-between"*/}
-                    {/*              alignItems="baseline"*/}
-                    {/*              className={classes.cardHeader}>*/}
-                    {/*            <Grid item >*/}
-                    {/*                <Typography variant="body2">*/}
-                    {/*                    {post.user_attr.name} {" "}*/}
-                    {/*                    <Typography variant="caption" inline>*/}
-                    {/*                         · {new Date(post.created_at).toLocaleDateString()}*/}
-                    {/*                    </Typography>*/}
-                    {/*                </Typography>*/}
-                    {/*            </Grid>*/}
-                    {/*            <Grid item>*/}
-                    {/*                {this.isRetweet(post)}*/}
-                    {/*            </Grid>*/}
-                    {/*        </Grid>*/}
-                    {/*        <CardContent className={classes.cardContent}>*/}
-                    {/*            <Typography component="p">*/}
-                    {/*                {post.content}*/}
-                    {/*            </Typography>*/}
-                    {/*        </CardContent>*/}
-                    {/*        <CardMedia*/}
-                    {/*            className={classes.media}*/}
-                    {/*            image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"*/}
-                    {/*            title="Paella dish"*/}
-                    {/*        />*/}
-                    {/*        <CardActions className={classes.actions}>*/}
-                    {/*            <Grid container spacing={8}>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>*/}
-                    {/*                        /!* <RotateRight/> *!/*/}
-                    {/*                        <Loop/>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>*/}
-                    {/*                        <TextsmsIcon/><Typography*/}
-                    {/*                        variant="caption">{post.comments_count}</Typography>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Like" onClick={this.handleClickLike}>*/}
-                    {/*                        <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton*/}
-                    {/*                        className={classnames(classes.expand, {*/}
-                    {/*                            [classes.expandOpen]: this.state.expanded,*/}
-                    {/*                        })}*/}
-                    {/*                        onClick={this.handleExpandClick}*/}
-                    {/*                        aria-expanded={this.state.expanded}*/}
-                    {/*                        aria-label="Show more"*/}
-                    {/*                    >*/}
-                    {/*                        <ExpandMoreIcon/>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*            </Grid>*/}
-                    {/*        </CardActions>*/}
-                    {/*    </Grid>*/}
 
-                    {/*</Grid>*/}
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
