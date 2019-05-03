@@ -1,7 +1,6 @@
 import {observable, action, decorate} from 'mobx';
 import api from '../../api';
 import profileStore from '../profileStore';
-import TweetStore from '../tweetStore';
 
 class TimelineStore {
 
@@ -32,13 +31,11 @@ class TimelineStore {
     };
 
     addTimeline = (newPost) => {
-        console.log(newPost)
         this.timeline.unshift(newPost);
         profileStore.addTweet();
     }
 
     getTimeline = () => {
-        // alert(this.timeline.slice())
         return this.timeline.slice()
     }
 
