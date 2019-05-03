@@ -12,7 +12,7 @@ class ProfileStore {
     following = '';
     follower = '';
     following_list = {};
-
+    id=''
 
     loadProfile = (user_id = '') => {
         return api.getProfile(user_id)
@@ -24,6 +24,7 @@ class ProfileStore {
                 this.tweets = user.tweets_count;
                 this.follower = user.follower_ids.length;
                 this.following = user.following_ids.length;
+                this.id=user._id.$oid
 
                 console.log(user.following_ids);
 
@@ -65,6 +66,7 @@ decorate(ProfileStore, {
     following: observable,
     follower: observable,
     following_list: observable,
+    id:observable,
     changeUsername: action,
     changeFollower: action,
     addFollowing: action,
