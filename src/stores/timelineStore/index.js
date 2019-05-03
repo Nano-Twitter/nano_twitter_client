@@ -1,6 +1,7 @@
 import {observable, action, decorate} from 'mobx';
 import api from '../../api';
 import profileStore from '../profileStore';
+import TweetStore from '../tweetStore';
 
 class TimelineStore {
 

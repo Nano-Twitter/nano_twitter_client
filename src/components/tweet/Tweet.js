@@ -113,16 +113,16 @@ class Tweet extends Component {
     };
 
     changeComment = (e) => {
-        this.props.rootStore.commentStore.changeComment(e.target.value);
+        this.props.rootStore.tweetStore.changeComment(e.target.value);
     };
 
     addCommment = (e) => {
-        this.props.rootStore.commentStore.addComment();
+        this.props.rootStore.tweetStore.addComment();
     };
 
     handleClickOpenComment = () => {
         this.setState({commentOpen: true});
-        this.props.rootStore.commentStore.changeTweetId(this.props.post._id.$oid);
+        this.props.rootStore.tweetStore.changeTweetId(this.props.post._id.$oid);
     };
 
     handleClickLike = () => {
@@ -150,7 +150,7 @@ class Tweet extends Component {
     };
 
     handleExpandClick = () => {
-        this.props.rootStore.commentStore.changeTweetId(this.props.post._id.$oid)
+        this.props.rootStore.tweetStore.changeTweetId(this.props.post._id.$oid)
         this.componentDidMount()
         this.setState(state => ({expanded: !state.expanded}));
     };
@@ -173,7 +173,7 @@ class Tweet extends Component {
     };
 
     componentDidMount() {
-        this.props.rootStore.commentStore.loadComments();
+        this.props.rootStore.tweetStore.loadComments();
     }
     followStatus = (post) => {
 
@@ -201,7 +201,7 @@ class Tweet extends Component {
     render() {
 
         const post = this.props.post;
-        const comments = this.props.rootStore.commentStore.getComments();
+        const comments = this.props.rootStore.tweetStore.getComments();
         console.log(comments);
         const {classes} = this.props;
 
@@ -245,11 +245,7 @@ class Tweet extends Component {
                                 image={post.image_url}
                                 title="Paella dish"
                             />:''}
-                            <CardContent>
-                                <Typography component="p">
-                                    {post.content}
-                                </Typography>
-                            </CardContent>
+                            
                             <CardActions className={classes.actions}>
                                 <Grid container spacing={8}>
                                     <Grid item xs={3} md={3} lg={3}>
@@ -286,10 +282,8 @@ class Tweet extends Component {
                         </Grid>
 
                     </Grid>
-
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                        {/* <Comment /> */}
-                        {<CardContent>
+                        {/* {<CardContent>
                             {
                                 comments.map((comment) => {
                                     return (
@@ -300,7 +294,7 @@ class Tweet extends Component {
                                     )
                                 })
                             }
-                        </CardContent>}
+                        </CardContent>} */}
                     </Collapse>
                 </Card>
 
