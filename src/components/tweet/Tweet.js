@@ -24,6 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
+import Input from '@material-ui/core/Input';
 import Loop from '@material-ui/icons/Loop'
 
 const styles = theme => ({
@@ -192,11 +193,11 @@ class Tweet extends Component {
                                     {post.content}
                                 </Typography>
                             </CardContent>
-                            <CardMedia
+                            {post.image_url?<CardMedia
                                 className={classes.media}
-                                image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
+                                image={post.image_url}
                                 title="Paella dish"
-                            />
+                            />:''}
                             <CardActions className={classes.actions}>
                                 <Grid container spacing={8}>
                                     <Grid item xs={3} md={3} lg={3}>

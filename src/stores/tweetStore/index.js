@@ -10,6 +10,7 @@ class TweetStore {
     parent_id;
     comments;
     likes;
+    imageUrl=''
 
     changeTweet = (value) => {
         this.tweet = value;
@@ -25,6 +26,7 @@ class TweetStore {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
             parent_id: this.parent_id,
             content: this.tweet,
+            image_url:this.imageUrl
         };
 
         return api.addTweet(params)
@@ -32,6 +34,7 @@ class TweetStore {
                 // alert(response.data.message);
                 this.tweet = '';
                 this.parent_id = undefined;
+                this.imageUrl=''
                 // this.s
 
                 timelineStore.addTimeline(response.data.data);
@@ -89,6 +92,7 @@ class TweetStore {
 
 decorate(TweetStore, {
     tweet: observable,
+    imageUrl:observable,
     changeTweet: action,
     changeParentId: action
 });
