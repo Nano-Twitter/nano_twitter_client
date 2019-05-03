@@ -231,11 +231,17 @@ class Tweet extends Component {
                     <CardActions className={classes.actions} disableActionSpacing>
                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
                             {/* <RotateRight/> */}
-                            <Loop/>{this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] ||post.retweet_count}
+                            <Loop/>
+                            <Loop/>
+                            <Typography variant="caption">
+                                {this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] ||post.retweet_count}
+                            </Typography>
                         </IconButton>
                         <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                            <TextsmsIcon/><Typography
-                            variant="caption">{(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}</Typography>
+                            <TextsmsIcon/>
+                            <Typography variant="caption">
+                                {(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}
+                            </Typography>
                         </IconButton>
                         <IconButton
                             className={classnames(classes.expand, {
