@@ -31,12 +31,7 @@ const styles = theme => ({
         height: 80,
         backgroundColor: blue[500],
     },
-    bigAvatar: {
-        marginTop: -53,
-        width: 75,
-        height: 75,
-        border: '3px solid #ffffff',
-    },
+
     profile: {
         paddingTop: 5,
         paddingBottom: 5,
@@ -54,6 +49,14 @@ const styles = theme => ({
     },
     atname: {
         fontSize: 14
+    },
+    userName:{
+        cursor:'pointer',
+        marginTop: -53,
+        width: 75,
+        height: 75,
+        border: '3px solid #ffffff',
+        fontSize:'40px'
     }
 });
 
@@ -71,9 +74,9 @@ class NameCardLarge extends Component {
 
                         <Grid container spacing={10}>
                             <Grid item xs={8} md={8} lg={8}>
-                                <Avatar alt={this.props.username}
-                                        src="https://material-ui.com/static/images/avatar/1.jpg"
-                                        className={this.props.classes.bigAvatar}/>
+                            <Avatar alt={this.props.username} className={this.props.classes.avatar} className={this.props.classes.userName}>
+                                {this.props.username.toUpperCase()[0]}
+                            </Avatar>
                             </Grid>
                             <Grid item xs={4} md={4} lg={4}>
                                 {this.props.id ? (this.props.rootStore.followStore.follow_relation[this.props.id] ?

@@ -94,6 +94,7 @@ class Tweet extends Component {
         commentOpen: false,
         retweetOpen: false,
     };
+
     handleClickUserName=(id)=>{
         let target=`/profile/${id}`
         if(!this.props.history.location.pathname.startsWith(target)){
@@ -107,10 +108,17 @@ class Tweet extends Component {
         this.props.rootStore.tweetStore.changeTweet(e.target.value);
     };
 
+    changeComment = (e) => {
+        this.props.rootStore.tweetStore.changeComment(e.target.value);
+    };
+
+    addCommment = (e) => {
+        this.props.rootStore.tweetStore.addComment();
+    };
+
     handleClickOpenComment = () => {
-        console.log(this.props.post._id.$oid)
         this.setState({commentOpen: true});
-        this.props.rootStore.tweetStore.loadComments(this.props.post._id.$oid);
+        this.props.rootStore.tweetStore.changeTweetId(this.props.post._id.$oid);
     };
 
 
@@ -133,6 +141,8 @@ class Tweet extends Component {
     };
 
     handleExpandClick = () => {
+        this.props.rootStore.tweetStore.changeTweetId(this.props.post._id.$oid)
+        this.componentDidMount()
         this.setState(state => ({expanded: !state.expanded}));
     };
 
@@ -152,6 +162,10 @@ class Tweet extends Component {
             );
         }
     };
+
+    componentDidMount() {
+        this.props.rootStore.tweetStore.loadComments();
+    }
 
     followStatus = (post) => {
 
@@ -176,9 +190,10 @@ class Tweet extends Component {
             }
         }
     };
-
     render() {
         const post = this.props.post;
+        const comments = this.props.rootStore.tweetStore.getComments();
+        console.log(comments);
         const {classes} = this.props;
 
         return (
@@ -271,22 +286,47 @@ class Tweet extends Component {
 
 
                 <Dialog
-                    fullWidth={this.state.fullWidth}
-                    maxWidth={this.state.maxWidth}
                     open={this.state.commentOpen}
                     onClose={this.handleCloseComment}
-                    aria-describedby="alert-dialog-description"
+                    aria-labelledby="form-dialog-title"
+                    fullWidth
+                    maxWidth={'xs'}
                 >
                     <DialogTitle id="alert-dialog-title">{"Comment"}</DialogTitle>
                     <DialogContent>
-                        <TweetBlock/>
+                        <TextField
+                            onChange={this.changeComment}
+                            className={classes.margin}
+                            InputLabelProps={{
+                                classes: {
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                },
+                            }}
+                            InputProps={{
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            value={this.props.rootStore.tweetStore.tweet}
+                            autoFocus
+                            label="Comment something..."
+                            variant="outlined"
+                            id="custom-css-outlined-input"
+                            margin="normal"
+                            fullWidth
+                            multiline
+                            rows='4'
+                        />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleCloseComment} color="primary">
-                            Disagree
+                        <Button onClick={this.handleCloseComment} color="secondary">
+                            Cancel
                         </Button>
-                        <Button onClick={this.handleCloseComment} color="primary" autoFocus>
-                            Agree
+                        <Button onClick={this.addCommment} color="primary" autoFocus>
+                            Comment
                         </Button>
                     </DialogActions>
                 </Dialog>

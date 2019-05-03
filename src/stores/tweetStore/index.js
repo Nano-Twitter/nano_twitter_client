@@ -1,17 +1,71 @@
 import {observable, action, decorate} from 'mobx';
+import { get, set } from 'mobx';
 import api from '../../api';
 import timelineStore from '../timelineStore'
 import profileStore from '../profileStore'
+// import {CommentStore} from '../commentStore'
 
 class TweetStore {
 
     tweet;
     user_id;
     parent_id;
-    comments;
     likes;
-    imageUrl=''
+    imageUrl='';
 
+    content = "";
+    tweet_id = "";
+
+    comments = {};
+    
+
+    changeComment = (value) => {
+        this.content = value;
+    }
+
+    changeTweetId = (value) => {
+        this.tweet_id = value;
+    }
+
+
+    addComment = () => {
+        const params = {
+            user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
+            content: this.content,
+            tweet_id: this.tweet_id
+        }
+        return api.addComment(params)
+            .then((response) => {
+                this.content = "";
+                // set(comments, tweet_id, this.tweet_id)
+            })
+            .catch((error) => {
+                alert(error.message.response.data.message);
+            })
+    }
+
+    loadComments = () => {
+        return api.getComments(this.tweet_id)
+            .then((response) => {
+                this.comments = []
+                set(this.comments,this.tweet_id, [].push(...response.data.data))
+                // this.comments.push();
+            })
+            .catch((error) => {
+                alert(error.message.response.data.message);
+            })
+    };
+
+    getComments = () => {
+        // return this.comments.slice()
+        const cmts = get(this.comments, this.tweet_id) || null
+        if (cmts){
+            return cmts
+        }else{
+            return []
+        }
+    };
+    
     changeTweet = (value) => {
         this.tweet = value;
     };
@@ -45,20 +99,7 @@ class TweetStore {
             });
     };
 
-    loadComments = (value) => {
-        console.log(value);
-        return api.getComments(value)
-            .then((response) => {
-                this.comments.add(response.data.data);
-            })
-            .catch((error) => {
-                alert(error.message.response.data.message)
-            })
-    };
 
-    getComments = () => {
-        this.comments.slice()
-    };
 
     like = (value) => {
         const params = {
@@ -92,9 +133,15 @@ class TweetStore {
 
 decorate(TweetStore, {
     tweet: observable,
-    imageUrl:observable,
+    imageUrl: observable,
+    commentStore: observable,
+    tweet_id: observable,
+    content:observable,
+    comments:observable,
     changeTweet: action,
-    changeParentId: action
+    changeParentId: action,
+    changeComment: action,
+    changeTweetId: action,
 });
 
 const tweetStore = new TweetStore();

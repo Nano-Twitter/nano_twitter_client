@@ -48,6 +48,9 @@ let api = {
     followees: (id = '',params={}) => {
         return mainServer.get(`/followees/list/${id}`,{params})
     },
+    addComment:(params) => {
+        return mainServer.post(`/tweets/${params.tweet_id}/comments`, qs.stringify(params))
+    },
     getComments:(tweet_id) => {
         return mainServer.get(`/tweets/${tweet_id}/comments`)
     },
