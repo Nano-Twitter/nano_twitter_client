@@ -3,9 +3,7 @@ import {observer, inject} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
-import { Grid } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -23,7 +21,7 @@ const styles = theme => ({
         display: 'flex',
     },
     avatar: {
-        backgroundColor: blue[500],
+        backgroundColor: blue[200],
     },
 
   });
@@ -44,7 +42,6 @@ class Comment extends Component {
                         {comment.username.toUpperCase()[0]}
                     </Avatar>
                 }
-
                 title={comment.username}
                 // subheader="September 14, 2016"
             />
