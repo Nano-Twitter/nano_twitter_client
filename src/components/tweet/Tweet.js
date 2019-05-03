@@ -39,34 +39,6 @@ const styles = theme => ({
     card: {
         maxWidth: 590,
     },
-
-    // media: {
-    //     height: 0,
-    //     borderRadius: 10,
-    //     border: null,
-    //     paddingTop: '56.25%', // 16:9
-    //     marginLeft: 15,
-    // },
-    // actions: {
-    //     display: 'flex',
-    //     padding: 0,
-    // },
-    // expand: {
-    //     transform: 'rotate(0deg)',
-    //     marginLeft: 'auto',
-    //     transition: theme.transitions.create('transform', {
-    //         duration: theme.transitions.duration.shortest,
-    //     }),
-    // },
-    // expandOpen: {
-    //     transform: 'rotate(180deg)',
-    // },
-    // avatar: {
-    //     backgroundColor: theme.palette.primary.light,
-    //     width: 50,
-    //     height: 50,
-    //     fontSize: 25
-    // },
     cardMain: {
         padding: 15,
         paddingBottom: 5,
@@ -91,7 +63,6 @@ const styles = theme => ({
     userName:{
         cursor:'pointer'
     },
-
 
     media: {
         height: 0,

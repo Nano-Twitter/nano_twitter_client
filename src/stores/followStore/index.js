@@ -8,7 +8,6 @@ class FollowStore {
     follow_relation = {};
     like_relation = {};
 
-
     constructor(rootStore) {
         this.rootStore = rootStore;
     }
@@ -30,6 +29,10 @@ class FollowStore {
     setFollowRelation(user_id, status) {
         // this.follow_relation.set(user_id, status)
         this.follow_relation[user_id] = status
+
+    }
+
+    loadLikeRelation() {
 
     }
 

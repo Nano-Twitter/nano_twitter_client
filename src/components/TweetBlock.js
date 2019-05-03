@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -9,7 +9,7 @@ import blue from '@material-ui/core/colors/blue';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import { inject, observer } from "mobx-react";
+import {inject, observer} from "mobx-react";
 import Input from '@material-ui/core/Input'
 
 const styles = theme => ({
@@ -17,7 +17,7 @@ const styles = theme => ({
         minWidth: 275,
         // paddingLeft: theme.spacing.unit * 3,
         // paddingRight: theme.spacing.unit * 3,
-        paddingBottom: 0,
+        // paddingBottom: 0,
     },
     bullet: {
         display: 'inline-block',
@@ -35,7 +35,6 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         paddingRight: theme.spacing.unit * 3,
-        // padding
         paddingBottom: 0,
     },
     margin: {
@@ -75,11 +74,12 @@ const styles = theme => ({
     },
     cardContent: {
         marginBottom: 0,
-        paddingBottom: 0
+        padding: 15,
+        paddingBottom: 15,
     },
-    uploadImage:{
-        width:'100%',
-       // transform:'translateX(-20px)'
+    uploadImage: {
+        width: '100%',
+        // transform:'translateX(-20px)'
     }
 });
 
@@ -98,18 +98,18 @@ class SimpleCard extends Component {
 
         fileReader.readAsDataURL(target.files[0]);
         fileReader.onload = (e) => {
-            this.props.rootStore.tweetStore.imageUrl=e.target.result
+            this.props.rootStore.tweetStore.imageUrl = e.target.result
         };
     }
 
     render() {
 
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         return (
 
             <Card className={classes.card}>
-                <CardContent>
+                <CardContent className={classes.cardContent}>
 
                     <Grid
                         container
@@ -156,34 +156,47 @@ class SimpleCard extends Component {
                                         multiline
                                         rows='4'
                                     />
-                                     {this.props.rootStore.tweetStore.imageUrl ?
-                                        <div><img className={classes.uploadImage} src={this.props.rootStore.tweetStore.imageUrl}></img></div> : ''}
-                                    <input
-                                        accept="image/*"
-                                        className={classes.input}
-                                        style={{ display: 'none' }}
-                                        id="raised-button-file"
-                                        multiple
-                                        type="file"
-                                        onChange={this.handleUpdate}
-                                    />
-                                    <label htmlFor="raised-button-file">
-                                        <Button variant="raised" component="span" className={classes.button}>
-                                            Upload Picture</Button>
-                                    </label>
-                                   
+
+
                                 </Grid>
 
-                                <Grid item
+                                <Grid
+                                    container
+                                    direction="row"
+                                    justify="flex-end"
+                                    alignItems="center"
                                 >
-                                    <Button variant="contained"
-                                        color="primary"
-                                        className={classes.button}
-                                        onClick={this.submit}
+
+                                    <Grid item>
+                                        {this.props.rootStore.tweetStore.imageUrl ?
+                                            <div><img className={classes.uploadImage}
+                                                      src={this.props.rootStore.tweetStore.imageUrl}></img></div> : ''}
+                                        <input
+                                            accept="image/*"
+                                            className={classes.input}
+                                            style={{display: 'none'}}
+                                            id="raised-button-file"
+                                            multiple
+                                            type="file"
+                                            onChange={this.handleUpdate}
+                                        />
+                                        <label htmlFor="raised-button-file">
+                                            <Button variant="raised" component="span" className={classes.button}>
+                                                Upload Picture</Button>
+                                        </label>
+                                    </Grid>
+                                    <Grid item
                                     >
-                                        Tweet
-                                    </Button>
+                                        <Button variant="contained"
+                                                color="primary"
+                                                className={classes.button}
+                                                onClick={this.submit}
+                                        >
+                                            Tweet
+                                        </Button>
+                                    </Grid>
                                 </Grid>
+
                             </Grid>
                         </Grid>
                     </Grid>
