@@ -306,7 +306,7 @@ class Tweet extends Component {
                                     notchedOutline: classes.notchedOutline,
                                 },
                             }}
-                            value={this.props.rootStore.tweetStore.tweet}
+                            value={this.props.rootStore.tweetStore.comment}
                             autoFocus
                             label="Comment something..."
                             variant="outlined"

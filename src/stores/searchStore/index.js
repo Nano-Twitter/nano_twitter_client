@@ -4,8 +4,7 @@ import api from '../../api';
 class SearchStore {
     results = [];
     searchTerm = ''
-    constructor() {
-    }
+    
     changeSearchTerm = (value) => {
         console.log('being changed', value)
         this.searchTerm = value

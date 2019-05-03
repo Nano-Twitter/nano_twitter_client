@@ -1,12 +1,11 @@
 import {observable, action, decorate} from 'mobx';
-import { get, set } from 'mobx';
 import api from '../../api';
 import timelineStore from '../timelineStore'
 import profileStore from '../profileStore'
 
 class TweetStore {
 
-    tweet;
+    tweet = "";
     user_id;
     parent_id;
     likes;
@@ -37,7 +36,6 @@ class TweetStore {
             .then((response) => {
                 this.content = "";
                 return this.getComments(this.tweet_id)
-                
             })
             .catch((error) => {
                 alert(error.message.response.data.message);
@@ -77,8 +75,6 @@ class TweetStore {
                 this.tweet = '';
                 this.parent_id = undefined;
                 this.imageUrl=''
-                // this.s
-
                 timelineStore.addTimeline(response.data.data);
                 profileStore.loadProfile();
             })
