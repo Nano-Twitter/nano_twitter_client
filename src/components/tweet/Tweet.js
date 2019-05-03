@@ -26,6 +26,7 @@ import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
 import Input from '@material-ui/core/Input';
 import Loop from '@material-ui/icons/Loop'
+import {withRouter} from 'react-router';
 
 const styles = theme => ({
     main: {
@@ -83,6 +84,9 @@ const styles = theme => ({
     grid: {
         padding: 0,
     },
+    userName:{
+        cursor:'pointer'
+    }
 
 });
 
@@ -94,6 +98,14 @@ class Tweet extends Component {
         commentOpen: false,
         retweetOpen: false,
     };
+    handleClickUserName=(id)=>{
+        let target=`/profile/${id}`
+        if(!this.props.history.location.pathname.startsWith(target)){
+            this.props.history.push(target)
+        }else{
+            // do nothing
+        }
+    }
 
     changeTweet = (e) => {
         this.props.rootStore.tweetStore.changeTweet(e.target.value);
@@ -166,7 +178,7 @@ class Tweet extends Component {
                           className={classes.cardMain}
                     >
                         <Grid item>
-                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
+                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar} className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         </Grid>
@@ -177,7 +189,7 @@ class Tweet extends Component {
                                   alignItems="baseline"
                                   className={classes.cardHeader}>
                                 <Grid item >
-                                    <Typography variant="body2">
+                                    <Typography className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}} variant="body2">
                                         {post.user_attr.name} {" "}
                                         <Typography variant="caption" inline>
                                              · {new Date(post.created_at).toLocaleDateString()}
@@ -329,4 +341,4 @@ class Tweet extends Component {
 //     classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(inject('rootStore')(observer(Tweet)));
+export default withRouter(withStyles(styles)(inject('rootStore')(observer(Tweet))));
