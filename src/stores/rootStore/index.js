@@ -6,8 +6,6 @@ import RecomStore from "../recomStore";
 import FollowStore from "../followStore";
 import SearchStore from '../searchStore';
 import userStore from '../userStore';
-import commentStore from '../commentStore';
-
 class RootStore {
     constructor() {
         this.loginStore = loginStore;
@@ -18,7 +16,6 @@ class RootStore {
         this.followStore = new FollowStore(this);
         this.searchStore=new SearchStore(this)
         this.userStore=userStore;
-        this.commentStore = commentStore;
     }
 }
 
