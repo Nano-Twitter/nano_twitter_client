@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 // import Collapse from '@material-ui/core/Collapse';
@@ -81,155 +81,22 @@ const styles = theme => ({
   
   });
 
-class Tweet extends Component {
-
-    state = { 
-      expanded: false,
-      commentOpen: false,
-      retweetOpen:false,
-    };
-
-    handleClickOpenComment = () => {
-      this.setState({ commentOpen: true });
-
-    };
-
-    handleClickOpenRetweet = () => {
-      this.setState({ retweetOpen: true });
-      this.props.rootStore.tweetStore.changeParentId(this.props.post._id.oid);
-    };
+class Comment extends Component {
   
-    handleCloseComment = () => {
-      this.setState({ commentOpen: false });
-    };
+  render() {
+    const post = {
+      user_attr:{
+        name: "happylamb"
+      },
+      created_at: "2019-04-30T05:10:32.415+00:00",
 
-    handleCloseRetweet = () => {
-      this.setState({ retweetOpen: false });
-    };
-
-    handleExpandClick = () => {
-      this.setState(state => ({ expanded: !state.expanded }));
-    };
-
-    render(){
-      
-      const post = this.props.comment;
-      const { classes } = this.props;
-
-      return (
-
-        <main className={classes.main}>
-          
-          <Card className={classes.card}>
-            <Grid container spacing={8}  className={classes.cardMain}>
-              <Grid item xs={1} md={1} lg={1}>
-                <Avatar alt={post.user_attr.name} src="https://material-ui.com/static/images/avatar/1.jpg" className={this.props.classes.avatar} />
-              </Grid>
-              <Grid item xs={11} md={11} lg={11}>
-                <Grid container spacing={0}  className={classes.cardHeader}>
-                  <Grid item xs={10} md={10} lg={10}>
-                    <Typography variant="body2">
-                      {'@'}{post.user_attr.name} {" "}
-                      <Typography variant="caption" inline>
-                        {post.user_attr.name} · {post.created_at}
-                      </Typography>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={2} md={2} lg={2}>
-                    
-                  </Grid>
-                </Grid>
-                <CardContent className={classes.cardContent}>
-                  <Typography component="p">
-                    {post.content}
-                  </Typography>
-                </CardContent>
-                <CardMedia
-                  className={classes.media}
-                  image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
-                  title="Paella dish"
-                />
-                <CardActions className={classes.actions}>
-                  <Grid container spacing={8}>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                        <RotateRight />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                        <TextsmsIcon /><Typography variant="caption">{post.comments_count}</Typography>
-                      </IconButton> 
-                    </Grid>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <IconButton aria-label="Add to favorites">
-                        <FavoriteIcon /><Typography variant="caption">{post.likes_count}</Typography>
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <IconButton
-                        className={classnames(classes.expand, {
-                          [classes.expandOpen]: this.state.expanded,
-                        })}
-                        onClick={this.handleExpandClick}
-                        aria-expanded={this.state.expanded}
-                        aria-label="Show more"
-                      >
-                        <ExpandMoreIcon />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </CardActions>
-              </Grid>
-              
-            </Grid>
-  
-          </Card>
-
-
-          <Dialog
-          fullWidth={this.state.fullWidth}
-          maxWidth={this.state.maxWidth}
-          open={this.state.commentOpen}
-          onClose={this.handleCloseComment}
-          aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Comments"}</DialogTitle>
-            <DialogContent>
-              <TweetBlock />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseComment} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={this.handleCloseComment} color="primary" autoFocus>
-                Agree
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          <Dialog
-          open={this.state.retweetOpen}
-          onClose={this.handleCloseRetweet}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Retweet Dialog"}</DialogTitle>
-            <DialogContent>
-              <TweetBlock />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseRetweet} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={this.handleCloseRetweet} color="primary" autoFocus>
-                Agree
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </main>
-      );
     }
+    const {classes} = this.props;
+    return (
+      "shit"
+    );
+  }
+
 }
 
-export default withStyles(styles)(inject('rootStore')(observer(Tweet)));
+export default withStyles(styles)(inject('rootStore')(observer(Comment)));
