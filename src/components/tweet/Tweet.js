@@ -131,6 +131,7 @@ class Tweet extends Component {
     };
 
     handleCloseComment = () => {
+        this.props.rootStore.tweetStore.clearCommentBlock();
         this.setState({commentOpen: false});
     };
 

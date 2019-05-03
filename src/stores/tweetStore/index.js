@@ -24,7 +24,6 @@ class TweetStore {
         this.tweet_id = value;
     };
 
-
     addComment = () => {
         const params = {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
@@ -39,6 +38,10 @@ class TweetStore {
             .catch((error) => {
                 alert(error.message.response.data.message);
             })
+    }
+
+    clearCommentBlock = () => {
+        this.content = "";
     }
 
     getComments = (tweetId) => {
