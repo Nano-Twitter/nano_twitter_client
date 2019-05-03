@@ -141,7 +141,7 @@ class Tweet extends Component {
     };
 
     handleExpandClick = () => {
-        this.props.rootStore.tweetStore.changeTweetId(this.props.post._id.$oid)
+        this.props.rootStore.tweetStore.getComments(this.props.post._id.$oid);
         this.componentDidMount()
         this.setState(state => ({expanded: !state.expanded}));
     };
@@ -162,10 +162,6 @@ class Tweet extends Component {
             );
         }
     };
-
-    componentDidMount() {
-        this.props.rootStore.tweetStore.loadComments();
-    }
 
     followStatus = (post) => {
 
@@ -192,8 +188,6 @@ class Tweet extends Component {
     };
     render() {
         const post = this.props.post;
-        const comments = this.props.rootStore.tweetStore.getComments();
-        console.log(comments);
         const {classes} = this.props;
 
         return (
@@ -269,18 +263,18 @@ class Tweet extends Component {
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                        {/*{<CardContent>*/}
-                        {/*    {*/}
-                        {/*        comments.map((comment) => {*/}
-                        {/*            return (*/}
-                        {/*                <Comment*/}
-                        {/*                    key={comment._id.$oid}*/}
-                        {/*                    comment={comment}*/}
-                        {/*                />*/}
-                        {/*            )*/}
-                        {/*        })*/}
-                        {/*    }*/}
-                        {/*</CardContent>}*/}
+                        {<CardContent>
+                            {
+                                (this.props.rootStore.tweetStore.comments[post._id.$oid] || []).map((comment) => {
+                                    return (
+                                        <Comment
+                                            key={comment._id.$oid}
+                                            comment={comment}
+                                        />
+                                    )
+                                })
+                            }
+                        </CardContent>}
                     </Collapse>
                 </Card>
 
