@@ -77,7 +77,13 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.light,
+        cursor: 'pointer'
+
     },
+    margin: {
+        paddingBottom: '0px!important',
+    }
+
 });
 
 
@@ -161,23 +167,17 @@ class Tweet extends Component {
     };
 
     followStatus = (post) => {
-
         if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
-
-            console.log(this.props.rootStore.followStore.follow_relation[post.user_id.$oid]);
-
             if (this.props.rootStore.followStore.follow_relation[post.user_id.$oid]) {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.unfollow(post.user_id.$oid);
-                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="secondary">unfollow</Button>
                 )
             } else {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.follow(post.user_id.$oid);
-                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="primary">follow</Button>
                 )
             }
@@ -194,9 +194,9 @@ class Tweet extends Component {
                     <CardHeader
                         avatar={
                             <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}
-                                    className={this.props.classes.userName} onClick={() => {
-                                this.handleClickUserName(post.user_attr.id)
-                            }}>
+                                    onClick={() => {
+                                        this.handleClickUserName(post.user_attr.id)
+                                    }}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         }
@@ -205,7 +205,6 @@ class Tweet extends Component {
                         }
 
                         title={
-
                             <Typography className={this.props.classes.userName} onClick={() => {
                                 this.handleClickUserName(post.user_attr.id)
                             }} variant="body2">
@@ -230,11 +229,9 @@ class Tweet extends Component {
 
                     <CardActions className={classes.actions} disableActionSpacing>
                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                            {/* <RotateRight/> */}
-                            <Loop/>
                             <Loop/>
                             <Typography variant="caption">
-                                {this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] ||post.retweet_count}
+                                {this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] || post.retweet_count}
                             </Typography>
                         </IconButton>
                         <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>

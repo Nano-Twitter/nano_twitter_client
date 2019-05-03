@@ -155,8 +155,6 @@ class SimpleCard extends Component {
                                         multiline
                                         rows='4'
                                     />
-
-
                                 </Grid>
 
                                 <Grid

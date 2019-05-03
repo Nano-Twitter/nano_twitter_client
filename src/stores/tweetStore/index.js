@@ -15,15 +15,15 @@ class TweetStore {
     content = "";
     tweet_id = "";
     comments = {};
-    tweetCounts={}
+    tweetCounts={};
 
     changeComment = (value) => {
         this.content = value;
-    }
+    };
 
     changeTweetId = (value) => {
         this.tweet_id = value;
-    }
+    };
 
 
     addComment = () => {
