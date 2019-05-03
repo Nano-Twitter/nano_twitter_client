@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -9,8 +9,8 @@ import blue from '@material-ui/core/colors/blue';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import {inject, observer} from "mobx-react";
-
+import { inject, observer } from "mobx-react";
+import Input from '@material-ui/core/Input'
 
 const styles = theme => ({
     card: {
@@ -76,6 +76,10 @@ const styles = theme => ({
     cardContent: {
         marginBottom: 0,
         paddingBottom: 0
+    },
+    uploadImage:{
+        width:'100%',
+       // transform:'translateX(-20px)'
     }
 });
 
@@ -89,9 +93,18 @@ class SimpleCard extends Component {
         this.props.rootStore.tweetStore.submit();
     };
 
+    handleUpdate = ({target}) => {
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(target.files[0]);
+        fileReader.onload = (e) => {
+            this.props.rootStore.tweetStore.imageUrl=e.target.result
+        };
+    }
+
     render() {
 
-        const {classes} = this.props;
+        const { classes } = this.props;
 
         return (
 
@@ -143,14 +156,30 @@ class SimpleCard extends Component {
                                         multiline
                                         rows='4'
                                     />
+                                     {this.props.rootStore.tweetStore.imageUrl ?
+                                        <div><img className={classes.uploadImage} src={this.props.rootStore.tweetStore.imageUrl}></img></div> : ''}
+                                    <input
+                                        accept="image/*"
+                                        className={classes.input}
+                                        style={{ display: 'none' }}
+                                        id="raised-button-file"
+                                        multiple
+                                        type="file"
+                                        onChange={this.handleUpdate}
+                                    />
+                                    <label htmlFor="raised-button-file">
+                                        <Button variant="raised" component="span" className={classes.button}>
+                                            Upload Picture</Button>
+                                    </label>
+                                   
                                 </Grid>
 
                                 <Grid item
                                 >
                                     <Button variant="contained"
-                                            color="primary"
-                                            className={classes.button}
-                                            onClick={this.submit}
+                                        color="primary"
+                                        className={classes.button}
+                                        onClick={this.submit}
                                     >
                                         Tweet
                                     </Button>

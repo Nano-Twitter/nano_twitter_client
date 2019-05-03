@@ -344,8 +344,7 @@ class Tweet extends Component {
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                        {<CardContent>
-                            <Comment/>
+                        {/*{<CardContent>*/}
                         {/*    {*/}
                         {/*        comments.map((comment) => {*/}
                         {/*            return (*/}
@@ -356,7 +355,7 @@ class Tweet extends Component {
                         {/*            )*/}
                         {/*        })*/}
                         {/*    }*/}
-                        </CardContent>}
+                        {/*</CardContent>}*/}
                     </Collapse>
                 </Card>
 

@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
 import {observer, inject} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import TextsmsIcon from '@material-ui/icons/Textsms';
-import RotateRight from '@material-ui/icons/RotateRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TweetBlock from '../TweetBlock'
-
+import { Grid } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import CardContent from '@material-ui/core/CardContent';
 const styles = theme => ({
     main: {
       width: 'auto',
@@ -84,17 +67,52 @@ const styles = theme => ({
 class Comment extends Component {
   
   render() {
+
     const post = {
       user_attr:{
         name: "happylamb"
       },
       created_at: "2019-04-30T05:10:32.415+00:00",
-
     }
+
     const {classes} = this.props;
+
     return (
-      "shit"
+      <Grid container
+            direction="row"
+            className={classes.cardMain}
+      >
+        <Grid item xs={2} md={2} lg={2}>
+          <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
+              {post.user_attr.name.toUpperCase()[0]}
+          </Avatar>
+        </Grid>
+        <Grid item xs={10} md={10} lg={10}>
+        <Grid container
+                spacing={0}
+                justify="space-between"
+                alignItems="baseline"
+                className={classes.cardHeader}>
+              <Grid item >
+                  <Typography variant="body2">
+                      {post.user_attr.name} {" "}
+                      <Typography variant="caption" inline>
+                            · {new Date(post.created_at).toLocaleDateString()}
+                      </Typography>
+                  </Typography>
+              </Grid>
+              <Grid item>
+                <Typography component="p">
+                    {post.content}
+                </Typography>
+              </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      // <Divider />
     );
+
   }
 
 }
