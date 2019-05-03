@@ -255,7 +255,7 @@ class Tweet extends Component {
                                     <Grid item xs={3} md={3} lg={3}>
                                         <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
                                             <TextsmsIcon/><Typography
-                                            variant="caption">{post.comments_count}</Typography>
+                                            variant="caption">{(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}</Typography>
                                         </IconButton>
                                     </Grid>
                                     <Grid item xs={3} md={3} lg={3}>
