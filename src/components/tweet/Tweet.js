@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import CardHeader from '@material-ui/core/CardHeader';
-
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,22 +12,18 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import blue from '@material-ui/core/colors/blue';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextsmsIcon from '@material-ui/icons/Textsms';
-import RotateRight from '@material-ui/icons/RotateRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
 import Loop from '@material-ui/icons/Loop'
-import rootStore from "../../stores/rootStore";
 import {withRouter} from 'react-router';
+import rootStore from "../../stores/rootStore";
 
 
 const styles = theme => ({
@@ -54,14 +49,13 @@ const styles = theme => ({
         paddingRight: 15,
     },
     icon: {
-        // margin: theme.spacing.unit,
         color: theme.palette.primary.light,
     },
     grid: {
         padding: 0,
     },
-    userName:{
-        cursor:'pointer'
+    userName: {
+        cursor: 'pointer'
     },
 
     media: {
@@ -83,7 +77,13 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.light,
+        cursor: 'pointer'
+
     },
+    margin: {
+        paddingBottom: '0px!important',
+    }
+
 });
 
 
@@ -95,11 +95,11 @@ class Tweet extends Component {
         retweetOpen: false,
     };
 
-    handleClickUserName=(id)=>{
-        let target=`/profile/${id}`
-        if(!this.props.history.location.pathname.startsWith(target)){
+    handleClickUserName = (id) => {
+        let target = `/profile/${id}`
+        if (!this.props.history.location.pathname.startsWith(target)) {
             this.props.history.push(target)
-        }else{
+        } else {
             // do nothing
         }
     };
@@ -114,9 +114,9 @@ class Tweet extends Component {
 
     addCommment = (e) => {
         this.props.rootStore.tweetStore.addComment()
-        .then(()=> {
-            this.handleCloseComment();
-        });
+            .then(() => {
+                this.handleCloseComment();
+            });
     };
 
     handleClickOpenComment = () => {
@@ -140,7 +140,7 @@ class Tweet extends Component {
 
     handleSendRetweet = () => {
         this.setState({retweetOpen: false});
-        this.props.rootStore.tweetStore.submit();
+        this.props.rootStore.tweetStore.submit(this.props.post);
     };
 
     handleExpandClick = () => {
@@ -167,28 +167,23 @@ class Tweet extends Component {
     };
 
     followStatus = (post) => {
-
         if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
-
-            console.log(this.props.rootStore.followStore.follow_relation[post.user_id.$oid]);
-
             if (this.props.rootStore.followStore.follow_relation[post.user_id.$oid]) {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.unfollow(post.user_id.$oid);
-                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="secondary">unfollow</Button>
                 )
             } else {
                 return (
                     <Button onClick={() => {
                         this.props.rootStore.followStore.follow(post.user_id.$oid);
-                        // this.forceUpdate();
                     }} size="small" variant="outlined" color="primary">follow</Button>
                 )
             }
         }
     };
+
     render() {
         const post = this.props.post;
         const {classes} = this.props;
@@ -198,7 +193,10 @@ class Tweet extends Component {
                 <Card className={classes.card}>
                     <CardHeader
                         avatar={
-                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar} className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}}>
+                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}
+                                    onClick={() => {
+                                        this.handleClickUserName(post.user_attr.id)
+                                    }}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
                         }
@@ -207,13 +205,21 @@ class Tweet extends Component {
                         }
 
                         title={
-
-                            <Typography className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}} variant="body2">
+                            <Typography className={this.props.classes.userName} onClick={() => {
+                                this.handleClickUserName(post.user_attr.id)
+                            }} variant="body2">
                                 {post.user_attr.name} {" "}
                             </Typography>
                         }
                         subheader={new Date(post.created_at).toLocaleDateString()}
                     />
+
+                    {post.image_url ? <CardMedia
+                        className={classes.media}
+                        image={post.image_url}
+                        title="Paella dish"
+                    /> : ''
+                    }
 
                     <CardContent>
                         <Typography component="p">
@@ -221,48 +227,30 @@ class Tweet extends Component {
                         </Typography>
                     </CardContent>
 
-                    {post.image_url?<CardMedia
-                        className={classes.media}
-                        image={post.image_url}
-                        title="Paella dish"
-                    />:''}
-
-
-
-                    <CardActions className={classes.actions}>
-                        <Grid container spacing={8}>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                                    {/* <RotateRight/> */}
-                                    <Loop/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                                    <TextsmsIcon/><Typography
-                                    variant="caption">{(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}</Typography>
-                                </IconButton>
-                            </Grid>
-                            {/*<Grid item xs={3} md={3} lg={3}>*/}
-                            {/*    <IconButton aria-label="Like" onClick={this.handleClickLike}>*/}
-                            {/*        <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>*/}
-                            {/*    </IconButton>*/}
-                            {/*</Grid>*/}
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton
-                                    className={classnames(classes.expand, {
-                                        [classes.expandOpen]: this.state.expanded,
-                                    })}
-                                    onClick={this.handleExpandClick}
-                                    aria-expanded={this.state.expanded}
-                                    aria-label="Show more"
-                                >
-                                    <ExpandMoreIcon/>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
+                    <CardActions className={classes.actions} disableActionSpacing>
+                        <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
+                            <Loop/>
+                            <Typography variant="caption">
+                                {this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] || post.retweet_count}
+                            </Typography>
+                        </IconButton>
+                        <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
+                            <TextsmsIcon/>
+                            <Typography variant="caption">
+                                {(this.props.rootStore.tweetStore.comments[post._id.$oid] || []).length || post.comments_count}
+                            </Typography>
+                        </IconButton>
+                        <IconButton
+                            className={classnames(classes.expand, {
+                                [classes.expandOpen]: this.state.expanded,
+                            })}
+                            onClick={this.handleExpandClick}
+                            aria-expanded={this.state.expanded}
+                            aria-label="Show more"
+                        >
+                            <ExpandMoreIcon/>
+                        </IconButton>
                     </CardActions>
-
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         {<CardContent>
@@ -279,7 +267,6 @@ class Tweet extends Component {
                         </CardContent>}
                     </Collapse>
                 </Card>
-
 
                 <Dialog
                     open={this.state.commentOpen}
@@ -306,7 +293,7 @@ class Tweet extends Component {
                                     notchedOutline: classes.notchedOutline,
                                 },
                             }}
-                            value={this.props.rootStore.tweetStore.comment}
+                            value={this.props.rootStore.tweetStore.content}
                             autoFocus
                             label="Comment something..."
                             variant="outlined"
@@ -376,9 +363,5 @@ class Tweet extends Component {
         );
     }
 }
-
-// isRetweet.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
 
 export default withRouter(withStyles(styles)(inject('rootStore')(observer(Tweet))));

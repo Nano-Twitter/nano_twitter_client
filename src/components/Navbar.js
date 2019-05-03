@@ -20,6 +20,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { observer, inject } from 'mobx-react';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
+import _ from 'lodash'
 
 const styles = theme => createStyles({
     root: {
@@ -169,8 +170,7 @@ class PrimarySearchAppBar extends React.Component {
                 open={isProfileMenuOpen}
                 onClose={this.closeAllMenues}
             >
-                <MenuItem onClick={this.closeAllMenues}>Profile</MenuItem>
-                <MenuItem onClick={this.closeAllMenues}>My account</MenuItem>
+                <MenuItem ><Link to={`/profile/${this.props.rootStore.profileStore.id}`}>Profile</Link></MenuItem>
                 <MenuItem onClick={this.logout}>Logout</MenuItem>
             </Menu>
         );

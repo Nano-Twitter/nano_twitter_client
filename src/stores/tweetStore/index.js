@@ -13,17 +13,16 @@ class TweetStore {
 
     content = "";
     tweet_id = "";
-
     comments = {};
-    
+    tweetCounts={};
 
     changeComment = (value) => {
         this.content = value;
-    }
+    };
 
     changeTweetId = (value) => {
         this.tweet_id = value;
-    }
+    };
 
 
     addComment = () => {
@@ -61,7 +60,7 @@ class TweetStore {
         this.parent_id = value;
     };
 
-    submit = () => {
+    submit = (parent_post) => {
 
         const params = {
             user_id: JSON.parse(localStorage.getItem('user'))._id.$oid,
@@ -72,6 +71,10 @@ class TweetStore {
 
         return api.addTweet(params)
             .then((response) => {
+
+                if (parent_post) {
+                    this.tweetCounts[parent_post._id.$oid]= parent_post.retweet_count+1
+                }
                 this.tweet = '';
                 this.parent_id = undefined;
                 this.imageUrl=''
@@ -82,8 +85,6 @@ class TweetStore {
                 alert(error.response.data.message);
             });
     };
-
-
 
     like = (value) => {
         const params = {
@@ -119,8 +120,9 @@ decorate(TweetStore, {
     tweet: observable,
     imageUrl: observable,
     tweet_id: observable,
-    content:observable,
     comments:observable,
+    content:observable,
+    tweetCounts:observable,
     changeTweet: action,
     changeParentId: action,
     changeComment: action,
