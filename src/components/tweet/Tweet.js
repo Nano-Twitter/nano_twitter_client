@@ -175,8 +175,29 @@ class Tweet extends Component {
     componentDidMount() {
         this.props.rootStore.commentStore.loadComments();
     }
-    
+    followStatus = (post) => {
 
+        if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
+
+            console.log(this.props.rootStore.followStore.follow_relation[post.user_id.$oid]);
+
+            if (this.props.rootStore.followStore.follow_relation[post.user_id.$oid]) {
+                return (
+                    <Button onClick={() => {
+                        this.props.rootStore.followStore.unfollow(post.user_id.$oid);
+                        // this.forceUpdate();
+                    }} size="small" variant="outlined" color="secondary">unfollow</Button>
+                )
+            } else {
+                return (
+                    <Button onClick={() => {
+                        this.props.rootStore.followStore.follow(post.user_id.$oid);
+                        // this.forceUpdate();
+                    }} size="small" variant="outlined" color="primary">follow</Button>
+                )
+            }
+        }
+    };
     render() {
 
         const post = this.props.post;
@@ -224,6 +245,11 @@ class Tweet extends Component {
                                 image={post.image_url}
                                 title="Paella dish"
                             />:''}
+                            <CardContent>
+                                <Typography component="p">
+                                    {post.content}
+                                </Typography>
+                            </CardContent>
                             <CardActions className={classes.actions}>
                                 <Grid container spacing={8}>
                                     <Grid item xs={3} md={3} lg={3}>
@@ -260,8 +286,6 @@ class Tweet extends Component {
                         </Grid>
 
                     </Grid>
-
-
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         {/* <Comment /> */}

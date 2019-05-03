@@ -39,7 +39,12 @@ const styles = theme => ({
 
 class Home extends Component {
 
+    componentDidMount() {
+        this.props.rootStore.followStore.loadFollowRelation();
+    }
+
     render() {
+
 
         return (
             <main className={this.props.classes.main}>

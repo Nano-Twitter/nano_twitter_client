@@ -1,5 +1,6 @@
-import { observable, action, decorate } from 'mobx';
+import {observable, action, decorate} from 'mobx';
 import api from '../../api';
+import FollowStore from "../followStore";
 
 // import api from '../../api';
 
@@ -12,9 +13,10 @@ class UserStore {
     following = '';
     follower = '';
     isLoading = false;
-    tweetList=[]
-    followers=[]
-    followings=[]
+    tweetList = [];
+    followers = [];
+    followings = [];
+
     loadProfile = (user_id) => {
         this.isLoading = true;
         return api.getProfile(user_id)
@@ -26,6 +28,7 @@ class UserStore {
                 this.tweets = user.tweets_count;
                 this.follower = user.follower_ids.length;
                 this.following = user.following_ids.length;
+
             })
             .catch((error) => {
                 console.log(error);
@@ -35,20 +38,20 @@ class UserStore {
             })
             ;
     }
-    getTweet=(userId,params={})=>{
-        return api.userTimeline(userId,params).then(response=>{
-           this.tweetList=response.data.data
+    getTweet = (userId, params = {}) => {
+        return api.userTimeline(userId, params).then(response => {
+            this.tweetList = response.data.data
         })
     }
-    getFollowers=(userId,params={})=>{
-        return api.followers(userId).then(response=>{
-            this.followers=response.data.data
-         })
+    getFollowers = (userId, params = {}) => {
+        return api.followers(userId).then(response => {
+            this.followers = response.data.data
+        })
     }
-    getFollowings=(userId,params={})=>{
-        return api.followees(userId).then(response=>{
-            this.followings=response.data.data
-         })
+    getFollowings = (userId, params = {}) => {
+        return api.followees(userId).then(response => {
+            this.followings = response.data.data
+        })
     }
     addTweet = () => {
         this.tweets += 1;
@@ -90,9 +93,9 @@ decorate(UserStore, {
     tweets: observable,
     following: observable,
     follower: observable,
-    followers:observable,
-    followings:observable,
-    tweetList:observable,
+    followers: observable,
+    followings: observable,
+    tweetList: observable,
     changeUsername: action,
     changeFollower: action,
     addFollowing: action,
@@ -100,12 +103,12 @@ decorate(UserStore, {
     addTweet: action,
     changeEmail: action,
     getProfile: action,
-    getTweet:action,
-    getFollowings:action,
-    getFollowers:action
+    getTweet: action,
+    getFollowings: action,
+    getFollowers: action
 });
 
 const userStore = new UserStore();
 
 export default userStore;
-export { userStore };
+export {userStore};
