@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
 import { Grid } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import CardContent from '@material-ui/core/CardContent';
+import Divider from '@material-ui/core/Divider';
 const styles = theme => ({
     main: {
       width: 'auto',
@@ -21,40 +21,15 @@ const styles = theme => ({
     card: {
       maxWidth: 590,
     },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-      borderRadius: 10,
-      border: '1px solid',
-      borderColor: blue[100],
-      marginLeft: 10,
-      marginTop: -5
-    },
-    actions: {
-      display: 'flex',
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
     avatar: {
       backgroundColor: blue[500],
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
     },
     cardMain: {
-      padding:10,
-      paddingTop: 15
-    },
-    cardHeader: {
-      padding: 10,
-      paddingLeft: 15,
+      paddingLeft:20,
+      paddingTop: 20,
+      height: 120
     },
     cardContent: {
       marginTop: -15,
@@ -68,12 +43,7 @@ class Comment extends Component {
   
   render() {
 
-    const post = {
-      user_attr:{
-        name: "happylamb"
-      },
-      created_at: "2019-04-30T05:10:32.415+00:00",
-    }
+    const comment = this.props.comment;
 
     const {classes} = this.props;
 
@@ -83,34 +53,31 @@ class Comment extends Component {
             className={classes.cardMain}
       >
         <Grid item xs={2} md={2} lg={2}>
-          <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>
-              {post.user_attr.name.toUpperCase()[0]}
+          <Avatar alt={comment.username} className={this.props.classes.avatar}>
+              {comment.username.toUpperCase()[0]}
           </Avatar>
         </Grid>
         <Grid item xs={10} md={10} lg={10}>
         <Grid container
                 spacing={0}
                 justify="space-between"
-                alignItems="baseline"
-                className={classes.cardHeader}>
-              <Grid item >
+                alignItems="baseline">
+              <Grid item xs={12} md={12} lg={12}>
                   <Typography variant="body2">
-                      {post.user_attr.name} {" "}
-                      <Typography variant="caption" inline>
-                            · {new Date(post.created_at).toLocaleDateString()}
-                      </Typography>
+                      {comment.username} {" "}
+                      {/* <Typography variant="caption" inline>
+                            · {new Date(comment.created_at).toLocaleDateString()}
+                      </Typography> */}
                   </Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={12} md={12} lg={12}>
                 <Typography component="p">
-                    {post.content}
+                    {comment.content}
                 </Typography>
               </Grid>
           </Grid>
         </Grid>
       </Grid>
-
-      // <Divider />
     );
 
   }

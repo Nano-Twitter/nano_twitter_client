@@ -4,8 +4,6 @@ import {withStyles} from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import CardHeader from '@material-ui/core/CardHeader';
-
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -26,9 +24,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TweetBlock from '../TweetBlock'
 import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
+import Input from '@material-ui/core/Input';
 import Loop from '@material-ui/icons/Loop'
-import rootStore from "../../stores/rootStore";
-
+import {withRouter} from 'react-router';
 
 const styles = theme => ({
     main: {
@@ -38,63 +36,16 @@ const styles = theme => ({
     card: {
         maxWidth: 590,
     },
-
-    // media: {
-    //     height: 0,
-    //     borderRadius: 10,
-    //     border: null,
-    //     paddingTop: '56.25%', // 16:9
-    //     marginLeft: 15,
-    // },
-    // actions: {
-    //     display: 'flex',
-    //     padding: 0,
-    // },
-    // expand: {
-    //     transform: 'rotate(0deg)',
-    //     marginLeft: 'auto',
-    //     transition: theme.transitions.create('transform', {
-    //         duration: theme.transitions.duration.shortest,
-    //     }),
-    // },
-    // expandOpen: {
-    //     transform: 'rotate(180deg)',
-    // },
-    // avatar: {
-    //     backgroundColor: theme.palette.primary.light,
-    //     width: 50,
-    //     height: 50,
-    //     fontSize: 25
-    // },
-    cardMain: {
-        padding: 15,
-        paddingBottom: 5,
-    },
-    cardHeader: {
-        padding: 15,
-        paddingTop: 0,
-        paddingBottom: 0,
-    },
-    cardContent: {
-        padding: 10,
-        paddingLeft: 15,
-        paddingRight: 15,
-    },
-    icon: {
-        // margin: theme.spacing.unit,
-        color: theme.palette.primary.light,
-    },
-    grid: {
-        padding: 0,
-    },
-
-
     media: {
         height: 0,
+        borderRadius: 10,
+        border: null,
         paddingTop: '56.25%', // 16:9
+        marginLeft: 15,
     },
     actions: {
         display: 'flex',
+        padding: 0,
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -108,7 +59,35 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.light,
+        width: 50,
+        height: 50,
+        fontSize: 25
     },
+    cardMain: {
+        padding: 15,
+    },
+    cardHeader: {
+        padding: 15,
+        paddingTop: 0,
+        paddingBottom: 0,
+    },
+    cardContent: {
+        padding: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    icon: {
+        margin: theme.spacing.unit,
+        color: theme.palette.primary.light,
+        fontSize: 16,
+    },
+    grid: {
+        padding: 0,
+    },
+    userName:{
+        cursor:'pointer'
+    }
+
 });
 
 
@@ -120,14 +99,30 @@ class Tweet extends Component {
         retweetOpen: false,
     };
 
+    handleClickUserName=(id)=>{
+        let target=`/profile/${id}`
+        if(!this.props.history.location.pathname.startsWith(target)){
+            this.props.history.push(target)
+        }else{
+            // do nothing
+        }
+    }
+
     changeTweet = (e) => {
         this.props.rootStore.tweetStore.changeTweet(e.target.value);
     };
 
+    changeComment = (e) => {
+        this.props.rootStore.commentStore.changeComment(e.target.value);
+    };
+
+    addCommment = (e) => {
+        this.props.rootStore.commentStore.addComment();
+    };
+
     handleClickOpenComment = () => {
-        console.log(this.props.post._id.$oid)
         this.setState({commentOpen: true});
-        this.props.rootStore.tweetStore.loadComments(this.props.post._id.$oid);
+        this.props.rootStore.commentStore.changeTweetId(this.props.post._id.$oid);
     };
 
     handleClickLike = () => {
@@ -155,6 +150,8 @@ class Tweet extends Component {
     };
 
     handleExpandClick = () => {
+        this.props.rootStore.commentStore.changeTweetId(this.props.post._id.$oid)
+        this.componentDidMount()
         this.setState(state => ({expanded: !state.expanded}));
     };
 
@@ -165,218 +162,167 @@ class Tweet extends Component {
                     <Grid item className={this.props.grid}>
                         <Loop className={this.props.icon} style={{fontSize: 13.3}}/>
                     </Grid>
-                    {/*<Grid item className={this.props.grid}>*/}
-                    {/*    <Typography component="p">*/}
-                    {/*        Retweet*/}
-                    {/*    </Typography>*/}
-                    {/*</Grid>*/}
+                    <Grid item className={this.props.grid}>
+                        <Typography component="p">
+                            Retweet
+                        </Typography>
+                    </Grid>
                 </Grid>
             );
         }
     };
 
-    followStatus = (post) => {
-        console.log(post.user_id.$oid);
-        console.log(JSON.parse(localStorage.getItem('user'))._id.$oid);
-
-        if (post.user_id.$oid !== JSON.parse(localStorage.getItem('user'))._id.$oid) {
-            if (this.props.rootStore.followStore.getFollowRelation().get(post.user_id.$oid)) {
-                return (
-                    <Button onClick={() => {
-                        this.props.rootStore.followStore.unfollow(post.user_id.$oid);
-                        this.forceUpdate();
-                    }} size="small" variant="outlined" color="secondary">unfollow</Button>
-                )
-            } else {
-                return (
-                    <Button onClick={() => {
-                        this.props.rootStore.followStore.follow(post.user_id.$oid);
-                        this.forceUpdate();
-                    }} size="small" variant="outlined" color="primary">follow</Button>
-                )
-            }
-        }
-    };
+    componentDidMount() {
+        this.props.rootStore.commentStore.loadComments();
+    }
+    
 
     render() {
 
         const post = this.props.post;
-        // console.log(post);
-        // const comments = this.props.rootStore.tweetStore.comments;
+        const comments = this.props.rootStore.commentStore.getComments();
+        console.log(comments);
         const {classes} = this.props;
-
 
         return (
             <main className={classes.main}>
                 <Card className={classes.card}>
-                    <CardHeader
-                        avatar={
-                            <Avatar aria-label="avatar" className={classes.avatar}>
+                    <Grid container
+                          direction="row"
+                          className={classes.cardMain}
+                    >
+                        <Grid item>
+                            <Avatar alt={post.user_attr.name} className={this.props.classes.avatar} className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}}>
                                 {post.user_attr.name.toUpperCase()[0]}
                             </Avatar>
-                        }
-                        action={
-                            this.followStatus(post)
-                        }
-
-                        title={post.user_attr.name}
-                        subheader={new Date(post.created_at).toLocaleDateString()}
-                    />
-
-
-                    <CardMedia
-                        className={classes.media}
-                        image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"
-                        title="Paella dish"
-                    />
-                    <CardContent>
-                        <Typography component="p">
-                            {post.content}
-                        </Typography>
-                    </CardContent>
-
-                    <CardActions className={classes.actions}>
-                        <Grid container spacing={8}>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
-                                    {/* <RotateRight/> */}
-                                    <Loop/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
-                                    <TextsmsIcon/><Typography
-                                    variant="caption">{post.comments_count}</Typography>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Like" onClick={this.handleClickLike}>
-                                    <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton
-                                    className={classnames(classes.expand, {
-                                        [classes.expandOpen]: this.state.expanded,
-                                    })}
-                                    onClick={this.handleExpandClick}
-                                    aria-expanded={this.state.expanded}
-                                    aria-label="Show more"
-                                >
-                                    <ExpandMoreIcon/>
-                                </IconButton>
-                            </Grid>
                         </Grid>
-                    </CardActions>
-                    {/*<Grid container*/}
-                    {/*      direction="row"*/}
-                    {/*      className={classes.cardMain}*/}
-                    {/*>*/}
-                    {/*    <Grid item xs={1} md={1} lg={1}>*/}
-                    {/*        <Avatar alt={post.user_attr.name} className={this.props.classes.avatar}>*/}
-                    {/*            {post.user_attr.name.toUpperCase()[0]}*/}
-                    {/*        </Avatar>*/}
-                    {/*    </Grid>*/}
-                    {/*    <Grid item xs={11} md={11} lg={11}>*/}
-                    {/*        <Grid container*/}
-                    {/*              spacing={0}*/}
-                    {/*              justify="space-between"*/}
-                    {/*              alignItems="baseline"*/}
-                    {/*              className={classes.cardHeader}>*/}
-                    {/*            <Grid item >*/}
-                    {/*                <Typography variant="body2">*/}
-                    {/*                    {post.user_attr.name} {" "}*/}
-                    {/*                    <Typography variant="caption" inline>*/}
-                    {/*                         · {new Date(post.created_at).toLocaleDateString()}*/}
-                    {/*                    </Typography>*/}
-                    {/*                </Typography>*/}
-                    {/*            </Grid>*/}
-                    {/*            <Grid item>*/}
-                    {/*                {this.isRetweet(post)}*/}
-                    {/*            </Grid>*/}
-                    {/*        </Grid>*/}
-                    {/*        <CardContent className={classes.cardContent}>*/}
-                    {/*            <Typography component="p">*/}
-                    {/*                {post.content}*/}
-                    {/*            </Typography>*/}
-                    {/*        </CardContent>*/}
-                    {/*        <CardMedia*/}
-                    {/*            className={classes.media}*/}
-                    {/*            image="https://www.fluentin3months.com/wp-content/uploads/2018/04/beautiful-spanish.jpg"*/}
-                    {/*            title="Paella dish"*/}
-                    {/*        />*/}
-                    {/*        <CardActions className={classes.actions}>*/}
-                    {/*            <Grid container spacing={8}>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>*/}
-                    {/*                        /!* <RotateRight/> *!/*/}
-                    {/*                        <Loop/>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>*/}
-                    {/*                        <TextsmsIcon/><Typography*/}
-                    {/*                        variant="caption">{post.comments_count}</Typography>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton aria-label="Like" onClick={this.handleClickLike}>*/}
-                    {/*                        <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*                <Grid item xs={3} md={3} lg={3}>*/}
-                    {/*                    <IconButton*/}
-                    {/*                        className={classnames(classes.expand, {*/}
-                    {/*                            [classes.expandOpen]: this.state.expanded,*/}
-                    {/*                        })}*/}
-                    {/*                        onClick={this.handleExpandClick}*/}
-                    {/*                        aria-expanded={this.state.expanded}*/}
-                    {/*                        aria-label="Show more"*/}
-                    {/*                    >*/}
-                    {/*                        <ExpandMoreIcon/>*/}
-                    {/*                    </IconButton>*/}
-                    {/*                </Grid>*/}
-                    {/*            </Grid>*/}
-                    {/*        </CardActions>*/}
-                    {/*    </Grid>*/}
+                        <Grid item xs={10}>
+                            <Grid container
+                                  spacing={0}
+                                  justify="space-between"
+                                  alignItems="baseline"
+                                  className={classes.cardHeader}>
+                                <Grid item >
+                                    <Typography className={this.props.classes.userName} onClick={()=>{this.handleClickUserName(post.user_attr.id)}} variant="body2">
+                                        {post.user_attr.name} {" "}
+                                        <Typography variant="caption" inline>
+                                             · {new Date(post.created_at).toLocaleDateString()}
+                                        </Typography>
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    {this.isRetweet(post)}
+                                </Grid>
+                            </Grid>
+                            <CardContent className={classes.cardContent}>
+                                <Typography component="p">
+                                    {post.content}
+                                </Typography>
+                            </CardContent>
+                            {post.image_url?<CardMedia
+                                className={classes.media}
+                                image={post.image_url}
+                                title="Paella dish"
+                            />:''}
+                            <CardActions className={classes.actions}>
+                                <Grid container spacing={8}>
+                                    <Grid item xs={3} md={3} lg={3}>
+                                        <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
+                                            {/* <RotateRight/> */}
+                                            <Loop/>
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item xs={3} md={3} lg={3}>
+                                        <IconButton aria-label="Comment" onClick={this.handleClickOpenComment}>
+                                            <TextsmsIcon/><Typography
+                                            variant="caption">{post.comments_count}</Typography>
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item xs={3} md={3} lg={3}>
+                                        <IconButton aria-label="Like" onClick={this.handleClickLike}>
+                                            <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item xs={3} md={3} lg={3}>
+                                        <IconButton
+                                            className={classnames(classes.expand, {
+                                                [classes.expandOpen]: this.state.expanded,
+                                            })}
+                                            onClick={this.handleExpandClick}
+                                            aria-expanded={this.state.expanded}
+                                            aria-label="Show more"
+                                        >
+                                            <ExpandMoreIcon/>
+                                        </IconButton>
+                                    </Grid>
+                                </Grid>
+                            </CardActions>
+                        </Grid>
 
-                    {/*</Grid>*/}
+                    </Grid>
+
 
 
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                        {/*{<CardContent>*/}
-                        {/*    {*/}
-                        {/*        comments.map((comment) => {*/}
-                        {/*            return (*/}
-                        {/*                <Comment*/}
-                        {/*                    key={comment._id.$oid}*/}
-                        {/*                    comment={comment}*/}
-                        {/*                />*/}
-                        {/*            )*/}
-                        {/*        })*/}
-                        {/*    }*/}
-                        {/*</CardContent>}*/}
+                        {/* <Comment /> */}
+                        {<CardContent>
+                            {
+                                comments.map((comment) => {
+                                    return (
+                                        <Comment
+                                            key={comment._id.$oid}
+                                            comment={comment}
+                                        />
+                                    )
+                                })
+                            }
+                        </CardContent>}
                     </Collapse>
                 </Card>
 
 
                 <Dialog
-                    fullWidth={this.state.fullWidth}
-                    maxWidth={this.state.maxWidth}
                     open={this.state.commentOpen}
                     onClose={this.handleCloseComment}
-                    aria-describedby="alert-dialog-description"
+                    aria-labelledby="form-dialog-title"
+                    fullWidth
+                    maxWidth={'xs'}
                 >
                     <DialogTitle id="alert-dialog-title">{"Comment"}</DialogTitle>
                     <DialogContent>
-                        <TweetBlock/>
+                        <TextField
+                            onChange={this.changeComment}
+                            className={classes.margin}
+                            InputLabelProps={{
+                                classes: {
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                },
+                            }}
+                            InputProps={{
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            value={this.props.rootStore.tweetStore.tweet}
+                            autoFocus
+                            label="Comment something..."
+                            variant="outlined"
+                            id="custom-css-outlined-input"
+                            margin="normal"
+                            fullWidth
+                            multiline
+                            rows='4'
+                        />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleCloseComment} color="primary">
-                            Disagree
+                        <Button onClick={this.handleCloseComment} color="secondary">
+                            Cancel
                         </Button>
-                        <Button onClick={this.handleCloseComment} color="primary" autoFocus>
-                            Agree
+                        <Button onClick={this.addCommment} color="primary" autoFocus>
+                            Comment
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -435,4 +381,4 @@ class Tweet extends Component {
 //     classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(inject('rootStore')(observer(Tweet)));
+export default withRouter(withStyles(styles)(inject('rootStore')(observer(Tweet))));

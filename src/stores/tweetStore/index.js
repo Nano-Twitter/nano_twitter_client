@@ -8,9 +8,9 @@ class TweetStore {
     tweet;
     user_id;
     parent_id;
-    comments;
     likes;
-    imageUrl=''
+    imageUrl='';
+    
 
     changeTweet = (value) => {
         this.tweet = value;
@@ -45,20 +45,7 @@ class TweetStore {
             });
     };
 
-    loadComments = (value) => {
-        console.log(value);
-        return api.getComments(value)
-            .then((response) => {
-                this.comments.add(response.data.data);
-            })
-            .catch((error) => {
-                alert(error.message.response.data.message)
-            })
-    };
 
-    getComments = () => {
-        this.comments.slice()
-    };
 
     like = (value) => {
         const params = {
@@ -94,7 +81,9 @@ decorate(TweetStore, {
     tweet: observable,
     imageUrl:observable,
     changeTweet: action,
-    changeParentId: action
+    changeParentId: action,
+    changeComment: action,
+    changeTweetId: action
 });
 
 const tweetStore = new TweetStore();

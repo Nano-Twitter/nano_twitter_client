@@ -18,7 +18,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { observer, inject } from 'mobx-react';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
 
 const styles = theme => createStyles({
@@ -99,7 +99,7 @@ const menuOption = [
     {
         id: 1,
         name: 'home',
-        link: '/home'
+        link: '/'
     },
     {
         id: 2,
