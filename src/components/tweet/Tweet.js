@@ -232,7 +232,6 @@ class Tweet extends Component {
                         <IconButton aria-label="Retweet" onClick={this.handleClickOpenRetweet}>
                             {/* <RotateRight/> */}
                             <Loop/>
-                            <Loop/>
                             <Typography variant="caption">
                                 {this.props.rootStore.tweetStore.tweetCounts[post._id.$oid] ||post.retweet_count}
                             </Typography>
