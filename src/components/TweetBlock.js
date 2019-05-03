@@ -35,7 +35,6 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         paddingRight: theme.spacing.unit * 3,
-        paddingBottom: 0,
     },
     margin: {
         margin: theme.spacing.unit,
@@ -75,7 +74,7 @@ const styles = theme => ({
     cardContent: {
         marginBottom: 0,
         padding: 15,
-        paddingBottom: 15,
+        paddingBottom: '15px!important',
     },
     uploadImage: {
         width: '100%',

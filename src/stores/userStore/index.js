@@ -37,52 +37,25 @@ class UserStore {
                 this.isLoading = false;
             })
             ;
-    }
+    };
+
     getTweet = (userId, params = {}) => {
         return api.userTimeline(userId, params).then(response => {
             this.tweetList = response.data.data
         })
-    }
+    };
+
     getFollowers = (userId, params = {}) => {
         return api.followers(userId).then(response => {
             this.followers = response.data.data
         })
-    }
+    };
+
     getFollowings = (userId, params = {}) => {
         return api.followees(userId).then(response => {
             this.followings = response.data.data
         })
     }
-    addTweet = () => {
-        this.tweets += 1;
-    }
-
-    changeUsername = (value) => {
-        this.username = value;
-        this.nickname = value;
-    }
-
-    changeEmail = (value) => {
-        this.email = value;
-    }
-
-    changeFollower = (value) => {
-        this.follower = value;
-    }
-
-    addFollowing = () => {
-        this.following += 1;
-    }
-
-    deleteFollowing = () => {
-        this.following -= 1;
-    }
-
-
-    getPersonalProfile = () => {
-
-    }
-
 }
 
 decorate(UserStore, {

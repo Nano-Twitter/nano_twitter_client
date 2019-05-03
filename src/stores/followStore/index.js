@@ -6,7 +6,6 @@ class FollowStore {
 
     current_user = JSON.parse(localStorage.getItem('user'));
     follow_relation = {};
-    like_relation = {};
 
     constructor(rootStore) {
         this.rootStore = rootStore;
@@ -25,24 +24,8 @@ class FollowStore {
         return this.follow_relation;
     }
 
-
     setFollowRelation(user_id, status) {
-        // this.follow_relation.set(user_id, status)
         this.follow_relation[user_id] = status
-
-    }
-
-    loadLikeRelation() {
-
-    }
-
-    getLikeRelation() {
-        return this.like_relation;
-    }
-
-    setLikeRelation(user_id, status) {
-        // this.like_relation.set(user_id, status)
-        this.like_relation[user_id] = status
     }
 
     follow = (id) => {
@@ -52,7 +35,6 @@ class FollowStore {
         return api.follow(id, params)
             .then(
                 () => {
-                    // this.follow_relation[id] = true;
                     profileStore.loadProfile()
                         .then(
                             () => {
@@ -97,8 +79,6 @@ decorate(FollowStore, {
     follow_relation: observable,
     getFollowRelation: action,
     setFollowRelation: action,
-    getLikeRelation: action,
-    setLikeRelation: action,
     follow: action,
     unfollow: action,
 });

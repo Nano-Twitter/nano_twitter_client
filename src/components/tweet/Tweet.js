@@ -101,7 +101,7 @@ class Tweet extends Component {
         }else{
             // do nothing
         }
-    }
+    };
 
     changeTweet = (e) => {
         this.props.rootStore.tweetStore.changeTweet(e.target.value);
@@ -113,11 +113,6 @@ class Tweet extends Component {
         this.props.rootStore.tweetStore.loadComments(this.props.post._id.$oid);
     };
 
-    handleClickLike = () => {
-        console.log(this.props.post._id.$oid)
-        this.setState({commentOpen: true});
-        this.props.rootStore.tweetStore.like(this.props.post._id.$oid);
-    };
 
     handleClickOpenRetweet = () => {
         this.setState({retweetOpen: true});
@@ -183,12 +178,8 @@ class Tweet extends Component {
     };
 
     render() {
-
         const post = this.props.post;
-        // console.log(post);
-        // const comments = this.props.rootStore.tweetStore.comments;
         const {classes} = this.props;
-
 
         return (
             <main className={classes.main}>
@@ -212,17 +203,19 @@ class Tweet extends Component {
                         subheader={new Date(post.created_at).toLocaleDateString()}
                     />
 
+                    <CardContent>
+                        <Typography component="p">
+                            {post.content}
+                        </Typography>
+                    </CardContent>
+
                     {post.image_url?<CardMedia
                         className={classes.media}
                         image={post.image_url}
                         title="Paella dish"
                     />:''}
 
-                    <CardContent>
-                        <Typography component="p">
-                            {post.content}
-                        </Typography>
-                    </CardContent>
+
 
                     <CardActions className={classes.actions}>
                         <Grid container spacing={8}>
@@ -238,11 +231,11 @@ class Tweet extends Component {
                                     variant="caption">{post.comments_count}</Typography>
                                 </IconButton>
                             </Grid>
-                            <Grid item xs={3} md={3} lg={3}>
-                                <IconButton aria-label="Like" onClick={this.handleClickLike}>
-                                    <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>
-                                </IconButton>
-                            </Grid>
+                            {/*<Grid item xs={3} md={3} lg={3}>*/}
+                            {/*    <IconButton aria-label="Like" onClick={this.handleClickLike}>*/}
+                            {/*        <FavoriteIcon/><Typography variant="caption">{post.likes_count}</Typography>*/}
+                            {/*    </IconButton>*/}
+                            {/*</Grid>*/}
                             <Grid item xs={3} md={3} lg={3}>
                                 <IconButton
                                     className={classnames(classes.expand, {

@@ -12,7 +12,6 @@ class ProfileStore {
     following = '';
     follower = '';
     following_list = {};
-    isLoading = false;
 
 
     loadProfile = (user_id = '') => {
@@ -55,33 +54,6 @@ class ProfileStore {
     addTweet = () => {
         this.tweets += 1;
     }
-
-    changeUsername = (value) => {
-        this.username = value;
-        this.nickname = value;
-    }
-
-    changeEmail = (value) => {
-        this.email = value;
-    }
-
-    changeFollower = (value) => {
-        this.follower = value;
-    }
-
-    addFollowing = () => {
-        this.following += 1;
-    }
-
-    deleteFollowing = () => {
-        this.following -= 1;
-    }
-
-
-    getPersonalProfile = () => {
-
-    }
-
 }
 
 decorate(ProfileStore, {
