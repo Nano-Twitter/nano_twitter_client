@@ -28,6 +28,7 @@ import Comment from './Comment'
 import TextField from "@material-ui/core/TextField";
 import Loop from '@material-ui/icons/Loop'
 import rootStore from "../../stores/rootStore";
+import {withRouter} from 'react-router';
 
 
 const styles = theme => ({
@@ -380,4 +381,4 @@ class Tweet extends Component {
 //     classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(inject('rootStore')(observer(Tweet)));
+export default withRouter(withStyles(styles)(inject('rootStore')(observer(Tweet))));
